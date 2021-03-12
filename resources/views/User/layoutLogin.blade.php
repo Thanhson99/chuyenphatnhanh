@@ -15,7 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('/User/vendor/select2/select2.min.css') }}">	
 	<link rel="stylesheet" type="text/css" href="{{ asset('/User/vendor/daterangepicker/daterangepicker.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('/User/css/util.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/main_login.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/mycss.css') }}">
 
 </head>
@@ -37,7 +37,6 @@
     <script src="{{ asset('/User/vendor/daterangepicker/moment.min.js') }}"></script>
     <script src="{{ asset('/User/vendor/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('/User/vendor/countdowntime/countdowntime.js') }}"></script>
-    <script src="{{ asset('/User/js/main.js') }}"></script>
-    <script src="{{ asset('/User/js/custom.js') }}"></script>
+    <script src="{{ asset('/User/js/main-login.js') }}"></script>
 
 </html>

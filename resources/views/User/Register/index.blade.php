@@ -3,7 +3,7 @@
 @section('main-content')
 
 	<div class="container-login100" style="background-image: url('images/bg-02.jpeg');">
-		<div class="wrap-login200 p-l-55 p-r-55 p-t-80 p-b-30">
+		<div class="wrap-login200 p-l-20 p-r-20 p-t-30 p-b-30">
 			<form action="{{ route('user.postRegister') }}" method="POST" class="login100-form validate-form">
 				<span class="login100-form-title p-b-37">
 					Đăng ký
@@ -25,7 +25,7 @@
 									<input class="input100" type="text" name="CMND" placeholder="Nhập số CMND">
 									<span class="focus-input100"></span>
 								</div>
-								<div class="wrap-input100 validate-input m-b-20 col-sm cl-right" data-validate="Nhập số điện thoại">
+								<div class="wrap-input100 validate-input m-b-20 col-sm cl-right m-l-10" data-validate="Nhập số điện thoại">
 									<input class="input100" type="text" name="phoneNumber" placeholder="Nhập số điện thoại">
 									<span class="focus-input100"></span>
 								</div>
@@ -60,7 +60,7 @@
 					<input class="login100-form-btn" type="submit" value="Đăng ký">
 				</div>
 				<div class="container-login100-form-btn redirect-login">
-					<p>Bạn đã có tài khoản ? <a href="{{ route('user.login') }}">Đăng nhập ngay</a></p>
+					<p>Bạn đã có tài khoản ? <a class="txt2 hov1" href="{{ route('user.login') }}">Đăng nhập ngay</a></p>
 				</div>
 				@csrf
 			</form>

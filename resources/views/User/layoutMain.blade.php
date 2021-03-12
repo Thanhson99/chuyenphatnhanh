@@ -14,10 +14,8 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('/User/vendor/animsition/css/animsition.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('/User/vendor/select2/select2.min.css') }}">	
 	<link rel="stylesheet" type="text/css" href="{{ asset('/User/vendor/daterangepicker/daterangepicker.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('/User/css/util.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/main.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/mycss.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/main_home.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/css-main.css') }}">
 </head>
 <body>
     {{-- header --}}
@@ -37,7 +35,10 @@
     <script src="{{ asset('/User/vendor/daterangepicker/moment.min.js') }}"></script>
     <script src="{{ asset('/User/vendor/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('/User/vendor/countdowntime/countdowntime.js') }}"></script>
-    <script src="{{ asset('/User/js/main.js') }}"></script>
     <script src="{{ asset('/User/js/custom.js') }}"></script>
-
+    <script src="{{ asset('/User/js/slick.min.js') }}"></script>
+    <script src="{{ asset('/User/js/main_home.min.js') }}"></script>
+    <script src="{{ asset('/User/js/jquery.lazyload.min.js') }}"></script>
+    <script src="{{ asset('/User/js/fastclick.min.js') }}"></script>
+    <script src="{{ asset('/User/js/timber.min.js') }}"></script>
 </html>

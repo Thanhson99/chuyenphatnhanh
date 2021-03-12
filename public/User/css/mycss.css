@@ -1,5 +1,24 @@
+.img-banner{
+    width: 435px;
+    margin-top: 55px;
+    margin-left: -30px;
+}
+
+.logo{
+    width: 72px;
+    padding-bottom: 1px;
+}
+
+.text-neon{
+    font-weight: 700;
+    font-size: 25px;
+    color: rgb(255, 31, 31);
+    padding-top: 15px;
+    padding-left: 20px;
+}
+
 .wrap-login200{
-    width: 1230px;
+    width: 1077px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -11,73 +30,29 @@
     -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
-.register-selected{
-    outline: none;
-    border: none;
-    background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 0 5px 30px 0px rgb(0 0 0 / 10%);
-    -moz-box-shadow: 0 5px 30px 0px rgba(0, 0, 0, 0.1);
-}
-
-.cl-right{
-    margin-left: 10px;
-}
-
-.img-banner{
-    margin: 90px -30px;
-    width: 365px;
+.img-banner-register{
+    width: 500px;
+    margin-left: -5px;
 }
 
 .redirect-login{
     padding-top: 20px;
 }
 
-.redirect-login a{
-    text-decoration: underline;
-    color: rgb(30, 15, 246);
+.register-selected{
+    outline: none;
+    border: none;
+    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 18px;
+    margin-left: 10px;
 }
 
-.redirect-login a, p{
-    font-size: 18px;
-}
-
-.img-banner-register{
-    width: 555px;
-    margin: -35px -40px;
-}
-
-.navbar-brand{
-    height: 31px;
-}
-
-.navbar img{
-    position: absolute;
-    width: 70px;
-    top: -2px;
-}
-
-.navbar span{
-    position: relative;
-    top: -3px;
-    margin-left: 80px;
-}
-
-.neon{
-    color: rgb(253, 31, 31);
-    top: 0;
-    font-weight: bold;
-    font-size: 20px;
-    font-style: oblique;
-    text-transform: uppercase;
-}
-
-.bar-button{
-    position: absolute;
-    right: 500px;
-    top: 3px;
-}
-
-.top-header{
-    background: rgb(252, 255, 45);
+.wp-header
+{
+    background-color:rgb(255, 255, 255);
+    box-shadow: 1px 2px 3px rgb(255, 31, 31);
 }

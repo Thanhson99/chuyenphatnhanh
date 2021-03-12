@@ -37,6 +37,9 @@ Route::prefix($prefixUrl)->name($prefixUrl . '.')->group(function() use($control
     Route::get('/register', function(){
         return view('User.Register.index');
     })->name('register');
+    Route::get('/fastshipping', function () {
+        return view('User.Other.Fastshipping');
+    })->name('fastshipping');
 });
 
 Route::prefix('admin')->group(function(){

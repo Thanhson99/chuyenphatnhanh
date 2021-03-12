@@ -1,6 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<header class="w-100 wp-header text-white py-3 pt-lg-0 pb-lg-0">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('/User/images/icons/logo-FS.png') }}" alt=""><span class="neon">More Than Shipping</span></a>
-        <a href="{{ route('home') }}"><input type="submit" class="login90-form-btn bar-button" value="Xem bưu cục gần đây"></a>
+        <div class="row d-flex">
+            <div class="col-lg-6 col-sm-6 col-4 align-self-center text-center">
+                <a class="d-flex" href="{{ route('home') }}" title="Fast Shipping">
+                    <img class="img-fulid logo" src="{{ asset('/User/images/icons/logo2.png') }}" alt="Fast Shipping" />
+                    <p class="text-neon">Fast Shipping</p>
+                </a>
+            </div>
+            <div class="col-lg-6 col-sm-6 d-md-flex d-none align-items-center justify-content-center">
+                <a href="#">
+                    <input type="submit" class="login100-form-btn" value="Xem bưu cục gần đây">
+                </a>
+            </div>
+        </div>
     </div>
-</nav>
+</header>

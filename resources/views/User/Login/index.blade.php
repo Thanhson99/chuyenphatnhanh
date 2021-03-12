@@ -14,7 +14,6 @@
 							<span class="login100-form-title p-b-37">
 								Đăng nhập
 							</span>
-							{{-- message --}}
 							@if ( session()->has('message') )
 								<div class="alert alert-danger">{{ session()->get('message') }}</div>
 							@endif
