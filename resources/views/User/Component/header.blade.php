@@ -31,33 +31,33 @@
                                 <li class="menu-item-has-children active">
                                     <a href="#" title="Giao nhận hàng hóa">Giao nhận hàng hóa</a>
                                     <ul class="sub-menu">
-                                        <li><a href="#">Tra cứu vận đơn</a></li>
-                                        <li><a href="#">Tra cước và thời gian vận chuyển</a></li>
-                                        <li><a href="#">Danh sách bưu cục</a></li>
-                                        <li><a href="#">Chính sách</a></li>
-                                        <li><a href="#">Bảng giá</a></li>
+                                        <li><a href="{{ route('user.billOfLading') }}">Tra cứu vận đơn</a></li>
+                                        <li><a href="{{ route('user.checkCharges') }}">Tra cước và thời gian vận chuyển</a></li>
+                                        <li><a href="{{ route('user.listPostOffice') }}">Danh sách bưu cục</a></li>
+                                        <li><a href="{{ route('user.contact') }}">Chính sách</a></li>
+                                        <li><a href="{{ route('user.priceList') }}">Bảng giá</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href="#" title="Dịch vụ">Dịch vụ</a>
                                     <ul class="sub-menu">
-                                        <li><a href="#">Chuyển phát hỏa tốc</a></li>
+                                        <li><a href="{{ route('user.expressDelivery') }}">Chuyển phát hỏa tốc</a></li>
                                         <li><a href="{{ route('user.fastshipping') }}">Chuyển phát nhanh</a></li>
-                                        <li><a href="#">Chuyển phát tiết kiệm</a></li>
-                                        <li><a href="#">Chuyển phát đường bộ</a></li>
-                                        <li><a href="#">Chuyển phát thu hộ (COD)</a></li>
-                                        <li><a href="#">Thuê xe nguyên chuyến</a></li>
+                                        <li><a href="{{ route('user.thriftyDelivery') }}">Chuyển phát tiết kiệm</a></li>
+                                        <li><a href="{{ route('user.roadDelivery') }}">Chuyển phát đường bộ</a></li>
+                                        <li><a href="{{ route('user.CODDelivery') }}">Chuyển phát thu hộ (COD)</a></li>
+                                        <li><a href="{{ route('user.carRental') }}">Thuê xe nguyên chuyến</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href="#" title="Giới thiệu">Giới thiệu</a>
                                     <ul class="sub-menu">
-                                        <li><a href="#">Về Nhất Tín</a></li>
-                                        <li><a href="#">Giá trị cốt lõi</a></li>
-                                        <li><a href="#" title="Tin tức">Tin tức</a></li>
+                                        <li><a href="{{ route('user.introduce') }}">Về Fast Shipping</a></li>
+                                        <li><a href="{{ route('user.onus') }}">Giá trị cốt lõi</a></li>
+                                        <li><a href="{{ route('user.news') }}" title="Tin tức">Tin tức</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#" title="Liên hệ">Liên hệ</a></li>
+                                <li><a href="{{ route('user.contact') }}" title="Liên hệ">Liên hệ</a></li>
                             </ul>
                         </nav>
                     </div>

@@ -56,3 +56,25 @@
     background-color:rgb(255, 255, 255);
     box-shadow: 1px 2px 3px rgb(255, 31, 31);
 }
+
+.noitice-info{
+    text-align: center;
+    max-width: unset !important;
+}
+
+.collapsed{
+    display: inline-flex;
+}
+
+.panel-group .panel{
+    display: block !important;
+}
+
+.collapsed{
+    font-weight: 300 !important;
+    /* font-size: 20px; */
+}
+
+.pn-bd-2{
+    padding: 0 50px;
+}

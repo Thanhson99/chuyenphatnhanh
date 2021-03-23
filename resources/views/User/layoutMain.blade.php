@@ -16,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('/User/vendor/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/main_home.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/css-main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/mycss.css') }}">
 </head>
 <body>
     {{-- header --}}
@@ -41,4 +42,6 @@
     <script src="{{ asset('/User/js/jquery.lazyload.min.js') }}"></script>
     <script src="{{ asset('/User/js/fastclick.min.js') }}"></script>
     <script src="{{ asset('/User/js/timber.min.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
+    <script src="{{ asset('/User/js/mapInput.js') }}"></script>
 </html>

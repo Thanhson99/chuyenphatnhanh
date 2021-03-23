@@ -48,21 +48,21 @@
 .ntl-Link .path1:before
 {
    content:"\ea84";
-   color:#fed403
+   color:#fe0303
 }
 
 .ntl-Link .path2:before
 {
    content:"\ea85";
    margin-left:-1em;
-   color:#000
+   color:rgb(255, 255, 255)
 }
 
 .ntl-Link .path3:before
 {
    content:"\ea86";
    margin-left:-1em;
-   color:#000
+   color:rgb(255, 255, 255)
 }
 
 .ntl-Box-checked-fill-color .path1:before
@@ -6058,38 +6058,38 @@ a.btn.disabled,fieldset:disabled a.btn
 
 .btn-secondary:hover
 {
-   color:#212529;
-   background-color:#d7b803;
-   border-color:#cbae02
+   color:#ffffff;
+   background-color:#fd1e1e;
+   border-color:#ff0d0d
 }
 
 .btn-secondary:focus,.btn-secondary.focus
 {
-   color:#212529;
-   background-color:#d7b803;
-   border-color:#cbae02;
+   color:#ffffff;
+   background-color:#ff1e1e;
+   border-color:#f30909;
    -webkit-box-shadow:0 0 0 .2rem rgba(219,189,10,0.5);
    box-shadow:0 0 0 .2rem rgba(219,189,10,0.5)
 }
 
 .btn-secondary.disabled,.btn-secondary:disabled
 {
-   color:#212529;
+   color:#ffffff;
    background-color:#fd1f1f;
    border-color:#fd1f1f
 }
 
 .btn-secondary:not(:disabled):not(.disabled):active,.btn-secondary:not(:disabled):not(.disabled).active,.show>.btn-secondary.dropdown-toggle
 {
-   color:#212529;
-   background-color:#cbae02;
-   border-color:#bea302
+   color:#ffffff;
+   background-color:#fb0a0a;
+   border-color:#ff0b0b
 }
 
 .btn-secondary:not(:disabled):not(.disabled):active:focus,.btn-secondary:not(:disabled):not(.disabled).active:focus,.show>.btn-secondary.dropdown-toggle:focus
 {
-   -webkit-box-shadow:0 0 0 .2rem rgba(219,189,10,0.5);
-   box-shadow:0 0 0 .2rem rgba(219,189,10,0.5)
+   -webkit-box-shadow:0 0 0 .2rem rgba(255, 22, 22, 0.5);
+   box-shadow:0 0 0 .2rem rgba(255, 15, 15, 0.5)
 }
 
 .btn-success
@@ -13230,6 +13230,11 @@ a.bg-dark:hover,a.bg-dark:focus,button.bg-dark:hover,button.bg-dark:focus
    padding-top:3rem!important
 }
 
+.pt-15,.py-15
+{
+   padding-top:5rem!important
+}
+
 .pr-5,.px-5
 {
    padding-right:3rem!important
@@ -16958,6 +16963,7 @@ body
 
 .wp-hotline-footer
 {
+   background: url(../images/bg-hotline-footer.jpg);
    background-size:cover
 }
 
@@ -17468,7 +17474,6 @@ label.required:after
 
 .section-hotline
 {
-   background:url(../images/images-bg-service.jpg) center center no-repeat;
    background-size:cover;
    width:100%;
    color:#fff
@@ -18323,7 +18328,6 @@ label.required:after
 
    .bottom-bg:before
    {
-      background:url(../images/images-bg-core-value.jpg) bottom center no-repeat;
       background-size:cover;
       width:100%;
       height:356px;
@@ -18713,7 +18717,7 @@ label.required:after
 {
    font-size:16px;
    line-height:25px;
-   border-top:1px solid #000;
+   border-top:1px solid rgb(255, 255, 255);
    padding-top:15px;
    margin-top:15px
 }

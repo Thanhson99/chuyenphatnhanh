@@ -3,7 +3,7 @@
    font-family:'SanFrancisco';
    font-display:swap;
    src:url(../fonts/SanFranciscoDisplay-Regular.eot);
-   src:local(☺︎),url(../fonts/SanFranciscoDisplay-Regular.woff2) format("woff2"),url(../fonts/SanFranciscoDisplay-Regular.woff) format("woff"),url(../fonts/SanFranciscoDisplay-Regular.ttf) format("truetype"),url(../fonts/SanFranciscoDisplay-Regular.svg) format("svg");
+   src:local(☺︎),url(../fonts/SanFranciscoDisplay-Regular.woff2) format("woff2"),url(../fonts/SanFranciscoDisplay-Regular.woff) format("woff"),url(../fonts/font-default/SanFranciscoDisplay-Regular.ttf) format("truetype"),url(../fonts/font-default/SanFranciscoDisplay-Regular.svg) format("svg");
    font-weight:400;
    font-style:normal
 }
@@ -12,8 +12,8 @@
 {
    font-family:'ntl-icon';
    font-display:swap;
-   src:url(../fonts/ntl-icon1bce.eot?v=6);
-   src:url(../fonts/ntl-icon1bce.eot?v=6) format("embedded-opentype"),url(../fonts/ntl-icon1bce.ttf?v=6) format("truetype"),url(../fonts/ntl-icon1bce.woff?v=6) format("woff"),url(../fonts/ntl-icon1bce.svg?v=6) format("svg");
+   src:url(../fonts/font-default/ntl-icon1bce.eot?v=6);
+   src:url(../fonts/font-default/ntl-icon1bce.eot?v=6) format("embedded-opentype"),url(../fonts/font-default/ntl-icon1bce.ttf?v=6) format("truetype"),url(../fonts/font-default/ntl-icon1bce.woff?v=6) format("woff"),url(../fonts/font-default/ntl-icon1bce.svg?v=6) format("svg");
    font-weight:400;
    font-style:normal
 }
@@ -22,14 +22,14 @@
 {
    font-family:'Roboto-Bold';
    font-display:swap;
-   src:url(../fonts/Roboto-Bold.ttf) format("truetype")
+   src:url(../fonts/font-default/Roboto-Bold.ttf) format("truetype")
 }
 
 @font-face
 {
    font-family:'Roboto-Regular';
    font-display:swap;
-   src:url(../fonts/Roboto-Regular.ttf) format("truetype")
+   src:url(../fonts/font-default/Roboto-Regular.ttf) format("truetype")
 }
 
 [class^="ntl-"],[class*=" ntl-"],.slick-arrow

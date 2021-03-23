@@ -1,176 +1,309 @@
 @extends('User.layoutMain')
 
 @section('main-content')
-
-<body class="page-template page-template-page-templates page-template-contact page-template-page-templatescontact-php page page-id-9619">
-    <div id="PageContainer" class="w-100 float-left position-relative is-moved-by-drawer">
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBZF5CF" height="0" width="0" style="display: none; visibility: hidden;"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
-
-        <style>
-            .polylang li {
-                list-style-type: none !important;
-                display: inline !important;
-            }
-
-            .li-right {
-                font-size: 14px;
-                color: #fdd800;
-            }
-
-            .li-right:hover {
-                color: #fff;
-            }
-        </style>
-
-        <div class="w-100 top-header font-size-14 pt-2 pb-2 d-none d-md-block">
-            <div class="container">
-                <div class="row d-flex align-content-center">
-                    <div class="col-lg-7 col-sm-7 col-12">
-                        <span class="pr-1">Trụ sở chính: 18A Cộng Hòa, Phường 12, Quận Tân Bình, Tp. Hồ Chí Minh</span>
-                        <span class="border-left pl-2">Giờ làm việc: <span class="SanFranciscoDisplay-Bold">7:00 - 20:00</span></span>
-                    </div>
-                    <div class="col-lg-5 col-sm-5 col-12 text-right">
-                        <a href="gioi-thieu-chung.html" title="">Giới thiệu về Nhất Tín Logistics</a>
-                        <a class="border-left pl-2 ml-1" href="https://online.ntlogistics.vn/auth/login?url=https://ntlogistics.vn" title="">Đăng nhập</a>
-                        <a class="border-left pl-2 ml-1" href="https://online.ntlogistics.vn/auth/register" title="">Đăng ký</a>
-                        <div class="border-left pl-2 ml-1 d-inline-block polylang">
-                            <li class="lang-item lang-item-233 lang-item-vi current-lang lang-item-first">
-                                <a lang="vi" hreflang="vi" href="lien-he.html">
-                                    <img
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACnklEQVR4Xu2Xv2sUTxiHn9mfOS/hkqCInaJoFQJiY5HWxsIq+B8ogr18KwvBXiv9C1KIf4BdQLAKKkZJJYhNCGLi937s7d7uzOvtLLisl3Pvmk2TB4Z3YQfeZz87M+wqEeEkcThhTgUU4AKhrc2igUQBK/ubm4e4DfdXigtbW6se0MFxaG1s0CSjvT2AjgeEYgySJJhuF0T+GFpEJswRmbiemANT5zmdDqQpQOgBkGVIHNvRBLZXIUAhoDVmOLRjHpxFQMAMmA/fx5QCIHkCUYTMKeBd1eBC8t5lHsTzbOqlgNZIr4cMBsxDuJYgsSJ+GzAPAshoVAqQpuh+36YwK8qH4PIAFEjWRhJmRkQgSUoBsgzT709dhCoQVAhoQIrhXzQ4KxHoXMQQ7zoggAIVgOmp6fLGQJkAxYrMBazV5FZzPGHhRsbyvRjlCqIZVwUZIMLqowgZKZQvtv56GTJ44zOBCChV7Lq/1wCDgRU5jiyC/itIdmD1cUxwyYABhD+oEEZfHQ6fnCH9lgIpU8n7OE51DWRRZOu/0B9g/65w9r+Y9p2kFFDQfx3y82kL0d2ZtqG7tFQKmCwDrcEY6pAhpN8FVHVudgCSGmZCa9uzcg4oY5B6AXChfTsBDMN3PjhC62ZG+1bMr5c+aOqwvSonoc4yPJGZEgjWNP6VlKNnLf5/EQKw/DBm+UFMcC1l9NmlFpHKSWjjEJGZElhYTzm43yLa9oFC+Oh5QPJFEV5PST6pmQR0llUF8DwQqckO2yD+ODl3uO0RrmeAgNR/C1QFiujrBQTiHZfjOkha3qun7OkAaGOsVWMoVRUwIqgGBVQpgAcgRQI4i4s0REVAG+Co26VJBItWwHlgDThHs/wAdhUQAku2NksC9E5/Tk9c4Df0zn9/3BO3NgAAAABJRU5ErkJggg=="
-                                        title="Tiếng Việt"
-                                        alt="Tiếng Việt"
-                                        width="32"
-                                        height="32"
-                                    />
-                                </a>
-                            </li>
-                            <li class="lang-item lang-item-236 lang-item-en">
-                                <a lang="en-US" hreflang="en-US" href="en/lien-he.html">
-                                    <img
-                                        src="data:image/png;base64,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"
-                                        title="English"
-                                        alt="English"
-                                        width="32"
-                                        height="32"
-                                    />
-                                </a>
-                            </li>
-                        </div>
-                        <div class="dropdown d-none">
-                            <img class="img-fuild pr-1" src="../images/img/lang.png" alt="" />
-                            <button class="btn dropdown-toggle text-white p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Vietnamese
-                            </button>
-                            <div class="dropdown-menu border-0 p-1" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">English</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <header class="w-100 wp-header text-white py-3 pt-lg-0 pb-lg-0">
-            <div class="container">
-                <div class="row d-flex">
-                    <div class="col-lg-3 col-sm-4 col-4 align-self-center">
-                        <a href="../index.html" title="Nhất Tín Logistic"><img class="img-fulid logo" src="../images/img/logo.png" alt="Nhất Tín Logistic" /></a>
-                    </div>
-                    <div class="col-lg-6 col-sm-8 d-none d-lg-block align-self-end">
-                        <nav id="site-navigation" class="main-navigation">
-                            <ul id="main-menu" class="menu">
-                                <li class="menu-item-has-children">
-                                    <a href="#" title="">Giao nhận hàng hóa</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="../tra-van-don.html">Tra cứu vận đơn</a></li>
-                                        <li><a href="../tra-cuoc.html">Tra cước và thời gian vận chuyển</a></li>
-                                        <li><a href="../danh-sach-buu-cuc.html">Danh sách bưu cục</a></li>
-                                        <li><a href="quy-dinh-va-chinh-sach.html">Chính sách</a></li>
-                                        <li><a href="bang-gia.html">Bảng giá</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Dịch vụ</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="chuyen-phat-hoa-toc.html">Chuyển phát hỏa tốc</a></li>
-                                        <li><a href="chuyen-phat-nhanh.html">Chuyển phát nhanh</a></li>
-                                        <li><a href="dich-vu-chuyen-phat-ket-hop-mes.html">Chuyển phát tiết kiệm</a></li>
-                                        <li><a href="dich-vu-chuyen-phat-nhanh-duong-bo.html">Chuyển phát đường bộ</a></li>
-                                        <li><a href="dv-van-chuyen-thuong-mai-dien-tu-cod.html">Chuyển phát thu hộ (COD)</a></li>
-                                        <li><a href="dich-vu-thue-xe-nguyen-chuyen.html">Thuê xe nguyên chuyến</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Giới thiệu</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="gioi-thieu-chung.html">Về Nhất Tín</a></li>
-                                        <li><a href="trach-nhiem.html">Giá trị cốt lõi</a></li>
-                                        <li><a href="index.html">Tin tức</a></li>
-                                    </ul>
-                                </li>
-                                <li class="active"><a href="lien-he.html">Liên hệ</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-2 d-flex align-items-center justify-content-center">
-                        <a class="li-right" href="tel:1900636688" title="">
-                            <img class="pr-2" src="../images/img/phone.png" />
-                            <span>1900 63 6688</span>
-                        </a>
-                    </div>
-
-                    <ul class="col-lg-3 col-sm-8 col-8 text-right d-lg-none">
-                        <li class="d-inline-block mr-2">
-                            <a class="text-fff" href="https://online.ntlogistics.vn/auth/login?url=https://ntlogistics.vn"><span class="ntl-Login fs1"></span></a>
-                        </li>
-                        <li class="d-inline-block">
-                            <button type="button" class="js-drawer-open-left ntl-menu d-inline-block border-0 text-center text-white" aria-controls="NavDrawer" aria-expanded="false">
-                                <i class="fs1 ntl-Hamburger-Menu"></i>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
         <div class="container">
             <div class="page-contact">
                 <h1 class="text-center heading-big">Yêu cầu hỗ trợ thông tin</h1>
                 <div class="d-flex justify-content-center align-items-center contact-detail my-5">
-                    <img src="../images/contact-1.png" alt="" class="mr-5" />
+                    <img src="{{ asset('User/images/contact.png') }}" alt="" class="mr-5" />
                     <p class="m-0">Chúng tôi luôn sẵn sàng hỗ trợ bạn mọi lúc mọi nơi.</p>
                 </div>
                 <div class="d-flex flex-column flex-md-row justify-content-center align-items-center contact-block">
                     <div class="hotline-block mr-md-4 mb-5">
-                        <p class="text-1">Liên hệ tổng đài chăm sóc khách hàng</p>
-                        <p class="text-2"><a href="tel:1900636688">1900 63 6688</a></p>
-                        <p class="text-3">(Cước phí 1000đ/phút)</p>
-                        <p class="text-4">Giải quyết khiếu nại trong vòng 24h</p>
+                        <p class="text-1 text-white">Liên hệ tổng đài chăm sóc khách hàng</p>
+                        <p class="text-2 text-white"><a class="text-white" href="tel:0337517047">0337 517 047</a></p>
+                        <p class="text-3 text-white">(Cước phí 1000đ/phút)</p>
+                        <p class="text-4 text-white">Giải quyết khiếu nại trong vòng 24h</p>
                     </div>
                     <div class="mail-block mb-5">
                         <p class="text-1">Yêu cầu phản hồi online</p>
-                        <button class="btn btn-secondary" data-toggle="modal" data-target="#supportModal">Gửi yêu cầu Online</button>
-                        <p class="text-4">Hoặc Quý khách có thể gửi email trực tiếp tới: <a href="mailto:nhattin@ntlogistics.vn">nhattin@ntlogistics.vn</a></p>
+                        <button class="btn btn-secondary text-white" data-toggle="modal" data-target="#supportModal">Gửi yêu cầu Online</button>
+                        <p class="text-4">Hoặc Quý khách có thể gửi email trực tiếp tới: <a href="mailto:fastshipping101099@gmail.com">fastshipping101099@gmail.com</a></p>
                     </div>
                 </div>
                 <div class="notice-block p-3 mb-4">
-                    <p class="text-1">Một số thông tin cần lưu ý</p>
-                    <ul>
-                        <li class="mb-3">
-                            <a href="quy-dinh-va-chinh-sach.html#policy-1"><span class="ntl-Black-Arrow-4"></span> Khiếu nại & đền bù</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="quy-dinh-va-chinh-sach.html#policy-2"><span class="ntl-Black-Arrow-4"></span> Quy định gửi & nhận hàng</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="quy-dinh-va-chinh-sach.html#policy-3"><span class="ntl-Black-Arrow-4"></span> Trách nhiệm các bên</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="quy-dinh-va-chinh-sach.html#policy-4"><span class="ntl-Black-Arrow-4"></span> Hàng hóa cấm gửi</a>
-                        </li>
-                    </ul>
+                    <p class="text-1 noitice-info">Một số thông tin cần lưu ý</p>
+                    <div id="questions" class="panel-group panel-group-faq">
+                        <div class="panel panel-faq">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#questions" href="#collapseOne" class="collapsed"><img style="padding-right: 10px; width: 30px; margin-bottom: 3px" src="{{ asset('User/images/icons/arrow-right.png') }}" alt=""> Khiếu nại & đền bù</a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body pn-bd-2">A: Bên Sử dụng Dịch Vụ<br>
+                                    B: Bên Cung cấp Dịch vụ (Fast shipping)<br>
+                                    ĐIỀU 1 _ PHẠM VI DỊCH VỤ <br>
+                                    Các loại dịch vụ bên B cung cấp cho bên A gồm: <br>
+                                    + Dịch vụ chuyển phát nhanh trong nước và quốc tế <br>
+                                    + Dịch vụ chuyển phát nhanh Hỗn Hợp <br>
+                                    + Dịch vụ vận tải đường hàng không và đường bộ <br>
+                                    + Dịch vụ thuê xe nguyên chuyến chạy nội và ngoại thành <br>
+                                    ĐIỀU 2 _ GIÁ CƯỚC<br>
+                                    1. Giá cước được tính theo bảng giá thỏa thuận, áp dụng cho hàng chuyển đi được đính
+                                    kèm theo hợp đồng này. Các khu vực khác chuyển hàng về địa chỉ của khách hàng
+                                    theo hợp đồng này với hình thức người nhận thanh toán thì sẽ áp dụng theo giá cước
+                                    vận chuyển của khu vực gửi hàng đi. Đối với các khu vực trả hàng không quy định
+                                    trong hợp đồng hoặc phụ lục của hợp đồng này, cước vận chuyển sẽ được tính theo
+                                    bảng giá công bố hiện hành của bên B căn cứ vào thời điểm gửi hàng (đối với dịch vụ
+                                    chuyển phát trong nước).<br>
+                                    2. Giá cước chưa bao gồm các khoản phí theo quy định của Bên B tại từng thời điểm. Đối
+                                    với hàng hóa để lưu tại kho Bên B quá 07 ngày do phía Bên A hoặc đối tác của Bên A thì
+                                    Bên A sẽ phải thanh toán phí lưu kho cho Bên B. Phí lưu kho sẽ được bên B tính toán
+                                    căn cứ vào khối lượng, thể tích hàng hóa và chi phí lưu kho bảo quản thức tế tại thời
+                                    điểm phát sinh chi phí này.<br>
+                                    3. Giá cước sẽ được điều chỉnh theo bảng giá kèm theo nếu có sai sót từ nhân viên của
+                                    Bên B.<br>
+                                    4. Giá cước có thể thay đổi nếu là hàng hóa đặc biệt hoặc thỏa thuận giữa 02 bên và được
+                                    chú thích lên từng vận đơn cụ thể.<br>
+                                    5. Trọng lượng hàng được xác định qua cân thực tế (trọng lượng thực) hoặc quy đổi theo
+                                    0337 517 047 thể tích (trọng lượng quy đổi). Nếu trọng lượng nào lớn hơn thì sẽ lấy trọng lượng đó và
+                                    áp vào bảng giá để tính cước.<br>
+                                    6. Cách tính trọng lượng quy đổi sẽ tùy thuộc vào bảng giá, loại hình dịch vụ và thỏa
+                                    thuận riêng của hai bên (nếu có). Trong trường hợp không có thỏa thuận riêng thì cách
+                                    thức quy đổi được thực hiện theo quy ước trên bảng giá công bố của bên B có hiệu lực
+                                    tại thời điểm gửi hàng.<br>
+                                    7. Trọng lượng, khối lượng bưu gửi được thể hiện cụ thể trên mẫu phiếu gửi của Nhất Tín
+                                    qua từng lần bên A gửi qua dịch vụ của bên B.<br>
+                                    8. Bảng giá cước được tính căn cứ vào giá xăng dầu thể hiện trên bảng giá trừ trường hợp
+                                    hai bên có thỏa thuận khác. Trong trường hợp giá nhiên liệu tăng hoặc giảm, giá cước
+                                    sẽ tăng hoặc giảm bằng 45% mức thay đổi của giá xăng dầu, cụ thể:<br>
+                                    GIÁ MỚI = GIÁ CŨ (1 + 45% x TỶ LỆ THAY ĐỔI GIÁ CỦA XĂNG DẦU)<br>
+                                    ĐIỀU 3 _ THỜI GIAN, ĐỊA ĐIỂM, PHƯƠNG THỨC CUNG ỨNG DỊCH VỤ<br>
+                                    1. Bên cung cấp dịch vụ (Bên B) phục vụ bên A 24 giờ/ 7 ngày trong tuần<br>
+                                    2. Bên B nhận bưu gửi tại địa chỉ của bên A hoặc bên A ra trực tiếp bên B để gửi.<br>
+                                    3. Phương thức cung ứng dịch vụ: Bên B chấp nhận bưu gửi của Bên A từ Việt Nam để
+                                    vận chuyển và phát tại nước ngoài.<br>
+                                    ĐIỀU 4 _ QUY CÁCH ĐÓNG GÓI HÀNG HÓA<br>
+                                    1. Đối với hàng hóa là hàng điện tử: (như điện thoại di động, máy vi tính, laptop, tablet,
+                                    máy ảnh, loa, đèn pin, pin sạc dự phòng…), Bên A có trách nhiệm:<br>
+                                    - Đóng gói hàng hóa bằng hộp carton cứng nhằm đảm bảo an toàn trong quá trình vận
+                                    chuyển.<br>
+                                    - Sử dụng vật liệu chèn lót sản phẩm chắc chắn đảm bảo hàng hóa không bị xê dịch,
+                                    ma sát, va chạm với nhau trong quá trình vận chuyển.<br>
+                                    - Niêm phong thùng hàng bằng băng keo niêm phong đặc chủng của Bên B hoặc của
+                                    Bên A.<br>
+                                    - Trong trường hợp Bên A sử dụng dịch vụ vận chuyển bằng đường hàng không, Bên A
+                                    phải tuân thủ tuyệt đối các quy định về an toàn hàng hóa theo các văn bản yêu cầu
+                                    của Tổng Cục Hàng Không Việt Nam và các quy định pháp luật khác có liên quan
+                                    như: Tắt nguồn toàn bộ các thiết bị có chứa pin Lion, pin Lithium (điện thoại di động,
+                                    máy tính bảng, laptop, đèn pin…), tháo rời Pin ra khỏi thân máy đối với máy tính xách
+                                    tay và đóng trong hộp tiêu chuẩn của nhà sản xuất để đảm bảo các điều kiện an toàn
+                                    khi vận chuyển.<br>
+                                    2. Đối với hàng hóa là các thiết bị vật tư đặc biệt, hàng hóa nguy hiểm, hàng hóa dễ
+                                    hư hại:<br>
+                                    - Bên A có trách nhiệm khai báo trung thực cho Bên B và đóng gói thiết bị vật tư đúng
+                                    tiêu chuẩn an toàn theo quy định pháp luật và các yêu cầu do Bên B đề ra đối với
+                                    từng trường hợp cụ thể.<br>
+                                    3. Đối với hàng hóa, thiết bị có nguy cơ bể vỡ trong quá trình vận chuyển:<br>
+                                    - Đóng kiện gỗ hoặc thùng xốp hoặc thùng carton có chèn lót để tránh va chạm, xê
+                                    dịch trong suốt quá trình vận chuyển.<br>
+                                    - Phải đánh dấu kí hiệu nhận biết như: hàng dễ vỡ, chiều chất xếp v.v… để đảm bảo khai
+                                    thác theo đúng yêu cầu.<br>
+                                    - Việc đóng gói do bên A thực hiện<br>
+                                    4. Trong trường hợp Bên A không thể đóng gói hàng hóa theo yêu cầu thì có thể sử dụng
+                                    dịch vụ đóng gói do Bên B cung cấp và tính phí theo bảng giá đính kèm hợp đồng.<br>
+                                    5. Trong trường hợp Bên A không thực hiên việc đóng gói theo đúng quy định của Bên B,
+                                    Bên B có quyền từ chối vận chuyển, thay đổi loại hình và phương thức vận chuyển
+                                    hoặc từ chối thực hiện nghĩa vụ bồi thường nếu có xảy ra sự cố bể vỡ, móp méo, trầy
+                                    xước hàng hóa …<br>
+                                    6. Trong trường hợp Bên A vi phạm các quy định về đóng gói đối với dịch vụ vận chuyển
+                                    bằng đường hàng không, mọi thiệt hại xảy ra sẽ do Bên A tự chịu trách nhiệm.</div>
+                            </div>
+                        </div>
+                        <div class="panel panel-faq">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#questions" class="collapsed" href="#collapseTwo"><img style="padding-right: 10px; width: 30px; margin-bottom: 3px" src="{{ asset('User/images/icons/arrow-right.png') }}" alt="">Quy định gửi & nhận hàng</a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse in" style="height: auto;">
+                                <div class="panel-body pn-bd-2">I. QUY ĐỊNH GỬI HÀNG<br>
+                                    1. Các cách thức gửi hàng<br>
+                                    1.1. Gửi hàng tại nhà<br>
+                                    Khách hàng có thể yêu cầu nhân viên Nhất Tín đến nhận thư từ, hàng hóa tại nhà
+                                    riêng hoặc công ty bằng nhiều cách sau:<br>
+                                    - Cách 1: Gọi Tổng đài Chăm sóc khách hàng 0337 517 047 và tạo vận đơn thông
+                                    qua Tư vấn viên.<br>
+                                    - Cách 2: Truy cập website www.online.ntlogistics.vn và tạo vận đơn trực tuyến.<br>
+                                    - Cách 3: Quý khách tải App Nhất Tín tại CH Play hoặc App Store và tạo vận đơn
+                                    trực tiếp từ ứng dụng.<br>
+                                    1.2. Gửi hàng tại Bưu cục<br>
+                                    Quý khách có thể đến trực tiếp các Bưu cục Nhất Tín gần nhất để sử dụng các
+                                    dịch vụ gửi thư, chuyển phát nhanh hàng hóa.<br>
+                                    2. Quy định chung khi Gửi hàng<br>
+                                    - Không gửi các loại hàng quốc cấm.<br>
+                                    - Kiểm tra đầy đủ hàng hóa tương ứng với các vận đơn được tạo thành công.<br>
+                                    - Vận đơn ghi đầy đủ các thông tin cần thiết. Mỗi vận đơn có thể bao gồm một
+                                    hoặc nhiều kiện hàng.<br>
+                                    - Cung cấp đúng trọng lượng, số lượng và kích thước hàng hóa sản phẩm. Hàng hóa
+                                    cần được đóng gói kỹ lưỡng để đảm bảo an toàn trong suốt quá trình vận chuyển.<br>
+                                    - Hàng hóa bên trong sẽ được nhân viên kiểm tra nội dung, kể cả hàng hoá
+                                    khách hàng đã tự niêm phong (Không áp dụng đối với hàng hóa đã được niêm
+                                    phong bởi nhà sản xuất).<br>
+                                    II. QUY ĐỊNH VỀ NHẬN HÀNG<br>
+                                    1. Các quy định chung khi nhận hàng<br>
+                                    1.1. Nhận hàng tận nơi<br>
+                                    - Nhân viên Fast shipping sẽ đọc kỹ thông tin ghi trên vận đơn, kiểm tra yêu
+                                    cầu trả hàng như: thời gian trả hàng, chuyển hoàn chứng từ, thu hộ, liên hệ
+                                    người nhận trước khi đi giao.<br>
+                                    - Nhân viên sẽ liên hệ khách hàng thông qua điện thoại. Trường hợp người nhận
+                                    không bắt máy hoặc không liên lạc được, hệ thống Fast shipping sẽ gửi
+                                    thông tin đến người nhận qua App hoặc SMS.<br>
+                                    - Fast shipping chỉ đồng ý xác nhận việc thay đổi địa chỉ trả hàng không quá
+                                    03 (ba) lần/vận đơn, và sẽ tính phí phát sinh nếu điểm trả mới cách xa điểm trả
+                                    trên vận đơn hơn 03 km.<br>
+                                    - Khách hàng cần kiểm tra kỹ hàng hóa trước khi ký nhận , ghi đầy đủ họ tên lên
+                                    vận đơn khi nhận hàng.<br>
+                                    1.2. Nhận hàng tại Bưu cục<br>
+                                    - Khách hàng khi đến nhận hàng tại Bưu cục Nhất Tín phải mang theo CMND. Thông
+                                    tin trên CMND phải trùng khớp thông tin người nhận đã ghi trên vận đơn.<br>
+                                    - Trường hợp khách hàng khi đến nhận hộ, phải cung cấp CMND của người nhận hộ
+                                    và giấy ủy quyền nhận hộ được xác nhận bởi người nhận trên vận đơn. Trên giấy
+                                    Ủy quyền phải ghi rõ số CMND của cả người ủy quyền và người được ủy quyền.<br>
+                                    - Khách hàng cung cấp số điện thoại của người nhận. Số điện thoại phải trùng
+                                    khớp với thông tin ghi trên vận đơn Fast shipping.<br>
+                                    - Nhân viên tại bưu cục sau khi giao hàng sẽ ghi đầy đủ số CMND, nơi cấp, ngày
+                                    cấp lên vận đơn.<br>
+                                    * Một số lưu ý khi Giao trả hàng<br>
+                                    - Hàng hóa sẽ được bàn giao lại cho bưu cục hoặc nhập lại kho trong các trường
+                                    hợp không phát được hàng như: khách hàng không có ở địa chỉ ghi trên vận
+                                    đơn, địa chỉ không có thật, số điện thoại không liên hệ được…<br>
+                                    - Nhân viên Nhất Tín sẽ thông báo cho khách hàng kiểm tra thông tin và xác
+                                    nhận phương án giải quyết tiếp theo cho đơn hàng trong các trường hợp
+                                    không phát được hàng vì các lý do như: địa chỉ sai, thay đổi địa chỉ mới, người
+                                    nhận từ chối nhận hàng v.v…<br>
+                                    Có 2 trường hợp:<br>
+                                    + Khách hàng yêu cầu chuyển hoàn: Nhân viên sẽ thông báo và lấy xác nhận
+                                    đồng ý thanh toán cước phí chuyển hoàn từ khách hàng, tiến hành làm các thủ
+                                    tục chuyển hoàn hàng hóa theo quy định.<br>
+                                    + Khách hàng yêu cầu chuyển tiếp: Nhân viên sẽ thông báo và lấy xác nhận
+                                    đồng ý thanh toán cước phí chuyển tiếp (nếu có) từ khách hàng, tiến hành làm
+                                    các thủ tục chuyển tiếp hàng hóa qua địa chỉ mới theo quy định. <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-faq">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#questions" class="collapsed" href="#collapseFour"><img style="padding-right: 10px; width: 30px; margin-bottom: 3px" src="{{ asset('User/images/icons/arrow-right.png') }}" alt="">Trách nhiệm các bên</a>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body pn-bd-2">
+                                    A: Bên Sử dụng Dịch Vụ<br>
+                                    B: Bên Cung cấp Dịch vụ (Fast shipping)<br>
+                                    A. BÊN A: BÊN SỬ DỤNG DỊCH VỤ<br>
+                                    QUYỀN LỢI:<br>
+                                    1. Yêu cầu Bên B cung cấp các dịch vụ theo nội dung tại Điều 1 và nhu cầu cung cấp
+                                    dịch vụ khác theo thỏa thuận.<br>
+                                    2. Được đảm bảo bí mật thông tin riêng và an toàn đối với bưu gửi<br>
+                                    3. Bên A có quyền khiếu nại bằng văn bản về việc sử dụng dịch vụ của Bên B. Thời
+                                    hiệu khiếu nại được quy định như sau:<br>
+                                    a) 06 tháng, kể từ ngày kết thúc thời gian toàn trình của bưu gửi đối với khiếu nại
+                                    về việc mất bưu gửi, chuyển phát bưu gửi chậm so với thời gian toàn trình đã
+                                    công bố; trường hợp doanh nghiệp không công bố thời gian toàn trình thì thời
+                                    hiệu này được tính từ ngày sau ngày bưu gửi đó được chấp nhận;<br>
+                                    b) 01 tháng, kể từ ngày bưu gửi được phát cho người nhận đối với khiếu nại về
+                                    việc bưu gửi bị suy suyển, hư hỏng, về giá cước và các nội dung khác có liên
+                                    quan trực tiếp đến bưu gửi;<br>
+                                    4. Được bồi thường thiệt hại theo thỏa thuận và theo quy định của pháp luật về bưu
+                                    chính.<br>
+                                    5. Yêu cầu Bên B cung cấp bảng kê và hóa đơn thanh toán cước hàng tháng.
+                                    NGHĨA VỤ:<br>
+                                    1. Bên A chủ động báo trước cho Bên B đối với trường hợp Bên A yêu cầu dịch vụ
+                                    đặc biệt hoặc số lượng bưu gửi lớn cần Bên B điều động phương tiện vận tải
+                                    lớn.<br>
+                                    2. Cung cấp toàn bộ chứng từ chứng minh nguồn gốc và tính hợp pháp của bưu gửi
+                                    như hóa đơn, lệnh điều động, phiếu xuất kho, tờ khai khải quan…và các giấy tờ
+                                    pháp lý khác theo quy định của pháp luật có liên quan đến hàng hóa để xuất trình
+                                    cho các cơ quan chức năng khi có yêu cầu.<br>
+                                    3. Đóng gói bưu gửi (nếu cần) khi có nguy cơ hư hỏng, bể vỡ, móp, ướt hoặc trầy
+                                    xước theo quy định đóng gói của Bên B để đảm bảo an toàn cho hàng hóa trong
+                                    quá trình vận chuyển.<br>
+                                    4. Chịu trách nhiệm trước pháp luật về nội dung bưu gửi.<br>
+                                    5. Tuân thủ các quy định của pháp luật về việc cấm lưu thông hoặc hạn chế lưu
+                                    thông đối với thông tin dưới dạng văn bản, kiện, gói hàng hóa.<br>
+                                    6. Thanh toán đầy đủ, đúng hạn cước phí các dịch vụ đã sử dụng theo quy định và
+                                    thỏa thuận tại hợp đồng này, kể cả trong thời gian xảy ra khiếu nại giữa hai bên.<br>
+                                    7. Khi có yêu cầu thay đổi địa chỉ, tên gọi của doanh nghiệp, ngừng sử dụng dịch vụ
+                                    hoặc chấm dứt hợp đồng, Bên A phải có văn bản gửi cho Bên B trước ít nhất 30
+                                    ngày để giải quyết.<br>
+                                    8. Bảo quản mẫu phiếu gửi hàng mà Bên B cấp phát cho Bên A và chịu trách nhiệm
+                                    thanh toán cước gửi hàng được lập bởi những mẫu phiếu gửi đó.<br>
+                                    9. Bồi thường cho Bên B theo quy định pháp luật nếu thiệt hại phát sinh do lỗi Bên A.<br>
+                                    B. BÊN B: BÊN CUNG CẤP DỊCH VỤ (Fast shipping)<br>
+                                    QUYỀN LỢI:<br>
+                                    1. Yêu cầu Bên A thực hiện đúng các yêu cầu của nhà nước và hướng dẫn của Bộ
+                                    Thông tin và Truyền thông về các dịch vụ trên.<br>
+                                    2. Yêu cầu Bên A thanh toán cước phí các dịch vụ đầy đủ, đúng hạn, kể cả trong thời
+                                    gian xem xét và giải quyết khiếu nại.<br>
+                                    3. Yêu cầu Bên A đóng gói hàng hóa theo đúng tiêu chuẩn quy định tại điều 3 (đối với
+                                    những hàng hóa dễ bể vỡ, hàng đông lạnh, hàng hóa nguy hiểm…) để đảm bảo
+                                    hàng hóa được bảo quản an toàn trong suốt quá trình vận chuyển.<br>
+                                    4. Kiểm tra nội dung gói, kiện trước khi chấp nhận và từ chối thực hiện dịch vụ
+                                    nếu Bên A không thực hiện đúng các quy định vận chuyển.<br>
+                                    5. Có quyền tạm ngưng cung cấp một phần hoặc toàn bộ dịch vụ nếu Bên A
+                                    không thanh toán cước phí trong thời gian 30 ngày kể từ ngày Bên B gửi hóa
+                                    đơn thanh toán.<br>
+                                    NGHĨA VỤ:<br>
+                                    1. Đảm bảo đúng chất lượng dịch vụ được Công ty công bố công khai.<br>
+                                    2. Cử nhân viên đến nhận hàng tại địa chỉ của Bên A sau khi nhận được yêu cầu của
+                                    Bên A.<br>
+                                    3. Đảm bảo chất lượng dịch vụ theo đúng tiêu chuẩn quy định và các thỏa thuận
+                                    giữa hai bên theo hợp đồng.<br>
+                                    4. Đảm bảo an toàn, chính xác và bí mật thông tin của Bên A theo quy định của
+                                    pháp luật, việc cung cấp chi tiết thông tin liên quan đến lô hàng phải được sự
+                                    chấp thuận bằng văn bản của bên A, trừ trường hợp theo yêu cầu của cơ quan
+                                    có thẩm quyền.<br>
+                                    5. Bồi thường thiệt hại cho Bên A theo Điều 9 của hợp đồng này và giải quyết các
+                                    khiếu nại theo đúng quy định của Luật bưu chính và các văn bản có liên quan.<br>
+                                    6. Có trách nhiệm chuyển hoàn bưu gửi cho bên A khi không phát được cho người
+                                    nhận của bên A và theo yêu cầu chuyển hoàn của bên A; nếu việc không phát
+                                    được do cho người nhận của bên A là do lỗi của bên A thì bên A có trách nhiệm
+                                    thanh toán cước phí chuyển hoàn (trừ trường hợp quy định tại khoản 3 Điều 17
+                                    Luật bưu chính)<br>
+                                    7. Cung cấp cho Bên A bảng kê chi tết và hóa đơn tài chính tương đương với cước phí
+                                    vận chuyển Bên A đã sử đụng.<br>
+                                    8. Thực hiện các yêu cầu của Bên A về thay đổi địa chỉ nhận hàng.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-faq">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#questions" class="collapsed" href="#collapseSeven"><img style="padding-right: 10px; width: 30px; margin-bottom: 3px" src="{{ asset('User/images/icons/arrow-right.png') }}" alt="">Hàng hóa cấm gửi</a>
+                                </h4>
+                            </div>
+                            <div id="collapseSeven" class="panel-collapse collapse" style="height: 0px;">
+                                <div class="panel-body pn-bd-2">
+                                    I. HÀNG HÓA CẤM GỬI<br>
+                                    - Các chất ma túy và chất kích thích thần kinh, gây nghiện.<br>
+                                    - Vũ khí đạn dược, trang thiết bị kỹ thuật quân sự.<br>
+                                    - Các loại văn hóa phẩm đồi trụy, phản động; ấn phẩm, tài liệu nhằm phá hoại trật tự
+                                    công cộng chống lại Nhà nước Cộng hòa Xã hội Chủ Nghĩa Việt Nam.<br>
+                                    - Vật hoặc chất dễ nổ, dễ cháy và các chất gây nguy hiểm hoặc làm mất vệ sinh, gây ô
+                                    nhiễm môi trường.<br>
+                                    - Các loại vật phẩm hàng hóa mà nhà nước cấm lưu thông, cấm kinh doanh, cấm xuất,
+                                    nhập khẩu.<br>
+                                    - Vật phẩm, ấn phẩm, hàng hóa cấm nhập vào nước nhận.<br>
+                                    II. QUY ĐỊNH MIỄN TRỪ TRÁCH NHIỆM ĐỀN BÙ, BỒI THƯỜNG<br>
+                                    - Hàng hóa đã được giao đúng thoả thuận.<br>
+                                    - Hàng hóa bị hư hại, mất mát do lỗi của bên gửi hàng.<br>
+                                    - Bị cơ quan nhà nước có thẩm quyền tịch thu hoặc tiêu hủy do nội dung bên trong vi
+                                    phạm các qui định cấm gửi của pháp luật hoặc do không xác minh được nguồn gốc,
+                                    xuất xứ.<br>
+                                    - Người gửi không cung cấp đầy đủ thông tin các giấy tờ cần thiết phục vụ cho việc giao
+                                    hàng dẫn đến các thiệt hại như hàng hoá hư hỏng do để lâu, bị phạt vi phạm, bị tịch
+                                    thu hàng hoá.<br>
+                                    - Chú ý: Hàng hóa cần có giấy tờ chứng minh nguồn gốc, xuất xứ hoặc hóa đơn GTGT đi
+                                    kèm. Nếu không, Fast shipping không chịu trách nhiệm trong trường hợp hàng hóa bị
+                                    Quản lý thị trường và các cơ quan chức năng thu giữ theo quy định của pháp luật. 
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,7 +313,7 @@
                 <div class="modal-content">
                     <div class="modal-body d-flex p-0">
                         <div class="modal-left d-none d-md-block">
-                            <img src="../images/support-bg.jpg" alt="" />
+                            <img src="{{ asset('User/images/support-bg.jpg') }}" alt="" />
                         </div>
                         <div class="modal-right">
                             <div class="close-top">
@@ -216,7 +349,7 @@
                                     <div class="invalid-feedback">Vui lòng nhập Nội dung</div>
                                 </div>
                                 <input type="hidden" id="wp_nonce" value="a914499e98" />
-                                <button class="btn btn-secondary btn-block" id="support-submit" type="submit">Gửi</button>
+                                <button class="btn btn-secondary" id="support-submit" type="submit" style="position: unset; width: 100%">Gửi</button>
                             </form>
                         </div>
                     </div>
@@ -224,39 +357,5 @@
             </div>
         </div>
     <!-- Start of widget script -->
-    <script type="text/javascript">
-        function loadJsAsync(t, e) {
-            var n = document.createElement("script");
-            (n.type = "text/javascript"),
-                (n.src = t),
-                n.addEventListener(
-                    "load",
-                    function (t) {
-                        e(null, t);
-                    },
-                    !1
-                );
-            var a = document.getElementsByTagName("head")[0];
-            a.appendChild(n);
-        }
-        window.addEventListener(
-            "DOMContentLoaded",
-            setTimeout(function () {
-                loadJsAsync("../../webchat.caresoft.vn_8090/js/CsChat3661.js?v=2.0", function () {
-                    var t = { domain: "nhattin" };
-                    embedCsChat(t);
-                });
-            }, 3000),
-            !1
-        );
-    </script>
-    <!-- End of widget script -->
-    <script type="text/javascript" defer src="../vendor/jquery.min001e.js?ver=2.0.0"></script>
-    <script type="text/javascript" defer src="../vendor/bootstrap.bundle.min001e.js?ver=2.0.0"></script>
-    <script type="text/javascript" defer src="../vendor/slick.min001e.js?ver=2.0.0"></script>
-    <script type="text/javascript" defer src="../vendor/fastclick.min001e.js?ver=2.0.0"></script>
-    <script type="text/javascript" defer src="../vendor/timber.min001e.js?ver=2.0.0"></script>
-    <script type="text/javascript" defer src="../js/main001e.js?ver=2.0.0"></script>
-    <script type="text/javascript" defer src="wp-includes/js/wp-embed.min9dff.js?ver=5.3.2"></script>
 </body>
 @endsection

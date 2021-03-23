@@ -40,6 +40,51 @@ Route::prefix($prefixUrl)->name($prefixUrl . '.')->group(function() use($control
     Route::get('/fastshipping', function () {
         return view('User.Other.Fastshipping');
     })->name('fastshipping');
+    Route::get('/contact', function () {
+        return view('User.Other.Contact');
+    })->name('contact');
+    Route::get('/expressdelivery', function () {
+        return view('User.Other.ExpressDelivery');
+    })->name('expressDelivery');
+    Route::get('/thriftydelivery', function () {
+        return view('User.Other.ThriftyDelivery');
+    })->name('thriftyDelivery');
+    Route::get('/roaddelivery', function () {
+        return view('User.Other.RoadDelivery');
+    })->name('roadDelivery');
+    Route::get('/coddelivery', function () {
+        return view('User.Other.CODDelivery');
+    })->name('CODDelivery');
+    Route::get('/carrental', function () {
+        return view('User.Other.CarRental');
+    })->name('carRental');
+    Route::get('/introduce', function () {
+        return view('User.Other.Introduce');
+    })->name('introduce');
+    Route::get('/fighting', function () {
+        return view('User.Other.Fighting');
+    })->name('fighting');
+    Route::get('/onus', function () {
+        return view('User.Other.Onus');
+    })->name('onus');
+    Route::get('/honest', function () {
+        return view('User.Other.Honest');
+    })->name('honest');
+    Route::get('/listpostoffice', function () {
+        return view('User.Other.ListPostOffice');
+    })->name('listPostOffice');
+    Route::get('/billoflading', function () {
+        return view('User.Other.BillOfLading');
+    })->name('billOfLading');
+    Route::get('/checkcharges', function () {
+        return view('User.Other.CheckCharges');
+    })->name('checkCharges');
+    Route::get('/pricelist', function () {
+        return view('User.Other.PriceList');
+    })->name('priceList');
+    Route::get('/news', function () {
+        return view('User.Other.News');
+    })->name('news');
 });
 
 Route::prefix('admin')->group(function(){

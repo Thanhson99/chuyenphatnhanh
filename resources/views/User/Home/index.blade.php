@@ -33,7 +33,7 @@
             </div>
 
             <div class="col-lg-6 col-md-12 col-sm-12 col-12 offset-lg-3 wp-slide flex-container center mt-lg-5 pt-lg-5" style="height: auto;">
-                <div class="mt-md-n5 mt-n3 more-than-log">
+                <div class="mt-md-n5 mt-n3 more-than-log text-white">
                     <!-- <img src="images/MoreThanLogistic.png" alt="" class="img-fluid"> -->
                     <!-- More Than Logistics -->
                     Hơn cả một dịch vụ
@@ -42,7 +42,7 @@
                     <div class="ml-0 mr-n1">
                         <span class="mx-auto d-block top-slide"></span>
                         <div class="box-cube">
-                            <a href="tra-cuoc.html">
+                            <a href="{{ route('user.checkCharges') }}">
                                 <span class="icon-slide font-size-30 ntl-Document-2">
                                     <span class="path1"></span><span id="ntl-Document-2" class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span>
                                     <span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span>
@@ -56,7 +56,7 @@
                     <div class="mx-0" style="z-index: 2;">
                         <span class="mx-auto d-block top-slide"></span>
                         <div class="box-cube active-box-cube">
-                            <a href="tra-van-don.html">
+                            <a href="{{ route('user.billOfLading') }}">
                                 <span class="icon-slide font-size-30 ntl-Box-1">
                                     <span id="ntl-Box-1" class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span>
                                 </span>
@@ -68,7 +68,7 @@
                     <div class="mr-0 ml-n1">
                         <span class="mx-auto d-block top-slide"></span>
                         <div class="box-cube">
-                            <a href="danh-sach-buu-cuc.html">
+                            <a href="{{ route('user.listPostOffice') }}">
                                 <span class="icon-slide font-size-30 ntl-Location-2">
                                     <span id="ntl-Location-2" class="path1"></span><span id="ntl-Location-22" class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span>
                                 </span>
@@ -379,160 +379,4 @@
                 </div>
             </div>
         </section>
-        {{-- <section class="w-100 wp-partner lazy">
-            <div class="container position-relative">
-                <div class="row">
-                    <div class="w-100 partners">
-                        <div id="partners-logo">
-                            <div class="slide">
-                                <img class="lazyload" src="#" alt="amway" />
-                            </div>
-                            <div class="slide">
-                                <img class="lazyload" src="#" alt="fpt" />
-                            </div>
-                            <div class="slide">
-                                <img class="lazyload" src="#" alt="thegioididong" />
-                            </div>
-                            <div class="slide">
-                                <img class="lazyload" src="#" alt="pharmacity" />
-                            </div>
-                            <div class="slide">
-                                <img class="lazyload" src="#" alt="samsung" />
-                            </div>
-                            <div class="slide">
-                                <img class="lazyload" src="#" alt="sony" />
-                            </div>
-                            <div class="slide">
-                                <img class="lazyload" src="#" alt="tcl" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-        <section class="w-100 wp-hotline-footer text-center text-white pt-5 pb-5">
-            <div class="container">
-                <div class="row">
-                    <!-- <div class="col-lg-8 col-md-8 col-12 offset-md-2"> -->
-                    <div class="mx-auto">
-                        <a class="hotline SanFranciscoDisplay-Bold" href="tel:0337 517 047">HOTLINE: 0337 517 047</a>
-                        <p class="text-nn">Liên hệ chúng tôi để được tư vấn giải pháp vận chuyển cho riêng bạn và nhận ngay báo giá dịch vụ tốt nhất!</p>
-                        <p style="color:rgb(253, 31, 31);; font-size: 20px;">Lấy hàng tận nơi. Giao hàng tận tay. Phục vụ tận tình</p>
-                        <div class="col-lg-12 col-12">
-                            <div class="row d-flex justify-content-center align-items-center font-size-16 pt-2 mt-4 mb-3 content-ft">
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-12 mb-4 mb-lg-0">
-                                    <a href="danh-sach-buu-cuc.html" class="d-inline-block p-2 rounded bg-white d-flex justify-content-center align-items-center">
-                                        <span class="icon ntl-Location-1 mr-3"><span class="path1"></span><span class="path22"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></span> Tìm bưu cục
-                                        gần bạn
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                                    <a href="tra-cuoc.html" class="d-inline-block p-2 rounded d-flex justify-content-center align-items-center"><span class="icon ntl-Box-search mr-3"></span> Tra cứu giá cước</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <div id="NavDrawer" class="drawer drawer--left">
-        <div class="drawer__header">
-            <div class="drawer__title h3">
-                <a class="site-header__logo-link" href="#" title="Fast Shipping">
-                    <img class="img-fluid w-50 mt-2" src="{{ asset('User/images/icons/logo.png') }}" alt="Fast Shipping" />
-                </a>
-            </div>
-            <div class="drawer__close js-drawer-close">
-                <button type="button" class="icon-fallback-text border-0 d-inline-block bg-transparent">
-                    <span class="ntl-Close"></span>
-                    <span class="fallback-text"></span>
-                </button>
-            </div>
-        </div>
-        <ul class="mobile-nav">
-            <li class="mobile-nav__item" aria-haspopup="true">
-                <div class="mobile-nav__has-sublist">
-                    <a href="#" class="mobile-nav__link">Giao nhận hàng hóa</a>
-                    <div class="mobile-nav__toggle">
-                        <button type="button" class="icon-fallback-text mobile-nav__toggle-open">
-                            <span class="ntl-White-Arrow-1"></span>
-                        </button>
-                        <button type="button" class="icon-fallback-text mobile-nav__toggle-close">
-                            <span class="ntl-White-Arrow-3"></span>
-                            <span class="fallback-text"></span>
-                        </button>
-                    </div>
-                </div>
-                <ul class="mobile-nav__sublist">
-                    <li class="mobile-nav__item"><a href="#" title="Tra cứu vận đơn" class="mobile-nav__link">Tra cứu vận đơn</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Tra cước và thời gian vận chuyển" class="mobile-nav__link">Tra cước và thời gian vận chuyển</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Danh sách bưu cục" class="mobile-nav__link">Danh sách bưu cục</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Chính sách" class="mobile-nav__link">Chính sách</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Bảng giá" class="mobile-nav__link">Bảng giá</a></li>
-                </ul>
-            </li>
-            <li class="mobile-nav__item" aria-haspopup="true">
-                <div class="mobile-nav__has-sublist">
-                    <a href="#" class="mobile-nav__link">Dịch vụ</a>
-                    <div class="mobile-nav__toggle">
-                        <button type="button" class="icon-fallback-text mobile-nav__toggle-open">
-                            <span class="ntl-White-Arrow-1"></span>
-                        </button>
-                        <button type="button" class="icon-fallback-text mobile-nav__toggle-close">
-                            <span class="ntl-White-Arrow-3"></span>
-                            <span class="fallback-text"></span>
-                        </button>
-                    </div>
-                </div>
-                <ul class="mobile-nav__sublist">
-                    <li class="mobile-nav__item"><a href="#" title="Chuyển phát hỏa tốc" class="mobile-nav__link">Chuyển phát hỏa tốc</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Chuyển phát nhanh" class="mobile-nav__link">Chuyển phát nhanh</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Chuyển phát tiết kiệm" class="mobile-nav__link">Chuyển phát tiết kiệm</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Chuyển phát đường bộ" class="mobile-nav__link">Chuyển phát đường bộ</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Chuyển phát thu hộ (COD)" class="mobile-nav__link">Chuyển phát thu hộ (COD)</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Thuê xe nguyên chuyến" class="mobile-nav__link">Thuê xe nguyên chuyến</a></li>
-                </ul>
-            </li>
-            <li class="mobile-nav__item" aria-haspopup="true">
-                <div class="mobile-nav__has-sublist">
-                    <a href="tin-tuc/index.html" class="mobile-nav__link">Tin tức</a>
-                    <div class="mobile-nav__toggle">
-                        <button type="button" class="icon-fallback-text mobile-nav__toggle-open">
-                            <span class="ntl-White-Arrow-1"></span>
-                        </button>
-                        <button type="button" class="icon-fallback-text mobile-nav__toggle-close">
-                            <span class="ntl-White-Arrow-3"></span>
-                            <span class="fallback-text"></span>
-                        </button>
-                    </div>
-                </div>
-                <ul class="mobile-nav__sublist">
-                    <li class="mobile-nav__item"><a href="#" title="Tin chuyên ngành" class="mobile-nav__link">Tin chuyên ngành</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Tin hoạt động" class="mobile-nav__link">Tin hoạt động</a></li>
-                    <li class="mobile-nav__item"><a href="{{ route('home') }}" title="Tin tuyển dụng" class="mobile-nav__link">Tin tuyển dụng</a></li>
-                </ul>
-            </li>
-            <li class="mobile-nav__item" aria-haspopup="true">
-                <div class="mobile-nav__has-sublist">
-                    <a href="#" class="mobile-nav__link">Giới thiệu</a>
-                    <div class="mobile-nav__toggle">
-                        <button type="button" class="icon-fallback-text mobile-nav__toggle-open">
-                            <span class="ntl-White-Arrow-1"></span>
-                        </button>
-                        <button type="button" class="icon-fallback-text mobile-nav__toggle-close">
-                            <span class="ntl-White-Arrow-3"></span>
-                            <span class="fallback-text"></span>
-                        </button>
-                    </div>
-                </div>
-                <ul class="mobile-nav__sublist">
-                    <li class="mobile-nav__item"><a href="#" title="Về Fast Shipping" class="mobile-nav__link">Về Fast Shipping</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Nhân sự NTL" class="mobile-nav__link">Nhân sự NTL</a></li>
-                    <li class="mobile-nav__item"><a href="#" title="Giá trị cốt lõi" class="mobile-nav__link">Giá trị cốt lõi</a></li>
-                </ul>
-            </li>
-            <li class="mobile-nav__item"><a class="mobile-nav__link mobile-nav__border" href="#" title="Liên hệ">Liên hệ</a></li>
-        </ul>
-    </div>
 @endsection
