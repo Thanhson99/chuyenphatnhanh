@@ -12,7 +12,7 @@
                         <span class="border-left pl-2">Giờ làm việc: <span class="SanFranciscoDisplay-Bold">7:00 - 20:00</span></span>
                     </div>
                     <div class="col-lg-4 col-sm-4 col-12 text-right">
-                        <a href="{{ route('home') }}" title="Giới thiệu về Fast Shipping">Giới thiệu về Fast Shipping</a>
+                        <a href="{{ route('user.introduce') }}" title="Giới thiệu về Fast Shipping">Giới thiệu về Fast Shipping</a>
                         <a class="border-left pl-2 ml-1" href="{{ route('user.login') }}" title="Đăng nhập">Đăng nhập</a>
                         <a class="border-left border-right pl-2 pr-2 ml-1 mr-2" href="{{ route('user.postRegister') }}" title="Đăng ký" style="border-right: 0px !important; padding-right: 0px !important;">Đăng ký</a>
                     </div>

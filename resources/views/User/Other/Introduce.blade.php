@@ -48,22 +48,22 @@
         <div class="container">
             <div class="d-flex justify-content-around justify-content-md-between align-content-center flex-wrap fw core-box-wrapper">
                 <div class="d-flex flex-column align-content-center core-box">
-                    <a href="trach-nhiem.html" class="cv-image" style="background: url('../User/images/trachnhiem-chiendau-trungthuc.jpg') no-repeat; background-size: cover; color: red">Trách nhiệm</a>
-                    <a href="trach-nhiem.html" class="cv-slogan">
+                    <a href="{{ route('user.onus') }}" class="cv-image" style="background: url('../User/images/trachnhiem-chiendau-trungthuc.jpg') no-repeat; background-size: cover; color: red">Trách nhiệm</a>
+                    <a href="{{ route('user.onus') }}" class="cv-slogan">
                         Tôi luôn tuân thủ & áp dụng đúng quy trình.<br />
                         Tôi là gốc rễ của mọi vấn đề.
                     </a>
                 </div>
                 <div class="d-flex flex-column align-content-center core-box">
-                    <a href="trung-thuc.html" class="cv-image" style="background: url('../User/images/trachnhiem-chiendau-trungthuc.jpg') no-repeat; background-size: cover; color: red">Trung thực</a>
-                    <a href="trung-thuc.html" class="cv-slogan">
+                    <a href="{{ route('user.honest') }}" class="cv-image" style="background: url('../User/images/trachnhiem-chiendau-trungthuc.jpg') no-repeat; background-size: cover; color: red">Trung thực</a>
+                    <a href="{{ route('user.honest') }}" class="cv-slogan">
                         Tôi trân trọng lời nói của tôi.<br />
                         Tôi nói bằng lượng hóa, không kể Câu chuyện.
                     </a>
                 </div>
                 <div class="d-flex flex-column align-content-center core-box">
-                    <a href="chien-dau.html" class="cv-image" style="background: url('../User/images/trachnhiem-chiendau-trungthuc.jpg') no-repeat; background-size: cover; color: red">Chiến đấu</a>
-                    <a href="chien-dau.html" class="cv-slogan">
+                    <a href="{{ route('user.fighting') }}" class="cv-image" style="background: url('../User/images/trachnhiem-chiendau-trungthuc.jpg') no-repeat; background-size: cover; color: red">Chiến đấu</a>
+                    <a href="{{ route('user.fighting') }}" class="cv-slogan">
                         Tôi không bao giờ nói “không”.<br />
                         Tôi quyết không bao giờ bỏ cuộc, luôn có kết quả vào thời điểm cụ thể.
                     </a>

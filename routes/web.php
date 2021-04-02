@@ -30,7 +30,8 @@ $controller = 'user';
 Route::prefix($prefixUrl)->name($prefixUrl . '.')->group(function() use($controller){
     $controllerName = ucfirst($controller) . '\\' . ucfirst($controller) . 'Controller';
     Route::post('/login', $controllerName . '@login')->name('postLogin');
-    Route::post('/register', $controllerName . '@register')->name('postRegister');
+    Route::post('/register', $controllerName . '@register')->name('postRegister');   
+    Route::get('/listpostoffice', $controllerName . '@get_post_office')->name("listPostOffice");
     Route::get('/login', function(){
         return view('User.Login.index');
     })->name('login');
@@ -70,9 +71,6 @@ Route::prefix($prefixUrl)->name($prefixUrl . '.')->group(function() use($control
     Route::get('/honest', function () {
         return view('User.Other.Honest');
     })->name('honest');
-    Route::get('/listpostoffice', function () {
-        return view('User.Other.ListPostOffice');
-    })->name('listPostOffice');
     Route::get('/billoflading', function () {
         return view('User.Other.BillOfLading');
     })->name('billOfLading');
@@ -87,7 +85,10 @@ Route::prefix($prefixUrl)->name($prefixUrl . '.')->group(function() use($control
     })->name('news');
 });
 
-Route::prefix('admin')->group(function(){
-    Route::get('/index', 'Admin\AdminController@index');
+$prefixUrl = 'admin';
+$controller = 'admin';
+Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($controller){
+    $controllerName = ucfirst($controller) . '\\' . ucfirst($controller) . 'Controller';
+    Route::get('/home', $controllerName . '@get_list_user')->name("listUser");
 });
 

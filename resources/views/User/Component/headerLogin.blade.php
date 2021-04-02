@@ -8,7 +8,7 @@
                 </a>
             </div>
             <div class="col-lg-6 col-sm-6 d-md-flex d-none align-items-center justify-content-center">
-                <a href="#">
+                <a href="{{ route('user.listPostOffice') }}">
                     <input type="submit" class="login100-form-btn" value="Xem bưu cục gần đây">
                 </a>
             </div>

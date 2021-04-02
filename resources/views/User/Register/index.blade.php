@@ -8,6 +8,12 @@
 				<span class="login100-form-title p-b-37">
 					Đăng ký
 				</span>
+				@if ( session()->has('message') )
+					<div class="alert alert-danger">{{ session()->get('message') }}</div>
+				@endif
+				@php
+					
+				@endphp
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-6">
@@ -26,7 +32,7 @@
 									<span class="focus-input100"></span>
 								</div>
 								<div class="wrap-input100 validate-input m-b-20 col-sm cl-right m-l-10" data-validate="Nhập số điện thoại">
-									<input class="input100" type="text" name="phoneNumber" placeholder="Nhập số điện thoại">
+									<input class="input100" type="text" name="phone_number" placeholder="Nhập số điện thoại">
 									<span class="focus-input100"></span>
 								</div>
 							</div>
@@ -35,7 +41,7 @@
 									<input class="input100" type="text" name="email" placeholder="Nhập địa chỉ Email">
 									<span class="focus-input100"></span>
 								</div>
-								<select class="form-select m-b-20 col-sm-4 register-selected cl-right" name="customerType">
+								<select class="form-select m-b-20 col-sm-4 register-selected cl-right" required="" name="customer_type">
 									<option selected>-- Loại khách hàng --</option>
 									<option value="0">Cá nhân</option>
 									<option value="1">Công ty</option>

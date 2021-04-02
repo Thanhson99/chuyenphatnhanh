@@ -372,21 +372,4 @@
             </div>
         </aside>
     </div>
-    <div class="section-hotline d-flex flex-column justify-content-center align-items-center mb-5 py-5">
-        <div class="container">
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <div class="big-text SanFranciscoDisplay-Bold">HOTLINE: <a href="tel:0337 517 047">0337 517 047</a></div>
-                <p class="mw-700 text-center">Liên hệ Fast shipping để được tư vấn chi tiết và có giá dịch vụ tốt nhất!</p>
-                <p style="color: #fc0404; font-size: 20px;">Lấy hàng tận nơi. Giao hàng tận tay. Phục vụ tận tình</p>
-                <div class="button-list d-flex flex-column flex-md-row align-items-center justify-content-center">
-                    <a href="../danh-sach-buu-cuc.html" class="btn btn-create-order btn-block mb-4 mb-md-0 mr-md-4">
-                        <span class="ntl-Location-1 mr-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></span>Tìm bưu cục gần bạn
-                    </a>
-                    <a href="{{ route('user.checkCharges') }}" class="btn btn-price-tracking btn-block">
-                        <span class="ntl-Box-2 mr-3"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></span>Tra cứu giá cước
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection

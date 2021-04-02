@@ -23,19 +23,24 @@ class LoginController extends Controller
         if ($existingUser) {
                 auth()->login($existingUser, true);
         } else {
-                $newUser = new User;
-                $newUser->provider_name = 'google';
-                $newUser->provider_id = $user->getId();
-                $newUser->email = $user->getEmail();
-                $newUser->name = $user->getName();
-                $newUser->CMND = null;
-                $newUser->phoneNumber = null;
-                $newUser->password = "";
-                $newUser->customerType = 1;
-                $newUser->avatar = $user->getAvatar();
-                $newUser->email_verified_at = now();
-                $newUser->save();
-                auth()->login($newUser, true);
+            // tạo id
+            // $id = uniqid (rand (), true);
+            // $md5c = md5($id);
+
+            $newUser = new User();
+            // $newUser->id = $md5c;
+            $newUser->provider_name = 'google';
+            $newUser->provider_id = $user->getId();
+            $newUser->email = $user->getEmail();
+            $newUser->name = $user->getName();
+            $newUser->CMND = null;
+            $newUser->phone_number = null;
+            $newUser->password = "";
+            $newUser->customer_type = 1;
+            $newUser->avatar = $user->getAvatar();
+            $newUser->email_verified_at = now();
+            $newUser->save();
+            auth()->login($newUser, true);
         }
         return redirect()->route('home');
     }

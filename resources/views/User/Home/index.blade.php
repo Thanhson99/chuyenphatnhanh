@@ -98,27 +98,27 @@
         <section class="w-100 wp-service">
             <div class="container container-service">
                 <div class="row m-0">
-                    <a href="#" class="item-service bg-fff translate text-center position-relative p-3">
+                    <a href="{{ route('user.checkCharges') }}" class="item-service bg-fff translate text-center position-relative p-3">
                         <p class="mb-3 mb-sm-0" style="height: 50px;">
                             <img src="{{ asset('/User/images/icons/icon-hoa-toc.png') }}" alt="" class="icon-hoa-toc" />
                         </p>
                         Chuyển phát hỏa tốc
                     </a>
-                    <a href="#" class="item-service bg-fff translate text-center position-relative p-3">
+                    <a href="{{ route('user.checkCharges') }}" class="item-service bg-fff translate text-center position-relative p-3">
                         <p class="ntl-CPN1 mb-3 mb-sm-0">
                             <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span>
                             <span class="path8"></span><span class="path9"></span><span class="path10"></span>
                         </p>
                         Chuyển phát nhanh
                     </a>
-                    <a href="#" class="item-service bg-fff translate text-center position-relative p-3">
+                    <a href="{{ route('user.checkCharges') }}" class="item-service bg-fff translate text-center position-relative p-3">
                         <p class="ntl-CP-Ket-Hop mb-3 mb-sm-0">
                             <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span>
                             <span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span>
                         </p>
                         Chuyển phát tiết kiệm
                     </a>
-                    <a href="#" class="item-service bg-fff translate text-center position-relative p-3">
+                    <a href="{{ route('user.checkCharges') }}" class="item-service bg-fff translate text-center position-relative p-3">
                         <p class="ntl-CP-duong-bo mb-3 mb-sm-0">
                             <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span>
                             <span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span>
@@ -128,11 +128,11 @@
                         </p>
                         Chuyển phát đường bộ
                     </a>
-                    <a href="#t" class="item-service bg-fff translate text-center position-relative p-3">
+                    <a href="{{ route('user.checkCharges') }}" class="item-service bg-fff translate text-center position-relative p-3">
                         <p class="ntl-Thu-ho-COD mb-3 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></p>
                         Chuyển phát thu hộ (COD)
                     </a>
-                    <a href="#" class="item-service bg-fff translate text-center position-relative p-3">
+                    <a href="{{ route('user.checkCharges') }}" class="item-service bg-fff translate text-center position-relative p-3">
                         <p class="ntl-Nguyen-xe mb-3 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></p>
                         Thuê xe nguyên chuyến
                     </a>
