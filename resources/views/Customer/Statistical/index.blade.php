@@ -1,7 +1,7 @@
-@extends('Admin.layout')
+@extends('Customer.layout')
 
 
-@section('admin-main-content')
+@section('Customer-main-content')
 <div class="content-wrapper" style="min-height: 415px;">
     <div class="content-header">
         <div class="container-fluid">
@@ -21,15 +21,6 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="group-btn">
-                    <form action="">
-                        <a href="#" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm người dùng</a>
-                        <a href="#" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa người dùng</a>
-                        @csrf
-                    </form>
-                </div>
-            </div>
-            <div class="row">
                 <table class="data-table table table-striped">
                     <thead>
                       <tr>
@@ -46,7 +37,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @if ($user->count() > 0)
+                        {{-- @if ($user->count() > 0)
                             @foreach ($user as $key => $collection)
                                 @php
                                     $id = $collection->id;
@@ -73,7 +64,7 @@
                                     <td>{{ $createdAt }}</td>
                                   </tr>
                             @endforeach
-                        @endif
+                        @endif --}}
                     </tbody>
                   </table>
             </div>

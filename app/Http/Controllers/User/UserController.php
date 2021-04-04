@@ -10,9 +10,15 @@ use App\list_post_office;
 class UserController extends Controller
 {
     public function login(Request $request){
+        // lấy dữ liệu user
         $user = User::where('email', $request->email)->where('password', $request->password)->first();
+        // kiểm tra user tồn tại
         if(isset($user)){
-            return redirect()->route('home');
+            // lấy thông tin user
+            session_start();
+            $_SESSION["user"] = $user;
+            //chuyển hướng sau khi login
+            return redirect()->route('customer.statistical');
         }
         return redirect()->route('user.login')->with('message', 'Tài khoản hoặc mật khẩu không đúng.');
     }
@@ -24,6 +30,7 @@ class UserController extends Controller
         $regexEmail = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/'; 
         $regexPhonenumber = '/(84|0[3|5|7|8|9])+([0-9]{8})\b/';
 
+        // kiểm tra các trường hợp
         if (!preg_match($regexEmail, $request->email)) {
             return redirect()->route('user.register')->with('message', 'Email không đúng định dạng.');
         }elseif(isset($user)){
@@ -53,12 +60,16 @@ class UserController extends Controller
         $newUser->email_verified_at = now();
         $newUser->remember_token = '';
         $newUser->save();
+        // chuyển hướng
         return redirect()->route('user.login');
     }
 
     public function get_post_office(){
+        // khai báo
         $office = new list_post_office();
+        // lấy dữ liệu các bưu cục
         $item = $office->list_office();
+        // chuyển hướng
         return view('User.Other.ListPostOffice')->with('item' , $item);
     }
 }

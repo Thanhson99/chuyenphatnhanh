@@ -92,3 +92,9 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::get('/home', $controllerName . '@get_list_user')->name("listUser");
 });
 
+$prefixUrl = 'customer';
+$controller = 'customer';
+Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($controller){
+    $controllerName = ucfirst($controller) . '\\' . ucfirst($controller) . 'Controller';
+    Route::get('/home', $controllerName . '@statistical')->name("statistical");
+});

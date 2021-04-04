@@ -1,0 +1,55 @@
+.group-btn{
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+}
+
+.group-btn a:first-child{
+    margin-right: 100px;
+}
+
+.group-btn a{
+    text-align: center;
+}
+
+.group-btn a img{
+    width: 50px;
+    padding-right: 20px;
+}
+
+.customer-header{
+    background-color: #343a40;
+    border-bottom: 1px solid #fff;
+    height: 75px;
+}
+
+#customer-avatar{
+    width: 70px;
+    border-radius: 50%;
+}
+
+#customer-name{
+    color: #fff;
+    padding-left: 20px;
+}
+
+.customer-right-header{
+    height: 75px;
+    justify-content: flex-end;
+}
+
+.customer-left-header{
+    height: 75px;;
+}
+
+.customer-left-header .customer-logo-header{
+    height: 73px;
+}
+
+.text-neon{
+    align-items: center;
+    display: flex;
+    padding-left: 20px;
+    color: #fff;
+    font-size: 25px;
+}

@@ -1,7 +1,6 @@
 @extends('User.layoutLogin')
 
 @section('main-content')
-
 	<div class="container-login100" style="background-image: url('images/bg-02.jpeg');">
 		<div class="wrap-login100 p-l-35 p-r-10 p-t-50 p-b-30">
 			<form  action="{{ route('user.postLogin') }}" method="POST" class="login100-form validate-form">

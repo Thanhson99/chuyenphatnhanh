@@ -78,3 +78,7 @@
 .pn-bd-2{
     padding: 0 50px;
 }
+
+#video-home{
+    display: unset !important;
+}

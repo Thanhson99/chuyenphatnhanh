@@ -13,4 +13,8 @@ class AdminController extends Controller
         $users = $user->list_users();
         return view('Admin.List_user.index')->with('user' , $users);
     }
+
+    public function delete_user($id){
+
+    }
 }

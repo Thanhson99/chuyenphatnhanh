@@ -12,14 +12,14 @@
     </head>
     <body class="sidebar-mini" style="height: auto;">
         {{-- header --}}
-        @include('Admin.Component.header')
+        @include('Customer.Component.header')
         {{-- slide bar --}}
-        @include('Admin.component.slide-bar')
+        @include('Customer.component.slide-bar')
             
-        @yield('admin-main-content')
+        @yield('Customer-main-content')
             
         {{-- footer --}}
-        @include('Admin.Component.footer')
+        @include('Customer.Component.footer')
     </body>
     <script src="{{ asset('/Admin/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
