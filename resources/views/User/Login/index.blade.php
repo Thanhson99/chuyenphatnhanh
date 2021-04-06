@@ -37,9 +37,6 @@
 								<a href="{{ route('login.provider', 'google') }}" class="login100-social-item"	>
 									<img  style="width: 30px" src="images/icons/icon-google.png" alt="GOOGLE">
 								</a>
-								<a href="{{ route('loginfb.provider')}}" class="login100-social-item"	>
-									<img  style="width: 30px" src="images/icons/icon-fb.png" alt="GOOGLE">
-								</a>
 							</div>
 							<div class="text-center redirect-login">
 								<a href="{{ route('user.postRegister') }}" class="txt2 hov1">

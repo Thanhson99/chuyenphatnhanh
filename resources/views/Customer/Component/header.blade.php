@@ -11,8 +11,17 @@
                 </a>
             </div>
             <div class="customer-right-header col-lg-6 col-sm-6 d-md-flex d-none align-items-center">
-                <img id="customer-avatar" src="{{ $_SESSION["user"]->avatar != '' ? $_SESSION["avatar"] : asset('/Admin/dist/img/avatar4.png') }}" alt="">
-                <h2 id="customer-name">{{ $_SESSION["user"]->name }}</h2>
+                <div class="dropdown" style="display: block">
+                    <a href="#" class="dropdown-toggle customer-dropdown-toggle" data-toggle="dropdown">
+                        <img id="customer-avatar" src="{{ $_SESSION["user"]->avatar != '' ? $_SESSION["avatar"] : asset('/Admin/dist/img/avatar4.png') }}" alt="">
+                        <h2 id="customer-name">{{ $_SESSION["user"]->name }}</h2>
+                    </a>
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu customer-dropdown-menu" style="z-index: 99999">
+                      <li><a href="#">Thông tin cá nhân</a></li>
+                      <li><a href="{{ route('customer.logout') }}">Đăng xuất</a></li>
+                    </ul>
+                  </div>
             </div>
         </div>
     </div>

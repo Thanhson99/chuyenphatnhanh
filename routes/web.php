@@ -90,6 +90,7 @@ $controller = 'admin';
 Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($controller){
     $controllerName = ucfirst($controller) . '\\' . ucfirst($controller) . 'Controller';
     Route::get('/home', $controllerName . '@get_list_user')->name("listUser");
+    Route::get('/form', $controllerName . '@add_user')->name("addUser");
 });
 
 $prefixUrl = 'customer';
@@ -97,4 +98,5 @@ $controller = 'customer';
 Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($controller){
     $controllerName = ucfirst($controller) . '\\' . ucfirst($controller) . 'Controller';
     Route::get('/home', $controllerName . '@statistical')->name("statistical");
+    Route::get('/logout', $controllerName . '@logout')->name("logout");
 });

@@ -17,4 +17,8 @@ class AdminController extends Controller
     public function delete_user($id){
 
     }
+
+    public function add_user(Request $request){
+        return view('Admin.List_user.form');
+    }
 }

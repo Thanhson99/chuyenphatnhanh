@@ -20,6 +20,7 @@ class UserController extends Controller
             //chuyển hướng sau khi login
             return redirect()->route('customer.statistical');
         }
+        // 
         return redirect()->route('user.login')->with('message', 'Tài khoản hoặc mật khẩu không đúng.');
     }
 

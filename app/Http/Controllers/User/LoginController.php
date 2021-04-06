@@ -50,7 +50,7 @@ class LoginController extends Controller
             $newUser->CMND = null;
             $newUser->phone_number = null;
             $newUser->password = "";
-            $newUser->customer_type = 1;
+            $newUser->customer_type = 0;
             $newUser->avatar = $user->getAvatar();
             $newUser->email_verified_at = now();
             // lưu tài khoản vào CSDL
