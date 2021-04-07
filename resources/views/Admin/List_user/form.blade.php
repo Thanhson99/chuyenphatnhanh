@@ -1,3 +1,7 @@
+@php
+    $select_customer_type = Form::select('Loại khách hàng', ['0' => 'Cá nhân', '1' => 'Công ty'], null, ['class' => 'form-control']);
+@endphp
+
 @extends('Admin.layout')
 
 @section('admin-main-content')
@@ -39,7 +43,28 @@
                           <input type="text" class="form-control" placeholder="Email">
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" placeholder="Last name">
+                            <span>Name</span>
+                            <input type="text" class="form-control" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <span>Phone number</span>
+                            <input type="text" class="form-control" placeholder="Phone number">
+                        </div>
+                        <div class="col">
+                            <span>Loại khách hàng</span>
+                            {!! $select_customer_type !!}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <span>CMND</span>
+                            <input type="text" class="form-control" placeholder="CMND">
+                        </div>
+                        <div class="col">
+                            <span>Avatar</span>
+                            <input type="file" class="form-control">
                         </div>
                     </div>
                     @csrf

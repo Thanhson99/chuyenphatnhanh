@@ -19,7 +19,7 @@
 
                 <div class="clearfix"></div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12" style="height: 450px;overflow: hidden;overflow-y: scroll;">
                 <div class="w-100 font-size-18 text-dark mt-1 pl-3 pr-3 pl-md-0 pr-md-0">1 chi nhánh / bưu cục trên toàn quốc</div>
                     @foreach ($item as $key => $collection)
                         @php

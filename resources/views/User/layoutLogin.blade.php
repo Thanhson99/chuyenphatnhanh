@@ -17,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('/User/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/main_login.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/User/css/mycss.css') }}">
+    <link rel="stylesheet" href="{{ asset('Admin/toastr-master/build/toastr.min.css') }}">
 
 </head>
 <body>
@@ -38,5 +39,11 @@
     <script src="{{ asset('/User/vendor/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('/User/vendor/countdowntime/countdowntime.js') }}"></script>
     <script src="{{ asset('/User/js/main-login.js') }}"></script>
+    <script src="{{ asset('/Admin/toastr-master/build/toastr.min.js') }}"></script>
 
+    @if (\Session::has('success'))
+        <script>
+            toastr.success("{{ \Session::get('success') }}", 'Thành công')
+        </script>
+    @endif
 </html>

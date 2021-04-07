@@ -91,6 +91,7 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     $controllerName = ucfirst($controller) . '\\' . ucfirst($controller) . 'Controller';
     Route::get('/home', $controllerName . '@get_list_user')->name("listUser");
     Route::get('/form', $controllerName . '@add_user')->name("addUser");
+    Route::post('/deleteUser', $controllerName . '@delete_user')->name('deleteUser');
 });
 
 $prefixUrl = 'customer';

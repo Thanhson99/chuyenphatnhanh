@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Socialite;
 use App\User;
+use App\Admin;
+use Session;
 
 class LoginController extends Controller
 {
@@ -20,7 +22,19 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             session_start();
             $_SESSION["user"] = $user;
+            Session::flash('success', 'Đăng nhập thành công');
             return redirect()->route('customer.statistical');
+        }
+        //  kiểm tra tài khoản admin
+        $admin = Admin::where('email', $user->getEmail())->first();
+        // email thuộc về admin
+        if($admin){
+            // Tạo session lưu thông tin admin
+            session_start();
+            $_SESSION["admin"] = $admin;
+            Session::flash('success', 'Đăng nhập thành công');
+            // chuyển hướng
+            return redirect()->route('admin.listUser');
         }
 
         // Lấy email kiểm tra nếu có cho phép đăng nhập
@@ -61,6 +75,7 @@ class LoginController extends Controller
         session_start();
         $_SESSION["user"] = $user;
         // chuyển hướng
+        Session::flash('success', 'Đăng nhập thành công');
         return redirect()->route('customer.statistical');
     }
 }

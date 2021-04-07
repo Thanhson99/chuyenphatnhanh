@@ -1,7 +1,10 @@
+@php
+    session_start();
+@endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('admin.listUser') }}" class="brand-link">
-        <img src="{{ asset('Admin/dist/img/avatar4.png') }}" alt="Admin-logo" class="brand-image img-circle elevation-3" style="opacity: 0.8;">
-        <span class="brand-text font-weight-light">Admin</span>
+        <img src="{{ $_SESSION["admin"]->avatar != '' ? $_SESSION["avatar"] : asset('/Admin/dist/img/avatar4.png') }}" alt="Admin-logo" class="brand-image img-circle elevation-3" style="opacity: 0.8;">
+        <span class="brand-text font-weight-light">{{ $_SESSION["name"] }}</span>
     </a>
     <div class="sidebar">
         <nav class="mt-2">
@@ -14,7 +17,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item  admin-bar-active">
                     <a href="{{ route('admin.listUser') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
@@ -23,7 +26,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.listUser') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý tin tức
@@ -31,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.listUser') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý giá cước
@@ -39,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a style="display: inline-flex" href="{{ route('admin.listUser') }}" class="nav-link">
+                    <a style="display: inline-flex" href="#" class="nav-link">
                         <i class="nav-icon fas fa-th" style="margin-top: .2rem; margin-right: .4rem;"></i>
                         <p>
                             Quản lý hình thức<br>vận chuyển
@@ -47,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.listUser') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý vận đơn
@@ -55,7 +58,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.listUser') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Thống kê

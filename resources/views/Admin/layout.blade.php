@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{{ asset('Admin/plugins/fontawesome-free/css/all.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('Admin/dist/css/adminlte.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('Admin/dist/css/style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('Admin/toastr-master/build/toastr.min.css') }}">
     </head>
     <body class="sidebar-mini" style="height: auto;">
         {{-- header --}}
@@ -25,4 +26,10 @@
     <script src="{{ asset('/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('/Admin/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('/Admin/dist/js/custome.js') }}"></script>
+    <script src="{{ asset('/Admin/toastr-master/build/toastr.min.js') }}"></script>
+    @if (\Session::has('success'))
+        <script>
+            toastr.success("{{ \Session::get('success') }}", 'Thành công')
+        </script>
+    @endif
 </html>

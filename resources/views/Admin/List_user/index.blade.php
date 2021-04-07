@@ -22,12 +22,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="group-btn">
-                    <a href="#" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm người dùng</a>
-                    <a href="#" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa người dùng</a>
+                    <a href="{{ route('admin.addUser') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm người dùng</a>
+                    <a href="javascript:submitForm('{{ route('admin.deleteUser') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa người dùng</a>
                 </div>
             </div>
             <div class="row">
-                <form id="form-list-customer" action="" id="">
+                <form id="form-list-customer" action="#" method="POST">
                     <table class="data-table table table-striped">
                         <thead>
                           <tr>
@@ -74,6 +74,9 @@
                             @endif
                         </tbody>
                       </table>
+                      <div class="pagination">
+                          {!! $user->links() !!}
+                      </div>
                       @csrf
                 </form>
             </div>

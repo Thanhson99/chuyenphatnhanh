@@ -92,3 +92,20 @@
 #img-customer{
     width: 100px;
 }
+
+.admin-bar-active{
+    background-color: rgb(71, 200, 240);
+    color: #fff !important;
+}
+
+.admin-bar-active a{
+    color: #fff !important;
+}
+
+#form-list-customer .col{
+    padding-bottom: 30px;
+}
+
+.pagination{
+    float: right;
+}
