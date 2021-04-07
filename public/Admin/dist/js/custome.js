@@ -18,3 +18,7 @@ $(document).ready(function(){
         $(this).addClass("admin-bar-active");
     });
 });
+
+$("select[name='provider-name']").change(function(){
+    $(this).parents('form').submit();
+})

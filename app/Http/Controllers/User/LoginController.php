@@ -16,7 +16,7 @@ class LoginController extends Controller
     }
 
     public function callback_social($provider){
-        // thử đăng nhập nếu tài khoản đã từng đăng nhập
+        // thử đăng nhập nếu tài khoản người dùng đã từng đăng nhập
         try {
             $user = Socialite::driver($provider)->user();
         } catch (\Exception $e) {

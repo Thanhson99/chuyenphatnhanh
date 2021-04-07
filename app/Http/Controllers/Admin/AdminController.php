@@ -9,13 +9,15 @@ use Session;
 
 class AdminController extends Controller
 {
-    public function get_list_user(){
+    public function get_list_user(Request $request){
+        // fillter provider name
+        $params['fillter']['provider-name'] = $request->input('provider-name', 'all');
         // khai báo model
         $user = new list_user();
         // gọi hàm model
-        $users = $user->list_users();
+        $users = $user->list_users($params);
         // chuyển hướng
-        return view('Admin.List_user.index')->with('user' , $users);
+        return view('Admin.List_user.index')->with('user' , $users)->with('params', $params);
     }
 
     public function delete_user(Request $request){

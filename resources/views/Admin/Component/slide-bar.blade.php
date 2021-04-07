@@ -3,8 +3,8 @@
 @endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('admin.listUser') }}" class="brand-link">
-        <img src="{{ $_SESSION["admin"]->avatar != '' ? $_SESSION["avatar"] : asset('/Admin/dist/img/avatar4.png') }}" alt="Admin-logo" class="brand-image img-circle elevation-3" style="opacity: 0.8;">
-        <span class="brand-text font-weight-light">{{ $_SESSION["name"] }}</span>
+        <img src="{{ $_SESSION["admin"]->avatar != '' ? $_SESSION["admin"]->avatar : asset('/Admin/dist/img/avatar4.png') }}" alt="Admin-logo" class="brand-image img-circle elevation-3" style="opacity: 0.8;">
+        <span class="brand-text font-weight-light">{{ $_SESSION["admin"]->name }}</span>
     </a>
     <div class="sidebar">
         <nav class="mt-2">

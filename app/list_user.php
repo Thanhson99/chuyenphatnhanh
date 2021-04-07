@@ -9,9 +9,13 @@ class list_user extends Model
     // tên table
     protected $table = 'users';
 
-    public function list_users(){
+    public function list_users($params = null){
+        $query = $this->select('*');
+        if($params['fillter']['provider-name'] != 'all'){
+            $query->where('provider_name', $params['fillter']['provider-name']);
+        }
         // lấy hết theo id từ bé đến lớn
-        $query = $this->orderBy("id", "ASC")->paginate(4); // phân trang theo số phần tử
+        $query = $query->orderBy("id", "ASC")->paginate(4); // phân trang theo số phần tử
         return $query;
     }
 

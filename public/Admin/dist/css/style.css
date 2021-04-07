@@ -109,3 +109,11 @@
 .pagination{
     float: right;
 }
+
+.provider-name{
+    flex: 1;
+}
+
+.group-btn-list-user{
+    padding: 10px !important;
+}
