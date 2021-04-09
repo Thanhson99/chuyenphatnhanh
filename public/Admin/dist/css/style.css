@@ -5,7 +5,11 @@
 }
 
 .group-btn a:first-child{
-    margin-right: 100px;
+    margin-right: 50px;
+}
+
+.group-btn a:last-child{
+    margin-left: 50px;
 }
 
 .group-btn a{
@@ -110,10 +114,14 @@
     float: right;
 }
 
-.provider-name{
+.provider-name, .news-type{
     flex: 1;
 }
 
 .group-btn-list-user{
     padding: 10px !important;
+}
+
+#form-list-news{
+    width: 100%;
 }

@@ -1,5 +1,12 @@
 @php
     $select_provider_name = Form::select('provider-name', ['all' => 'Tất cả', 'google' => 'google', 'website' => 'website'], $params['fillter']['provider-name'], ['class' => 'form-control provider-name']);
+    $search_field = [
+        'all' => 'Tất cả',
+        'email' => 'Email',
+        'name' => 'Tên',
+        'CMND' => 'CMND',
+        'phone_number' => 'Số điện thoại'
+    ];
 @endphp
 
 @extends('Admin.layout')
@@ -30,14 +37,31 @@
                 </div>
             </div>
             <div class="row" style="padding-bottom: 20px">
-                <form id="change-provider-name" action="{{ route('admin.listUser') }}" style="width: 100%">
-                    <div class="col-sm-2">
+                <div class="col-sm-2">
+                    <form id="change-provider-name" action="{{ route('admin.listUser') }}">
                         <div class="row align-items-center">
                             <span style="padding-right: 20px">Lọc</span>
                             {!! $select_provider_name !!}
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <div class="col-sm-6">
+                    <form action="{{ route('admin.listUser') }}">
+                        <div class="dropdown" style="display: flex; margin-left: 50px">
+                            <button class="btn btn-default dropdown-toggle search-text" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tìm kiếm {{ mb_strtolower($search_field[$params['search']['field']]) != 'tất cả'  }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @foreach ($search_field as $key => $item)
+                                    <a class="dropdown-item" href="javascript:changeSearchField('{{ $key }}', '{{ $item }}')">{{ $item }}</a>
+                                @endforeach
+                            </div>
+                            <input name="search_value" type="text" style="width: 50%; display:block; margin: 0 10px">
+                            <button class="btn btn-default" type="submit">Tìm kiếm</button>
+                        </div>
+                        <input type="hidden" name="search_field" value="all">
+                    </form>
+                </div>
             </div>
             <div class="row">
                 <form id="form-list-customer" action="#" method="POST">
@@ -47,10 +71,10 @@
                             <th scope="col"><input type="checkbox" name="check-all" id="check-all"></th>
                             <th scope="col">Email</th>
                             <th scope="col">Provider name</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Tên</th>
                             <th scope="col">CMND</th>
-                            <th scope="col">Phone number</th>
-                            <th scope="col">Customer type</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Loại khách hàng</th>
                             <th scope="col">Avatar</th>
                             <th scope="col">Email verify</th>
                             <th scope="col">Updated at</th>

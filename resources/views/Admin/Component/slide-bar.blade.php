@@ -17,7 +17,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item  admin-bar-active">
+                <li data-stt="1" class="nav-item  admin-bar-active">
                     <a href="{{ route('admin.listUser') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin.listNews') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý tin tức
