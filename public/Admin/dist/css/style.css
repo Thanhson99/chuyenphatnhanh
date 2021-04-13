@@ -4,12 +4,8 @@
     padding: 30px;
 }
 
-.group-btn a:first-child{
+.group-btn a{
     margin-right: 50px;
-}
-
-.group-btn a:last-child{
-    margin-left: 50px;
 }
 
 .group-btn a{
@@ -89,10 +85,6 @@
     color: blue;
 }
 
-#form-list-customer{
-    width: 100%;
-}
-
 #img-customer{
     width: 100px;
 }
@@ -114,7 +106,7 @@
     float: right;
 }
 
-.provider-name, .news-type{
+.provider-name, .news-type, .transportation-type, .orders{
     flex: 1;
 }
 
@@ -122,6 +114,20 @@
     padding: 10px !important;
 }
 
-#form-list-news{
+.list-items{
     width: 100%;
+}
+
+.highlight{
+    background-color: rgb(255, 252, 65);
+}
+
+.link_nav{
+    outline: none !important;
+}
+
+.col span{
+    display: block;
+    margin-bottom: 15px;
+    margin-top: 5px;
 }

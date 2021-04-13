@@ -1,4 +1,5 @@
 @php
+    use App\Helper\Template;
     $select_provider_name = Form::select('provider-name', ['all' => 'Tất cả', 'google' => 'google', 'website' => 'website'], $params['fillter']['provider-name'], ['class' => 'form-control provider-name']);
     $search_field = [
         'all' => 'Tất cả',
@@ -45,26 +46,27 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-sm-6">
-                    <form action="{{ route('admin.listUser') }}">
+                <div class="col-sm-7">
+                    <form id="frm-search" action="{{ route('admin.listUser') }}">
                         <div class="dropdown" style="display: flex; margin-left: 50px">
                             <button class="btn btn-default dropdown-toggle search-text" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Tìm kiếm {{ mb_strtolower($search_field[$params['search']['field']]) != 'tất cả'  }}
+                                Tìm kiếm {{ mb_strtolower($search_field[$params['search']['field']]) != 'tất cả' ? mb_strtolower($search_field[$params['search']['field']]) != 'cmnd' ? 'theo ' . mb_strtolower($search_field[$params['search']['field']]) : 'theo ' . $search_field[$params['search']['field']] : mb_strtolower($search_field[$params['search']['field']]) }}
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 @foreach ($search_field as $key => $item)
                                     <a class="dropdown-item" href="javascript:changeSearchField('{{ $key }}', '{{ $item }}')">{{ $item }}</a>
                                 @endforeach
                             </div>
-                            <input name="search_value" type="text" style="width: 50%; display:block; margin: 0 10px">
+                            <input value="{{ $params['search']['value'] }}" name="search_value" type="text" style="width: 50%; display:block; margin: 0 10px">
                             <button class="btn btn-default" type="submit">Tìm kiếm</button>
+                            <a href="javascript:clearSearch()" class="btn btn-default" style="margin-left: 10px">Xóa tìm kiếm</a>
                         </div>
                         <input type="hidden" name="search_field" value="all">
                     </form>
                 </div>
             </div>
             <div class="row">
-                <form id="form-list-customer" action="#" method="POST">
+                <form id="form-list-customer" class="list-items" action="#" method="POST">
                     <table class="data-table table table-striped">
                         <thead>
                           <tr>
@@ -86,11 +88,11 @@
                                 @foreach ($user as $key => $collection)
                                     @php
                                         $id = $collection->id;
-                                        $email = $collection->email;
+                                        $email = Template::highlight($collection->email, $params['search']);
                                         $providerName = $collection->provider_name;
-                                        $name = $collection->name;
-                                        $CMND = $collection->CMND;
-                                        $phoneNumber = $collection->phone_number;
+                                        $name = Template::highlight($collection->name, $params['search']);
+                                        $CMND = Template::highlight($collection->CMND, $params['search']);
+                                        $phoneNumber = Template::highlight($collection->phone_number, $params['search']);
                                         $customerType = $collection->customer_type;
                                         $avatar = $collection->avatar;
                                         $emailVerifyAt = $collection->email_verified_at;
@@ -99,11 +101,11 @@
                                     @endphp
                                     <tr>
                                         <td><input type="checkbox" name="cbid[]" value="{{ $id }}"></td>
-                                        <td>{{ $email }}</td>
+                                        <td>{!! $email !!}</td>
                                         <td>{{ $providerName }}</td>
-                                        <td>{{ $name }}</td>
-                                        <td>{{ $CMND == null ? 'Chưa có' : $CMND }}</td>
-                                        <td>{{ $phoneNumber == null ? 'Chưa có' : $phoneNumber }}</td>
+                                        <td>{!! $name !!}</td>
+                                        <td>{!! $CMND == null ? 'Chưa có' : $CMND !!}</td>
+                                        <td>{!! $phoneNumber == null ? 'Chưa có' : $phoneNumber !!}</td>
                                         <td>{{ $customerType == 0 ?  'Cá nhân' : 'Công ty'}}</td>
                                         <td>{!! $avatar == null ? '<img id="img-customer" src="' . asset('/Admin/dist/img/avatar4.png') . '" alt="">' : '<img id="img-customer" src="' . $avatar . '" alt="">' !!}</td>
                                         <td>{{ $emailVerifyAt }}</td>

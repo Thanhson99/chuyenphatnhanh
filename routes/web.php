@@ -95,6 +95,17 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::get('/listNews', $controllerName . '@get_news')->name("listNews");
     Route::get('/formAddNews', $controllerName . '@add_news')->name("addNews");
     Route::post('/deleteNews', $controllerName . '@delete_news')->name('deleteNews');
+    Route::get('/listTransportationType', $controllerName . '@get_transportation_type')->name("listTransportationType");
+    Route::get('/formTransportationType', $controllerName . '@add_transportation_type')->name("addTransportationType");
+    Route::post('/deleteTransportationType', $controllerName . '@delete_transportation_type')->name('deleteTransportationType');
+    Route::get('/listRates', $controllerName . '@get_rates')->name("listRates");
+    Route::get('/formAddRates', $controllerName . '@add_rates')->name("addRates");
+    Route::post('/deleteRates', $controllerName . '@delete_rates')->name('deleteRates');
+    Route::get('/listOrders', $controllerName . '@get_orders')->name("listOrders");
+    Route::get('/formAddOrders', $controllerName . '@add_orders')->name("addOrders");
+    Route::post('/deleteOrders', $controllerName . '@delete_orders')->name('deleteOrders');
+
+    Route::get('/logout', $controllerName . '@logout')->name("logout");
 });
 
 $prefixUrl = 'customer';
@@ -104,3 +115,7 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::get('/home', $controllerName . '@statistical')->name("statistical");
     Route::get('/logout', $controllerName . '@logout')->name("logout");
 });
+
+Route::get('/page-not-found', function () {
+    return view('page_not_found');
+})->name('page_not_found');

@@ -16,8 +16,8 @@ class CustomerController extends Controller
         session_start();
         // Xóa dữ liệu của phiên
         if(isset($_SESSION["user"])){
-            unset($_SESSION["user"]);
+            session_destroy();
         }
-        return view('User.Home.index');
+        return redirect()->route('home');
     }
 }

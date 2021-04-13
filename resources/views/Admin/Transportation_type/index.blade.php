@@ -1,11 +1,10 @@
 @php
     use App\Helper\Template;
-    $select_news_type = Form::select('news-type', ['all' => 'Tất cả', 'tin chuyên ngành' => 'Tin chuyên ngành', 'tin hoạt động' => 'Tin hoạt động', 'tin khuyến mãi' => 'Tin khuyến mãi'], $params['fillter']['news-type'], ['class' => 'form-control news-type']);
+    // $select_transportation_type = Form::select('transportation-type', ['all' => 'Tất cả', 'transportation_type' => 'Hình thức vận chuyển', 'rates' => 'giá'], $params['fillter']['transportation-type'], ['class' => 'form-control transportation-type']);
     $search_field = [
         'all' => 'Tất cả',
-        'title' => 'Tiêu đề',
-        'description' => 'Nội dung',
-        'new_type' => 'Loại tin tức'
+        'transportation_type' => 'Hình thức vận chuyển',
+        'rates' => 'Giá'
     ];
 @endphp
 
@@ -17,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Quản lý tin tức</h1>
+                    <h1 class="m-0">Quản lý hình thức vận chuyển</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.listUser') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Quản lý tin tức</li>
+                        <li class="breadcrumb-item active">Quản lý hình thức vận chuyển</li>
                     </ol>
                 </div>
             </div>
@@ -32,22 +31,22 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="group-btn group-btn-list-user">
-                    <a href="{{ route('admin.addNews') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm tin tức</a>
-                    <a href="{{ route('admin.addNews') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Sửa tin tức</a>
-                    <a href="javascript:submitForm('{{ route('admin.deleteNews') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa tin tức</a>
+                    <a href="{{ route('admin.addTransportationType') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm hình thức vận chuyển</a>
+                    <a href="{{ route('admin.addTransportationType') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Sửa hình thức vận chuyển</a>
+                    <a href="javascript:submitForm('{{ route('admin.deleteTransportationType') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa hình thức vận chuyển</a>
                 </div>
             </div>
             <div class="row" style="padding-bottom: 20px">
-                <div class="col-sm-2">
-                    <form id="change-provider-name" action="{{ route('admin.listNews') }}">
+                {{-- <div class="col-sm-2">
+                    <form id="change-provider-name" action="{{ route('admin.listTransportationType') }}">
                         <div class="row align-items-center">
                             <span style="padding-right: 20px">Lọc</span>
-                            {!! $select_news_type !!}
+                            {!! $select_transportation_type !!}
                         </div>
                     </form>
-                </div>
-                <div class="col-sm-8">
-                    <form id="frm-search" action="{{ route('admin.listNews') }}">
+                </div> --}}
+                <div class="col-sm-10">
+                    <form id="frm-search" action="{{ route('admin.listTransportationType') }}">
                         <div class="dropdown" style="display: flex; margin-left: 50px">
                             <button class="btn btn-default dropdown-toggle search-text" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Tìm kiếm {{ mb_strtolower($search_field[$params['search']['field']]) != 'tất cả' ? 'theo ' . mb_strtolower($search_field[$params['search']['field']]) : mb_strtolower($search_field[$params['search']['field']]) }}
@@ -66,37 +65,31 @@
                 </div>
             </div>
             <div class="row">
-                <form id="form-list-news" class="list-items" action="#" method="POST">
+                <form id="form-transportation-type" class="list-items" action="#" method="POST">
                     <table class="data-table table table-striped">
                         <thead>
                           <tr>
                             <th scope="col"><input type="checkbox" name="check-all" id="check-all"></th>
-                            <th scope="col">Tiêu đề</th>
-                            <th scope="col">Nội dung</th>
-                            <th scope="col">Hình ảnh</th>
-                            <th scope="col">Loại tin tức</th>
-                            <th scope="col">Updated at</th>
-                            <th scope="col">Created at</th>
+                            <th scope="col">Hình thức vận chuyển</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">created_at</th>
+                            <th scope="col">updated_at</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @if ($news->count() > 0)
-                                @foreach ($news as $key => $collection)
+                            @if ($transportation->count() > 0)
+                                @foreach ($transportation as $key => $collection)
                                     @php
                                         $id = $collection->id;
-                                        $title = Template::highlight($collection->title, $params['search']);
-                                        $description = Template::highlight($collection->description, $params['search']);
-                                        $picture = $collection->picture;
-                                        $new_type = Template::highlight($collection->new_type, $params['search']);
+                                        $transportation_type = Template::highlight($collection->transportation_type, $params['search']);
+                                        $rates = Template::highlight(number_format($collection->rates, 0), $params['search']);
                                         $updatedAt = $collection->updated_at;
                                         $createdAt = $collection->created_at;
                                     @endphp
                                     <tr>
                                         <td><input type="checkbox" name="cbid[]" value="{{ $id }}"></td>
-                                        <td>{!! $title !!}</td>
-                                        <td>{!! $description !!}</td>
-                                        <td>{{ $picture }}</td>
-                                        <td>{!! $new_type !!}</td>
+                                        <td>{!! $transportation_type !!}</td>
+                                        <td>{!! $rates !!} VNĐ</td>
                                         <td>{{ $updatedAt }}</td>
                                         <td>{{ $createdAt }}</td>
                                       </tr>
@@ -105,7 +98,7 @@
                         </tbody>
                       </table>
                       <div class="pagination">
-                          {!! $news->links() !!}
+                          {!! $transportation->links() !!}
                       </div>
                       @csrf
                 </form>

@@ -1,5 +1,10 @@
 @php
     session_start();
+    if(!isset($_SESSION["user"])){
+        //chuyển hướng
+        header("Location: http://chuyenphatnhanh.blog/page-not-found");
+        exit;
+    }
 @endphp
 <header class="w-100 wp-header text-black py-3 pt-lg-0 pb-lg-0 customer-header">
     <div class="container">

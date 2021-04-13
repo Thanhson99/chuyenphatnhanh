@@ -4,22 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class news extends Model
+class transportation_type extends Model
 {
     // tên table
-    protected $table = 'news';
+    protected $table = 'transportation_type';
     public $search_field = [
-        'title', 'description', 'new_type'
+        'transportation_type', 'rates'
     ];
 
-    public function list_news($params = null){
+    public function list_transportation_type($params = null){
         $query = $this->select('*');
-        if($params['fillter']['news-type'] != 'all'){
-            $query->where('new_type', $params['fillter']['news-type']);
-        }
         if(!empty($params['search']['value'])){
             if($params['search']['field'] != 'all'){
-                $search_field =  in_array($params['search']['field'], $this->search_field) ? $params['search']['field'] : 'title';
+                $search_field =  in_array($params['search']['field'], $this->search_field) ? $params['search']['field'] : 'transportation_type';
                 $query->where($search_field, 'LIKE', '%' . $params['search']['value'] . '%');
             }else{
                 foreach($this->search_field as $key => $search_field){
@@ -28,11 +25,11 @@ class news extends Model
             }
         }
         // lấy hết theo id từ bé đến lớn
-        $query = $query->orderBy("id", "ASC")->paginate(4); // phân trang theo số phần tử
+        $query = $query->orderBy("id", "ASC")->paginate(10); // phân trang theo số phần tử
         return $query;
     }
 
-    public function delete_news($id){
+    public function delete_transportation_type($id){
         // tìm user theo id sau đó xóa
         $query = $this->find($id)->delete();
         return $query;
