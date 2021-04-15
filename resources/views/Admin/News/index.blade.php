@@ -33,7 +33,6 @@
             <div class="row">
                 <div class="group-btn group-btn-list-user">
                     <a href="{{ route('admin.addNews') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm tin tức</a>
-                    <a href="{{ route('admin.addNews') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Sửa tin tức</a>
                     <a href="javascript:submitFormNews('{{ route('admin.deleteNews') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa tin tức</a>
                 </div>
             </div>
@@ -77,6 +76,7 @@
                             <th scope="col">Loại tin tức</th>
                             <th scope="col">Updated at</th>
                             <th scope="col">Created at</th>
+                            <th scope="col">Sửa tin tức</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -90,15 +90,17 @@
                                         $new_type = Template::highlight($collection->new_type, $params['search']);
                                         $updatedAt = $collection->updated_at;
                                         $createdAt = $collection->created_at;
+                                        $linkEdit = route('admin.addNews', ['id' => $id]);
                                     @endphp
                                     <tr>
                                         <td><input type="checkbox" name="cbid[]" value="{{ $id }}"></td>
                                         <td>{!! $title !!}</td>
                                         <td>{!! $description !!}</td>
-                                        <td>{{ $picture }}</td>
+                                        <td><img src="{{ asset('Images/News/thumb/' . $picture) }}" alt=""></td>
                                         <td>{!! $new_type !!}</td>
                                         <td>{{ $updatedAt }}</td>
                                         <td>{{ $createdAt }}</td>
+                                        <td><a href="{{ $linkEdit }}">Sửa</a></td>
                                       </tr>
                                 @endforeach
                             @endif

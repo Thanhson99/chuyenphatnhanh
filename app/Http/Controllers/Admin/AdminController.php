@@ -65,15 +65,20 @@ class AdminController extends Controller
         $delete = new news();
         if(count($arrCbid) > 0){
             foreach($arrCbid as $key => $id){
-                $item = $delete->delete_news($id);
+                $delete->removeImage($id);
+                $delete->delete_news($id);
             }
         }
         Session::flash('success', 'Đã xóa thành công');
         return redirect()->back();
     }
 
-    public function add_news(){
-        return view('Admin.News.form');
+    public function add_news(Request $request){
+        $item = [];
+        if(isset($request->id)){
+            $item = news::find($request->id);
+        }
+        return view('Admin.News.form')->with('item', $item);
     }
 
     public function save_news(Request $request){
@@ -95,7 +100,7 @@ class AdminController extends Controller
         // tạo mode save dữ liệu
         $params = $request->all();
         $new = new news();
-        $news = $new->saveItem($params);
+        $id = $new->saveItem($params);
         
         if($request->type == 'close'){
             Session::flash('success', 'Thêm tin tức thành công');
@@ -104,6 +109,10 @@ class AdminController extends Controller
         if($request->type == 'new'){
             Session::flash('success', 'Thêm tin tức thành công');
             return redirect()->route('admin.addNews');
+        }
+        if($request->type == 'save'){
+            Session::flash('success', 'Thêm tin tức thành công');
+            return redirect()->route('admin.addNews', ['id' => $id]);
         }
     }
 

@@ -78,3 +78,27 @@ function submitSave(link){
     frm.attr('action', link);
     frm.submit();
 }
+
+function toSlug(t){
+    var str = $(t).val();
+    // đổi input thành tiếng việt k dấu
+    str = str.toLowerCase();
+    //xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ẵ|â|ầ|ấ|ậ|ẫ|ẩ|ă|ắ|ẵ|ặ|ẳ|ằ)/g, 'a');
+    str = str.replace(/(ó|ò|ọ|õ|ỏ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ỡ|ở)/g, 'o');
+    str = str.replace(/(é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ)/g, 'e');
+    str = str.replace(/(ù|ú|ụ|ũ|ủ|ư|ừ|ứ|ự|ữ|ử)/g, 'u')
+    str = str.replace(/(í|ì|ĩ|ị|ỉ)/g, 'i');
+    str = str.replace(/(ý|ỳ|ỷ|ỵ|ỹ)/g, 'y');
+    str = str.replace(/(đ)/g, 'd');
+    //xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, '');
+    //thay khoảng trắng = ký tự -
+    str = str.replace(/(\s+)/g, '-');
+    // xóa phần dư - ở đầu
+    str = str.replace(/^-+/g, '');
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, '');
+
+    $('#slug').val(str);
+}
