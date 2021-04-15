@@ -34,7 +34,7 @@
                 <div class="group-btn group-btn-list-user">
                     <a href="{{ route('admin.addNews') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm tin tức</a>
                     <a href="{{ route('admin.addNews') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Sửa tin tức</a>
-                    <a href="javascript:submitForm('{{ route('admin.deleteNews') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa tin tức</a>
+                    <a href="javascript:submitFormNews('{{ route('admin.deleteNews') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa tin tức</a>
                 </div>
             </div>
             <div class="row" style="padding-bottom: 20px">

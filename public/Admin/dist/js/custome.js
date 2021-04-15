@@ -72,3 +72,9 @@ function submitFormOrder(link){
         frm.submit();
     }
 }
+
+function submitSave(link){
+    var frm = $('#form-list-new');
+    frm.attr('action', link);
+    frm.submit();
+}

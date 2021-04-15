@@ -28,7 +28,7 @@ class news extends Model
             }
         }
         // lấy hết theo id từ bé đến lớn
-        $query = $query->orderBy("id", "ASC")->paginate(4); // phân trang theo số phần tử
+        $query = $query->orderBy("id", "ASC")->paginate(10); // phân trang theo số phần tử
         return $query;
     }
 
@@ -36,5 +36,14 @@ class news extends Model
         // tìm user theo id sau đó xóa
         $query = $this->find($id)->delete();
         return $query;
+    }
+
+    public function saveItem($params){
+        $data = $params['form'];
+        $news = new news();
+        $news->title = $data['title'];
+        $news->description = $data['description'];
+        $news->new_type = $data['new_type'];
+        $news->save();
     }
 }

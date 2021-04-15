@@ -94,6 +94,7 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::post('/deleteUser', $controllerName . '@delete_user')->name('deleteUser');
     Route::get('/listNews', $controllerName . '@get_news')->name("listNews");
     Route::get('/formAddNews', $controllerName . '@add_news')->name("addNews");
+    Route::post('/saveNews', $controllerName . '@save_news')->name("saveNews");
     Route::post('/deleteNews', $controllerName . '@delete_news')->name('deleteNews');
     Route::get('/listTransportationType', $controllerName . '@get_transportation_type')->name("listTransportationType");
     Route::get('/formTransportationType', $controllerName . '@add_transportation_type')->name("addTransportationType");

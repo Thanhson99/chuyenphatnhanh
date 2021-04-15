@@ -1,5 +1,5 @@
 @php
-    $select_news_type = Form::select('Loại tin tức', ['tin chuyên ngành' => 'tin chuyên ngành', 'tin hoạt động' => 'Tin hoạt động', 'tin khuyến mãi' => 'Tin khuyến mãi'], null, ['class' => 'form-control']);
+    $select_news_type = Form::select('form[new_type]', ['tin chuyên ngành' => 'tin chuyên ngành', 'tin hoạt động' => 'Tin hoạt động', 'tin khuyến mãi' => 'Tin khuyến mãi'], null, ['class' => 'form-control']);
 @endphp
 
 @extends('Admin.layout')
@@ -26,13 +26,13 @@
             <div class="row">
                 <div class="group-btn">
                     <a href="#" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu</a>
-                    <a href="#" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu và tạo mới</a>
-                    <a href="#" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu và đóng</a>
-                    <a href="#" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/close.png') }}" alt="">Đóng</a>
+                    <a href="javascript:submitSave('{{ route('admin.saveNews', 'type=new') }}')" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu và tạo mới</a>
+                    <a href="javascript:submitSave('{{ route('admin.saveNews', 'type=close') }}')" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu và đóng</a>
+                    <a href="{{ route('admin.listNews') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/close.png') }}" alt="">Đóng</a>
                 </div>
             </div>
             <div class="row">
-                <form id="form-list-customer" class="list-items" action="" id="">
+                <form id="form-list-new" class="list-items" method="POST" action="#">
                     <div class="col-md-12">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -42,12 +42,21 @@
                           </nav>
                     </div>
                     <div class="col-md-12">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <div class="form-row">
                                     <div class="col">
                                         <span>Tiêu đề</span>
-                                        <input type="text" class="form-control" placeholder="Tiêu đề">
+                                        <input name="form[title]" type="text" class="form-control" placeholder="Tiêu đề">
                                     </div>
                                     <div class="col">
                                         <span>Loại tin tức</span>
@@ -57,7 +66,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <span>Nội dung</span>
-                                    <textarea style="height: 100px" type="text" class="form-control" placeholder="Nội dung"></textarea>
+                                    <textarea  name="form[description]" style="height: 100px" type="text" class="form-control" placeholder="Nội dung"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -71,25 +80,25 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <span>Slug:</span>
-                                        <input type="text" class="form-control">
+                                        <input name="form[slug]" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
                                         <span>Meta title:</span>
-                                        <input type="text" class="form-control">
+                                        <input name="form[meta_title]" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
                                         <span>Meta description:</span>
-                                    <textarea style="height: 100px" type="text" class="form-control"></textarea>
+                                    <textarea name="form[meta_description]" style="height: 100px" type="text" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
                                         <span>Meta keywords:</span>
-                                        <input type="text" class="form-control">
+                                        <input name="form[meta_keywords]" type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>

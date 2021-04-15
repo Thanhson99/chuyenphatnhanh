@@ -72,8 +72,39 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function add_news(Request $request){
+    public function add_news(){
         return view('Admin.News.form');
+    }
+
+    public function save_news(Request $request){
+        // validate
+        $validatedData = $request->validate([
+            'form.title' => 'required|min:3|max:70',
+            'form.description' => 'required|min:3|max:1000',
+        ],
+        [
+            'required' => ":attribute không được để trống",
+            'min' => ":attribute ít nhất :min ký tự",
+            'max' => ":attribute vượt quá :max ký tự",
+        ],
+        [
+            'form.title' => 'Tiêu đề',
+            'form.description' => 'Nội dung'
+        ]);
+
+        // tạo mode save dữ liệu
+        $params = $request->all();
+        $new = new news();
+        $news = $new->saveItem($params);
+        
+        if($request->type == 'close'){
+            Session::flash('success', 'Thêm tin tức thành công');
+            return redirect()->route('admin.listNews');
+        }
+        if($request->type == 'new'){
+            Session::flash('success', 'Thêm tin tức thành công');
+            return redirect()->route('admin.addNews');
+        }
     }
 
     public function get_transportation_type(Request $request){
