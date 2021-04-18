@@ -32,8 +32,7 @@
             <div class="row">
                 <div class="group-btn group-btn-list-user">
                     <a href="{{ route('admin.addRates') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm giá cước</a>
-                    <a href="{{ route('admin.addRates') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Sửa giá cước</a>
-                    <a href="javascript:submitForm('{{ route('admin.deleteRates') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa giá cước</a>
+                    <a href="javascript:submitFormRates('{{ route('admin.deleteRates') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa giá cước</a>
                 </div>
             </div>
             <div class="row" style="padding-bottom: 20px">
@@ -70,10 +69,11 @@
                         <thead>
                           <tr>
                             <th scope="col"><input type="checkbox" name="check-all" id="check-all"></th>
-                            <th scope="col">Tên giá cước</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">created_at</th>
+                            <th scope="col">Tên loại hàng</th>
+                            <th scope="col">Giá cước</th>
                             <th scope="col">updated_at</th>
+                            <th scope="col">created_at</th>
+                            <th scope="col">Sửa giá cước</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -85,6 +85,7 @@
                                         $rate = Template::highlight(number_format($collection->rates, 0), $params['search']);
                                         $updatedAt = $collection->updated_at;
                                         $createdAt = $collection->created_at;
+                                        $linkEdit = route('admin.addRates', ['id' => $id]);
                                     @endphp
                                     <tr>
                                         <td><input type="checkbox" name="cbid[]" value="{{ $id }}"></td>
@@ -92,6 +93,7 @@
                                         <td>{!! $rate !!} VNĐ</td>
                                         <td>{{ $updatedAt }}</td>
                                         <td>{{ $createdAt }}</td>
+                                        <td><a href="{{ $linkEdit }}">Sửa</a></td>
                                       </tr>
                                 @endforeach
                             @endif

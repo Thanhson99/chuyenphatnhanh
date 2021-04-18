@@ -91,6 +91,7 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     $controllerName = ucfirst($controller) . '\\' . ucfirst($controller) . 'Controller';
     Route::get('/home', $controllerName . '@get_list_user')->name("listUser");
     Route::get('/formAddUser', $controllerName . '@add_user')->name("addUser");
+    Route::post('/saveUser', $controllerName . '@save_user')->name("saveUser");
     Route::post('/deleteUser', $controllerName . '@delete_user')->name('deleteUser');
     Route::get('/listNews', $controllerName . '@get_news')->name("listNews");
     Route::get('/formAddNews', $controllerName . '@add_news')->name("addNews");
@@ -98,9 +99,11 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::post('/deleteNews', $controllerName . '@delete_news')->name('deleteNews');
     Route::get('/listTransportationType', $controllerName . '@get_transportation_type')->name("listTransportationType");
     Route::get('/formTransportationType', $controllerName . '@add_transportation_type')->name("addTransportationType");
+    Route::post('/saveTransportationType', $controllerName . '@save_transportation_type')->name("saveTransportationType");
     Route::post('/deleteTransportationType', $controllerName . '@delete_transportation_type')->name('deleteTransportationType');
     Route::get('/listRates', $controllerName . '@get_rates')->name("listRates");
     Route::get('/formAddRates', $controllerName . '@add_rates')->name("addRates");
+    Route::post('/saveRates', $controllerName . '@save_rates')->name("saveRates");
     Route::post('/deleteRates', $controllerName . '@delete_rates')->name('deleteRates');
     Route::get('/listOrders', $controllerName . '@get_orders')->name("listOrders");
     Route::get('/formAddOrders', $controllerName . '@add_orders')->name("addOrders");

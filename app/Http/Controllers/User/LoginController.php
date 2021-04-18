@@ -41,14 +41,41 @@ class LoginController extends Controller
         $existingUser = User::where('email', $user->getEmail())->first();
         if ($existingUser) {
             // nếu đã có email trong CSDL update lại thông tin người dùng
-            $existingUser->provider_name = 'google';
-            $existingUser->provider_id = $user->getId();
-            $existingUser->email = $user->getEmail();
-            $existingUser->name = $user->getName();
-            $existingUser->avatar = $user->getAvatar();
-            $existingUser->email_verified_at = now();
-            $existingUser->save();
-            auth()->login($existingUser, true);
+            // kiểm tra tên nếu có rồi thì k update = tên google nữa nếu chưa có thì update = tên của google
+            if($existingUser['name'] == ""){
+                $existingUser->provider_name = 'google';
+                $existingUser->provider_id = $user->getId();
+                $existingUser->email = $user->getEmail();
+                $existingUser->name = $user->getName();
+                $existingUser->email_verified_at = now();
+                $existingUser->save();
+                auth()->login($existingUser, true);
+            }else{
+                $existingUser->provider_name = 'google';
+                $existingUser->provider_id = $user->getId();
+                $existingUser->email = $user->getEmail();
+                $existingUser->email_verified_at = now();
+                $existingUser->save();
+                auth()->login($existingUser, true);
+            }
+            // kiểm tra nếu chưa có avatar mà có tk lại đn = google thì update avatar
+            if($existingUser['avatar'] == ""){
+                $existingUser->provider_name = 'google';
+                $existingUser->provider_id = $user->getId();
+                $existingUser->email = $user->getEmail();
+                $existingUser->avatar = $user->getAvatar();
+                $existingUser->email_verified_at = now();
+                $existingUser->save();
+                auth()->login($existingUser, true);
+            }else{
+                $existingUser->provider_name = 'google';
+                $existingUser->provider_id = $user->getId();
+                $existingUser->email = $user->getEmail();
+                $existingUser->email_verified_at = now();
+                $existingUser->save();
+                auth()->login($existingUser, true);
+            }
+            
         } else {
             // chưa đăng có tài khoản trong CSDL
             // tạo id

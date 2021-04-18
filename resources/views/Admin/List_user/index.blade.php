@@ -81,6 +81,7 @@
                             <th scope="col">Email verify</th>
                             <th scope="col">Updated at</th>
                             <th scope="col">Created at</th>
+                            <th scope="col">Sửa thông tin</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -98,6 +99,7 @@
                                         $emailVerifyAt = $collection->email_verified_at;
                                         $updatedAt = $collection->updated_at;
                                         $createdAt = $collection->created_at;
+                                        $linkEdit = route('admin.addUser', ['id' => $id]);
                                     @endphp
                                     <tr>
                                         <td><input type="checkbox" name="cbid[]" value="{{ $id }}"></td>
@@ -105,12 +107,13 @@
                                         <td>{{ $providerName }}</td>
                                         <td>{!! $name !!}</td>
                                         <td>{!! $CMND == null ? 'Chưa có' : $CMND !!}</td>
-                                        <td>{!! $phoneNumber == null ? 'Chưa có' : $phoneNumber !!}</td>
+                                        <td>{!! $phoneNumber != null ? strlen(strval($phoneNumber)) == 9 ? '0' . $phoneNumber : $phoneNumber : 'Chưa có'  !!}</td>
                                         <td>{{ $customerType == 0 ?  'Cá nhân' : 'Công ty'}}</td>
-                                        <td>{!! $avatar == null ? '<img id="img-customer" src="' . asset('/Admin/dist/img/avatar4.png') . '" alt="">' : '<img id="img-customer" src="' . $avatar . '" alt="">' !!}</td>
+                                        <td><img style="width: 100px" src="{{ $avatar != null ? strlen($avatar) <= 15 ? asset('Images/Users/' . $avatar) : $avatar : asset('/Admin/dist/img/avatar4.png') }}" alt=""></td>
                                         <td>{{ $emailVerifyAt }}</td>
                                         <td>{{ $updatedAt }}</td>
                                         <td>{{ $createdAt }}</td>
+                                        <td><a href="{{ $linkEdit }}">Sửa</a></td>
                                       </tr>
                                 @endforeach
                             @endif

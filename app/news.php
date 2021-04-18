@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Image;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use File;
 
 class news extends Model
 {
@@ -22,7 +22,7 @@ class news extends Model
     public function list_news($params = null){
         // lấy trường dữ liệu
         $query = $this->select('*');
-        // kiểm tra dillter
+        // kiểm tra fillter
         if($params['fillter']['news-type'] != 'all'){
             $query->where('new_type', $params['fillter']['news-type']);
         }
@@ -68,6 +68,15 @@ class news extends Model
             return $news->id;
         }else{
             // nếu đã có id thì update database
+            // update ảnh
+            // kiểm tra nếu update ảnh ms update
+            if(isset($params['picture'])){
+                $picture = $this->uploadImage($params['picture']);
+                $data['picture'] = $picture;
+                // xóa hình cũ
+                $this->removeImage($params['id']);
+            }
+            // update data
             $this->where('id', $params['id'])->update($data);
             // trả về id
             return $params['id'];
@@ -97,6 +106,19 @@ class news extends Model
 
     public function removeImage($id){
         $query = $this->find($id)->get();
-        Storage::delete(public_path() . 'Images/News/' . $query[0]['picture']);
+        $img_name = $query[0]['picture'];
+        $path = public_path() . '/Images/News/' . $img_name;
+        if(File::exists($path)){
+            File::delete($path);
+        }
+        if(!empty($this->resize)){
+            // resize ảnh lưu vào đường dẫn
+            foreach($this->resize as $folder => $size){ 
+                $path = public_path() . '/Images/News/' . $folder . '/' .  $img_name;
+                if(File::exists($path)){
+                    File::delete($path);
+                }
+            }
+        }
     }
 }

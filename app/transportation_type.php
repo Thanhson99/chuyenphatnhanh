@@ -34,4 +34,24 @@ class transportation_type extends Model
         $query = $this->find($id)->delete();
         return $query;
     }
+    
+    public function saveItem($params){
+        // gán data = dữ liệu submit form
+        $data = $params['form'];
+        // nếu không tồn tại id tạo đối tượng và thêm mới
+        if(!isset($params['id'])){
+            $transportation_type = new transportation_type();
+            $transportation_type->transportation_type = $data['transportation_type'];
+            $transportation_type->rates = $data['rates'];
+            $transportation_type->save();
+            // trả về id
+            return $transportation_type->id;
+        }else{
+            // nếu đã có id thì update database
+            // update data
+            $this->where('id', $params['id'])->update($data);
+            // trả về id
+            return $params['id'];
+        }
+    }
 }

@@ -34,4 +34,24 @@ class rates extends Model
         $query = $this->find($id)->delete();
         return $query;
     }
+
+    public function saveItem($params){
+        // gán data = dữ liệu submit form
+        $data = $params['form'];
+        // nếu không tồn tại id tạo đối tượng và thêm mới
+        if(!isset($params['id'])){
+            $rates = new rates();
+            $rates->name = $data['name'];
+            $rates->rates = $data['rates'];
+            $rates->save();
+            // trả về id
+            return $rates->id;
+        }else{
+            // nếu đã có id thì update database
+            // update data
+            $this->where('id', $params['id'])->update($data);
+            // trả về id
+            return $params['id'];
+        }
+    }
 }

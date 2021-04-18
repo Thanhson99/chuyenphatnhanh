@@ -25,9 +25,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="group-btn">
-                    <a href="javascript:submitSave('{{ route('admin.saveNews', 'type=save') }}')" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu</a>
-                    <a href="javascript:submitSave('{{ route('admin.saveNews', 'type=new') }}')" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu và tạo mới</a>
-                    <a href="javascript:submitSave('{{ route('admin.saveNews', 'type=close') }}')" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu và đóng</a>
+                    <a href="javascript:submitSaveNews('{{ route('admin.saveNews', 'type=save') }}')" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu</a>
+                    <a href="javascript:submitSaveNews('{{ route('admin.saveNews', 'type=new') }}')" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu và tạo mới</a>
+                    <a href="javascript:submitSaveNews('{{ route('admin.saveNews', 'type=close') }}')" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/save.png') }}" alt="">Lưu và đóng</a>
                     <a href="{{ route('admin.listNews') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/close.png') }}" alt="">Đóng</a>
                 </div>
             </div>
@@ -73,6 +73,9 @@
                                     <div class="col">
                                         <span>Avatar</span>
                                         <input name="picture" type="file" class="form-control">
+                                        @if (isset($item['picture']))
+                                            <img style="margin-top: 20px" src="{{ asset('Images/News/standard/' . $item['picture']) }}" alt="">
+                                        @endif
                                     </div>
                                 </div>
                             </div>

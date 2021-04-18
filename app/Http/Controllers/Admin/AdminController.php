@@ -10,6 +10,7 @@ use App\transportation_type;
 use App\rates;
 use App\orders;
 use App\detail_orders;
+use App\User;
 use Session;
 
 class AdminController extends Controller
@@ -27,14 +28,59 @@ class AdminController extends Controller
         return view('Admin.List_user.index')->with('user' , $users)->with('params', $params);
     }
 
+    public function save_user(Request $request){
+        // validate
+        $validatedData = $request->validate([
+            'form.name' => 'required|min:3|max:50',
+            'form.email' => 'required|min:3|max:50',
+            'form.password' => 'required|min:8|max:50',
+            'form.CMND' => 'required|min:9|max:12',
+            'form.phone_number' => 'required|min:10|max:10'
+        ],
+        [
+            'required' => ":attribute không được để trống",
+            'min' => ":attribute ít nhất :min ký tự",
+            'max' => ":attribute vượt quá :max ký tự"
+        ],
+        [
+            'form.name' => 'Tên',
+            'form.email' => 'Email',
+            'form.password' => 'Mật khẩu',
+            'form.CMND' => 'CMND',
+            'form.phone_number' => 'Số điện thoại'
+        ]);
+
+        // tạo mode save dữ liệu
+        $params = $request->all();
+        $user = new User();
+        $id = $user->saveItem($params);
+        // kiểm tra điều kiện
+        if($request->type == 'close'){
+            Session::flash('success', 'Thêm người dùng thành công');
+            return redirect()->route('admin.listUser');
+        }
+        if($request->type == 'new'){
+            Session::flash('success', 'Thêm người dùng thành công');
+            return redirect()->route('admin.addUser');
+        }
+        if($request->type == 'save'){
+            Session::flash('success', 'Thêm người dùng thành công');
+            return redirect()->route('admin.addUser', ['id' => $id]);
+        }
+    }
+
     public function delete_user(Request $request){
         // lấy các id cần xóa
         $arrCbid = $request->cbid;
         // khai báo model
         $delete = new list_user();
+        $deleteImage = new User();
         if(count($arrCbid) > 0){
             foreach($arrCbid as $key => $id){
-                $item = $delete->delete_user($id);
+                // xóa ảnh
+                $deleteImage->removeImage($id);
+                // xóa database
+                $delete->delete_user($id);
             }
         }
         Session::flash('success', 'Đã xóa thành công');
@@ -42,7 +88,12 @@ class AdminController extends Controller
     }
 
     public function add_user(Request $request){
-        return view('Admin.List_user.form');
+        $item = [];
+        // kiểm tra id nếu tồn tại đưa đến trang sửa không có id đưa đến tragn thêm
+        if(isset($request->id)){
+            $item = User::find($request->id);
+        }
+        return view('Admin.List_user.form')->with('item', $item);
     }
 
     public function get_news(Request $request){
@@ -65,16 +116,21 @@ class AdminController extends Controller
         $delete = new news();
         if(count($arrCbid) > 0){
             foreach($arrCbid as $key => $id){
+                // xóa ảnh
                 $delete->removeImage($id);
+                // xóa database
                 $delete->delete_news($id);
             }
         }
+        // thông báo
         Session::flash('success', 'Đã xóa thành công');
+        // chuyển hướng
         return redirect()->back();
     }
 
     public function add_news(Request $request){
         $item = [];
+        // kiểm tra id nếu tồn tại đưa đến trang sửa không có id đưa đến tragn thêm
         if(isset($request->id)){
             $item = news::find($request->id);
         }
@@ -101,7 +157,7 @@ class AdminController extends Controller
         $params = $request->all();
         $new = new news();
         $id = $new->saveItem($params);
-        
+        // kiểm tra điều kiện
         if($request->type == 'close'){
             Session::flash('success', 'Thêm tin tức thành công');
             return redirect()->route('admin.listNews');
@@ -135,7 +191,7 @@ class AdminController extends Controller
         $delete = new transportation_type();
         if(count($arrCbid) > 0){
             foreach($arrCbid as $key => $id){
-                $item = $delete->delete_transportation($id);
+                $delete->delete_transportation_type($id);
             }
         }
         Session::flash('success', 'Đã xóa thành công');
@@ -143,7 +199,45 @@ class AdminController extends Controller
     }
 
     public function add_transportation_type(Request $request){
-        return view('Admin.List_user.form');
+        $item = [];
+        // kiểm tra id nếu tồn tại đưa đến trang sửa không có id đưa đến tragn thêm
+        if(isset($request->id)){
+            $item = transportation_type::find($request->id);
+        }
+        return view('Admin.Transportation_type.form')->with('item', $item);
+    }
+
+    public function save_transportation_type(Request $request){
+        // validate
+        $validatedData = $request->validate([
+            'form.transportation_type' => 'required|min:3|max:70'
+        ],
+        [
+            'required' => ":attribute không được để trống",
+            'min' => ":attribute ít nhất :min ký tự",
+            'max' => ":attribute vượt quá :max ký tự",
+        ],
+        [
+            'form.transportation_type' => 'Loại hình vận chuyển'
+        ]);
+
+        // tạo mode save dữ liệu
+        $params = $request->all();
+        $new = new transportation_type();
+        $id = $new->saveItem($params);
+        // kiểm tra điều kiện
+        if($request->type == 'close'){
+            Session::flash('success', 'Thêm hình thức vận chuyển thành công');
+            return redirect()->route('admin.listTransportationType');
+        }
+        if($request->type == 'new'){
+            Session::flash('success', 'Thêm hình thức vận chuyển thành công');
+            return redirect()->route('admin.addTransportationType');
+        }
+        if($request->type == 'save'){
+            Session::flash('success', 'Thêm hình thức vận chuyển thành công');
+            return redirect()->route('admin.addTransportationType', ['id' => $id]);
+        }
     }
     
     public function get_rates(Request $request){
@@ -164,7 +258,7 @@ class AdminController extends Controller
         $delete = new rates();
         if(count($arrCbid) > 0){
             foreach($arrCbid as $key => $id){
-                $item = $delete->delete_rates($id);
+                $delete->delete_rates($id);
             }
         }
         Session::flash('success', 'Đã xóa thành công');
@@ -172,7 +266,45 @@ class AdminController extends Controller
     }
 
     public function add_rates(Request $request){
-        return view('Admin.List_user.form');
+        $item = [];
+        // kiểm tra id nếu tồn tại đưa đến trang sửa không có id đưa đến tragn thêm
+        if(isset($request->id)){
+            $item = rates::find($request->id);
+        }
+        return view('Admin.rates.form')->with('item', $item);
+    }
+
+    public function save_rates(Request $request){
+        // validate
+        $validatedData = $request->validate([
+            'form.name' => 'required|min:3|max:70'
+        ],
+        [
+            'required' => ":attribute không được để trống",
+            'min' => ":attribute ít nhất :min ký tự",
+            'max' => ":attribute vượt quá :max ký tự",
+        ],
+        [
+            'form.name' => 'Tên loại hàng'
+        ]);
+
+        // tạo mode save dữ liệu
+        $params = $request->all();
+        $rates = new rates();
+        $id = $rates->saveItem($params);
+        // kiểm tra điều kiện
+        if($request->type == 'close'){
+            Session::flash('success', 'Thêm giá cước thành công');
+            return redirect()->route('admin.listRates');
+        }
+        if($request->type == 'new'){
+            Session::flash('success', 'Thêm giá cước thành công');
+            return redirect()->route('admin.addRates');
+        }
+        if($request->type == 'save'){
+            Session::flash('success', 'Thêm giá cước thành công');
+            return redirect()->route('admin.addRates', ['id' => $id]);
+        }
     }
 
     public function get_orders(Request $request){

@@ -73,7 +73,7 @@ function submitFormOrder(link){
     }
 }
 
-function submitSave(link){
+function submitSaveNews(link){
     var frm = $('#form-list-new');
     frm.attr('action', link);
     frm.submit();
@@ -101,4 +101,39 @@ function toSlug(t){
     str = str.replace(/-+$/g, '');
 
     $('#slug').val(str);
+}
+
+function showPassword() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+}
+
+function submitSaveUser(link){
+    var frm = $('#form-list-customer');
+    frm.attr('action', link);
+    frm.submit();
+}
+
+function submitSaveTransportationType(link){
+    var frm = $('#form-list-transportation-type');
+    frm.attr('action', link);
+    frm.submit();
+}
+
+function submitFormTransportationType(link){
+    var frm = $('#form-transportation-type');
+    if(confirm('Bạn  chắc chắn muốn xóa?')){
+        frm.attr('action', link);
+        frm.submit();
+    }
+}
+
+function submitSaveRates(link){
+    var frm = $('#form-list-rates');
+    frm.attr('action', link);
+    frm.submit();
 }

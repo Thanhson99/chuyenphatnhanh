@@ -32,8 +32,7 @@
             <div class="row">
                 <div class="group-btn group-btn-list-user">
                     <a href="{{ route('admin.addTransportationType') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm hình thức vận chuyển</a>
-                    <a href="{{ route('admin.addTransportationType') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Sửa hình thức vận chuyển</a>
-                    <a href="javascript:submitForm('{{ route('admin.deleteTransportationType') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa hình thức vận chuyển</a>
+                    <a href="javascript:submitFormTransportationType('{{ route('admin.deleteTransportationType') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa hình thức vận chuyển</a>
                 </div>
             </div>
             <div class="row" style="padding-bottom: 20px">
@@ -74,6 +73,7 @@
                             <th scope="col">Giá</th>
                             <th scope="col">created_at</th>
                             <th scope="col">updated_at</th>
+                            <th scope="col">Sửa hình thức vận chuyển</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -85,6 +85,7 @@
                                         $rates = Template::highlight(number_format($collection->rates, 0), $params['search']);
                                         $updatedAt = $collection->updated_at;
                                         $createdAt = $collection->created_at;
+                                        $linkEdit = route('admin.addTransportationType', ['id' => $id]);
                                     @endphp
                                     <tr>
                                         <td><input type="checkbox" name="cbid[]" value="{{ $id }}"></td>
@@ -92,6 +93,7 @@
                                         <td>{!! $rates !!} VNĐ</td>
                                         <td>{{ $updatedAt }}</td>
                                         <td>{{ $createdAt }}</td>
+                                        <td><a href="{{ $linkEdit }}">Sửa</a></td>
                                       </tr>
                                 @endforeach
                             @endif

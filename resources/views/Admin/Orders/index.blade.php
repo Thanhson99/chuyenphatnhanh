@@ -81,13 +81,14 @@
                             <th scope="col"><input type="checkbox" name="check-all" id="check-all"></th>
                             <th scope="col">Tình trạng</th>
                             <th scope="col">Hình thức vận chuyển</th>
-                            <th style="width: 15%" scope="col">Thông tin hàng hóa</th>
+                            <th style="width: 10%" scope="col">Thông tin hàng hóa</th>
                             <th scope="col">Người gửi</th>
                             <th scope="col">SĐT người gửi</th>
                             <th style="width: 15%" scope="col">Nơi gửi</th>
                             <th scope="col">Người nhận</th>
                             <th scope="col">SĐT người nhận</th>
                             <th style="width: 15%" scope="col">Nơi nhận</th>
+                            <th style="width: 10%" scope="col">Ghi chú</th>
                             <th scope="col">created_at</th>
                             <th scope="col">updated_at</th>
                           </tr>
@@ -142,6 +143,7 @@
                                                 $receiver = Template::highlight($collection_detail->receiver_name, $params['search']);
                                                 $receiver_phone = Template::highlight($collection_detail->receiver_phone_number, $params['search']);
                                                 $recipients = Template::highlight($address_recipients, $params['search']);
+                                                $note = $collection_detail->note;
                                                 $updatedAt = $collection_order->updated_at;
                                                 $createdAt = $collection_order->created_at;
                                             @endphp
@@ -156,6 +158,7 @@
                                                 <td>{!! $receiver !!}</td>
                                                 <td>0{{ $receiver_phone }}</td>
                                                 <td>{!! $recipients !!}</td>
+                                                <td>{{ $note == "" ? "Không có ghi chú" : $note }}</td>
                                                 <td>{{ $updatedAt }}</td>
                                                 <td>{{ $createdAt }}</td>
                                             </tr>

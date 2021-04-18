@@ -1,10 +1,15 @@
 @php
+    use App\User;
     session_start();
     if(!isset($_SESSION["user"])){
         //chuyển hướng
         header("Location: http://chuyenphatnhanh.blog/page-not-found");
         exit;
     }
+    // lấy ảnh
+    $user = User::where('email', $_SESSION["user"]->email)->first();
+    $avatar = $user['avatar'];
+    $name = $user['name'];
 @endphp
 <header class="w-100 wp-header text-black py-3 pt-lg-0 pb-lg-0 customer-header">
     <div class="container">
@@ -18,8 +23,8 @@
             <div class="customer-right-header col-lg-6 col-sm-6 d-md-flex d-none align-items-center">
                 <div class="dropdown" style="display: block">
                     <a href="#" class="dropdown-toggle customer-dropdown-toggle" data-toggle="dropdown">
-                        <img id="customer-avatar" src="{{ $_SESSION["user"]->avatar != '' ? $_SESSION["user"]->avatar : asset('/Admin/dist/img/avatar4.png') }}" alt="">
-                        <h2 id="customer-name">{{ $_SESSION["user"]->name }}</h2>
+                        <img id="customer-avatar" src="{{ $avatar != null ? strlen($avatar) <= 15 ? asset('Images/Users/' . $avatar) : $avatar : asset('/Admin/dist/img/avatar4.png') }}" alt="">
+                        <h2 id="customer-name">{{ $name }}</h2>
                     </a>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu customer-dropdown-menu" style="z-index: 99999">
