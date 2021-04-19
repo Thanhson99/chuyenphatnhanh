@@ -11,6 +11,9 @@ use App\rates;
 use App\orders;
 use App\detail_orders;
 use App\User;
+use App\provinces;
+use App\districts;
+use App\wards;
 use Session;
 
 class AdminController extends Controller
@@ -346,7 +349,31 @@ class AdminController extends Controller
     }
 
     public function add_orders(Request $request){
-        return view('Admin.List_user.form');
+        $item = [];
+        // kiểm tra id nếu tồn tại đưa đến trang sửa không có id đưa đến trang thêm
+        if(isset($request->id)){
+            $item = rates::find($request->id);
+        }
+        //lấy tỉnh thành
+        $provinces = new provinces();
+        $provinces_list = $provinces->get_provinces();
+        return view('Admin.Orders.form')->with('item', $item)->with('provinces', $provinces_list);
+    }
+
+    public function show_districts(Request $request){
+        $districts = new districts();
+        $districts_list = $districts->get_district($request->provinces_id);
+        return response()->json($districts_list);
+    }
+
+    public function show_wards(Request $request){
+        $wards = new wards();
+        $wards_list = $wards->get_wards($request->district_id);
+        return response()->json($wards_list);
+    }
+
+    public function save_orders(Request $request){
+        dd($request);
     }
 
     public function logout(){

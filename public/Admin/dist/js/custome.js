@@ -137,3 +137,9 @@ function submitSaveRates(link){
     frm.attr('action', link);
     frm.submit();
 }
+
+function submitSaveOrders(link){
+    var frm = $('#form-list-orders');
+    frm.attr('action', link);
+    frm.submit();
+}

@@ -107,8 +107,10 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::post('/deleteRates', $controllerName . '@delete_rates')->name('deleteRates');
     Route::get('/listOrders', $controllerName . '@get_orders')->name("listOrders");
     Route::get('/formAddOrders', $controllerName . '@add_orders')->name("addOrders");
+    Route::post('/saveOrders', $controllerName . '@save_orders')->name("saveOrders");
     Route::post('/deleteOrders', $controllerName . '@delete_orders')->name('deleteOrders');
-
+    Route::post('/districts', $controllerName . '@show_districts')->name("showDistricts");
+    Route::post('/wards', $controllerName . '@show_wards')->name("showWards");
     Route::get('/logout', $controllerName . '@logout')->name("logout");
 });
 
@@ -123,3 +125,7 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
 Route::get('/page-not-found', function () {
     return view('page_not_found');
 })->name('page_not_found');
+
+Route::fallback(function () {
+    return view('page_not_found');
+});

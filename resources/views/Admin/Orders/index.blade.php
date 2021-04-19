@@ -41,7 +41,6 @@
             <div class="row">
                 <div class="group-btn group-btn-list-user">
                     <a href="{{ route('admin.addOrders') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Thêm đơn hàng</a>
-                    <a href="{{ route('admin.addOrders') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/add.png') }}" alt="">Sửa đơn hàng</a>
                     <a href="javascript:submitFormOrder('{{ route('admin.deleteOrders') }}')" id="btn-delete-customer" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/delete.png') }}" alt="">Xóa đơn hàng</a>
                 </div>
             </div>
@@ -91,6 +90,7 @@
                             <th style="width: 10%" scope="col">Ghi chú</th>
                             <th scope="col">created_at</th>
                             <th scope="col">updated_at</th>
+                            <th scope="col">Sửa vận đơn</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -146,6 +146,7 @@
                                                 $note = $collection_detail->note;
                                                 $updatedAt = $collection_order->updated_at;
                                                 $createdAt = $collection_order->created_at;
+                                                $linkEdit = route('admin.addOrders', ['id' => $id]);
                                             @endphp
                                             <tr>
                                                 <td><input type="checkbox" name="cbid[]" value="{{ $id }}"></td>
@@ -161,6 +162,7 @@
                                                 <td>{{ $note == "" ? "Không có ghi chú" : $note }}</td>
                                                 <td>{{ $updatedAt }}</td>
                                                 <td>{{ $createdAt }}</td>
+                                                <td><a href="{{ $linkEdit }}">Sửa</a></td>
                                             </tr>
                                         @endif
                                     @endforeach

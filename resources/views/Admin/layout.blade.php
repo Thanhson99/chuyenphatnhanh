@@ -32,4 +32,57 @@
             toastr.success("{{ \Session::get('success') }}", 'Thành công')
         </script>
     @endif
+    <script>
+        // tỉnh thành quận huyện phường xã
+        $(document).ready(function () {
+            $("#provinces").change(function(){
+                var provinces_id = $(this).val();
+                var url = "{{ route('admin.showDistricts') }}";
+                var token = $("input[name='_token']").val();
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: {
+                        provinces_id: provinces_id, 
+                        _token: token
+                    },
+                    success: function(data) {
+                        $("select[name='form[districts]']").html("<option value='0'>Chọn quận/huyện</option>");
+                        $.each(data, function(key, value){
+                            $("select[name='form[districts]']").append(
+                                "<option value=" + value.id + ">" + value.name_district + "</option>"
+                            );
+                        });
+                    },
+                    error: function(){
+                        console.log('Lỗi')
+                    }
+                });
+            });
+            $("#districts").change(function(){
+                var district_id = $(this).val();
+                var url = "{{ route('admin.showWards') }}";
+                var token = $("input[name='_token']").val();
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: {
+                        district_id : district_id, 
+                        _token: token
+                    },
+                    success: function(data) {
+                        $("select[name='form[wards]']").html('<option value="0">Chọn phường/xã</option>');
+                        $.each(data, function(key, value){
+                            $("select[name='form[wards]']").append(
+                                "<option value=" + value.id + ">" + value.name_ward + "</option>"
+                            );
+                        });
+                    },
+                    error: function(){
+                        console.log('Lỗi')
+                    }
+                });
+            });
+        });
+    </script>
 </html>
