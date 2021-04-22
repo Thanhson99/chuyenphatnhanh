@@ -14,6 +14,7 @@ use App\User;
 use App\provinces;
 use App\districts;
 use App\wards;
+use App\distanceAddress;
 use Session;
 
 class AdminController extends Controller
@@ -350,14 +351,26 @@ class AdminController extends Controller
 
     public function add_orders(Request $request){
         $item = [];
+        $distance = "";
         // kiểm tra id nếu tồn tại đưa đến trang sửa không có id đưa đến trang thêm
-        if(isset($request->id)){
-            $item = rates::find($request->id);
+        if(isset($request->item)){
+            $item = $request->item;
+        }
+        if(isset($request->distance)){
+            $distance = $request->distance;
         }
         //lấy tỉnh thành
         $provinces = new provinces();
         $provinces_list = $provinces->get_provinces();
-        return view('Admin.Orders.form')->with('item', $item)->with('provinces', $provinces_list);
+
+        $stock_rates_list = $this->show_stock_rates();
+        return view('Admin.Orders.form')->with('item', $item)->with('provinces', $provinces_list)->with('stock_rates', $stock_rates_list)->with('distance', $distance);
+    }
+
+    public function show_stock_rates(){
+        $stock_rates = new rates();
+        $stock_list = $stock_rates->get_stock_rates();
+        return $stock_list;
     }
 
     public function show_districts(Request $request){
@@ -372,8 +385,98 @@ class AdminController extends Controller
         return response()->json($wards_list);
     }
 
-    public function save_orders(Request $request){
-        dd($request);
+    public function get_info_orders(Request $request){
+        // validate dữ liệu
+        $validatedData = $request->validate([
+            'form.sending_name' => 'required|min:3|max:50',
+            'form.sending_phone_number' => 'required|min:10|max:10',
+            'form.sending_place' => 'required|min:3|max:100',
+            'form.receiver_name' => 'required|min:3|max:50',
+            'form.receiver_phone_number' => 'required|min:10|max:10',
+            'form.recipients' => 'required|min:3|max:100',
+            'form.weight' => 'required',
+        ],
+        [
+            'required' => ":attribute không được để trống",
+            'min' => ":attribute ít nhất :min ký tự",
+            'max' => ":attribute vượt quá :max ký tự",
+        ],
+        [
+            'form.sending_name' => 'Tên người gửi',
+            'form.sending_phone_number' => 'Số điện thoại người gửi',
+            'form.sending_place' => 'Số nhà, tên đường người gửi',
+            'form.receiver_name' => 'Tên người nhận',
+            'form.receiver_phone_number' => 'Số điện thoại người nhận',
+            'form.recipients' => 'Số nhà, tên đường người nhận',
+            'form.weight' => 'Khối lượng',
+        ]);
+        // trả về giá tiền và các hình thức vận chuyển
+
+        // xử lý dữ liệu
+        $params = $request->all();
+        // kiểm tra tỉnh thành đã nhập chưa ?
+        $message = "Vui lòng chọn ";
+        if($params['form']['provinces_sending'] == "Chọn tỉnh/thành phố"){
+            $message = $message . 'tỉnh/thành phố gửi, ';
+        }
+        if($params['form']['districts_sending'] == "Chọn quận/huyện" || $params['form']['districts_sending'] == "0"){
+            $message = $message . 'quận/huyện gửi, ';
+        }
+        if($params['form']['wards_sending'] == "Chọn phường/xã" || $params['form']['wards_sending'] == "0"){
+            $message = $message . 'phường/xã gửi, ';
+        }
+        if($params['form']['provinces_receiver'] == "Chọn tỉnh/thành phố"){
+            $message = $message . 'tỉnh/thành phố nhận, ';
+        }
+        if($params['form']['districts_receiver'] == "Chọn quận/huyện" || $params['form']['districts_receiver'] == "0"){
+            $message = $message . 'quận/huyện nhận, ';
+        }
+        if($params['form']['wards_receiver'] == "Chọn phường/xã" || $params['form']['wards_receiver'] == "0"){
+            $message = $message . 'phường/xã nhận, ';
+        }
+        if($params['form']['stock_rate_type'] == "Loại hàng hóa"){
+            $message = $message . 'loại hàng hóa.';
+        }
+
+        if($message != "Vui lòng chọn "){
+            return redirect()->route('admin.addOrders')->with('message', $message);
+        }
+
+        // gọi model
+        $provinces = new provinces();
+        // lấy tỉnh
+        $provinces_id_sending = $params['form']['provinces_sending'];
+        $provinces_name_sending = $provinces->get_provinces_name($provinces_id_sending)[0]['name_provinces'];
+        $provinces_id_receiver = $params['form']['provinces_receiver'];
+        $provinces_name_receiver = $provinces->get_provinces_name($provinces_id_receiver)[0]['name_provinces'];
+
+        // lấy thành phố
+        $districts = new districts();
+        $districts_id_sending = $params['form']['districts_sending'];
+        $districts_name_sending = $districts->get_district_name($districts_id_sending)[0]['name_district'];
+        $districts_id_receiver = $params['form']['districts_receiver'];
+        $districts_name_receiver = $districts->get_district_name($districts_id_receiver)[0]['name_district'];
+
+        //lấy quận huyện
+        $wards = new wards();
+        $wards_id_sending = $params['form']['wards_sending'];
+        $wards_name_sending = $wards->get_wards_name($wards_id_sending)[0]['name_ward'];
+        $wards_id_receiver = $params['form']['wards_receiver'];
+        $wards_name_receiver = $wards->get_wards_name($wards_id_receiver)[0]['name_ward'];
+
+        // lấy tên đường
+        $sending_place = $params['form']['sending_place'];
+        $recipients = $params['form']['recipients'];
+        
+        // hợp nhất địa chỉ
+        $address_sending = $provinces_name_sending . ', ' . $districts_name_sending . ', ' . $wards_name_sending . ', ' . $sending_place;
+        $address_receiver = $provinces_name_receiver . ', ' . $districts_name_receiver . ', ' . $wards_name_receiver . ', ' . $recipients;
+
+        // lấy độ dài đường đi theo Km
+        $distance = new distanceAddress();
+        $distanceAddress = $distance->getDistance($address_sending ,$address_receiver , "K");
+
+        return redirect()->route('admin.addOrders', ['distance' => $distanceAddress, 'item' => $params['form']]);
     }
 
     public function logout(){

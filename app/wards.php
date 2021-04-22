@@ -12,4 +12,9 @@ class wards extends Model
         $query = $this->select('*')->where('district_id', $id)->get();
         return $query;
     }
+
+    public function get_wards_name($id){
+        $query = $this->select('*')->where('id', $id)->get();
+        return $query;
+    }
 }

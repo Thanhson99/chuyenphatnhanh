@@ -54,4 +54,9 @@ class rates extends Model
             return $params['id'];
         }
     }
+
+    public function get_stock_rates(){
+        $query = $this->select('*')->orderBy('id', 'ASC')->get();
+        return $query;
+    }
 }

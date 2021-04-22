@@ -12,4 +12,9 @@ class provinces extends Model
         $query = $this->select('*')->orderBy('id', 'ASC')->get();
         return $query;
     }
+
+    public function get_provinces_name($id){
+        $query = $this->select('*')->where('id', $id)->get();
+        return $query;
+    }
 }

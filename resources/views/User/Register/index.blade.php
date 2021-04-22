@@ -11,9 +11,6 @@
 				@if ( session()->has('message') )
 					<div class="alert alert-danger">{{ session()->get('message') }}</div>
 				@endif
-				@php
-					
-				@endphp
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-6">

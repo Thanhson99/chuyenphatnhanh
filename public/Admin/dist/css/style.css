@@ -135,3 +135,30 @@
 #form-list-orders .col input, #form-list-orders .col select, #form-list-orders .col textarea{
     margin-top: 20px;
 }
+
+#form-list-orders .tab-pane .form-row .col span{
+    background-color: rgb(251, 24, 24);
+    padding: 20px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+#form-list-orders .form-row .total-price{
+    display: block !important;
+    background-color: rgb(251, 24, 24);
+    padding: 15px;
+    color: #fff;
+    float: right;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.btn-submit-type-transportation{
+    display: block;
+    width: 200px;
+    color: #fff;
+    background-color: #ff1414;
+    margin: 10px auto;
+    padding: 10px;
+}
