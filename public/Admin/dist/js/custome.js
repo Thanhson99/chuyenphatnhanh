@@ -143,3 +143,18 @@ function submitFormOrders(link){
     frm.attr('action', link);
     frm.submit();
 }
+
+Number.prototype.format = function(n, x) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+};
+
+document.getElementById("formatPrice").addEventListener("keyup",e=>{
+    // let str = e.target.value;
+    let value = e.target.value.replace(/,/g,"");
+    if(isNaN(value)) value="0";
+    // res = str.replace(/blue/g, "red");
+    let number = new Number(value);
+    if(number > 500000000) number = 500000000;
+    document.getElementById("formatPrice").value = number.format();
+})

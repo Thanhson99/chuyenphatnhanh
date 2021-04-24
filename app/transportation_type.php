@@ -54,4 +54,9 @@ class transportation_type extends Model
             return $params['id'];
         }
     }
+
+    public function get_transportation_type(){
+        $query = $this->select('*')->orderBy('id', 'ASC')->get();
+        return $query;
+    }
 }

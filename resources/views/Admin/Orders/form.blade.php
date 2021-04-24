@@ -1,3 +1,24 @@
+@php
+    // set time zone viet nam
+    date_default_timezone_set("Asia/Ho_Chi_Minh");
+    //  chuyển đổi ngày
+    $date = date("d/m/Y : h:i");
+    $arrDate = explode("/", $date);
+    // lấy ngày cần thay đổi
+    $day = $arrDate[0];
+    // chuyển phát nhanh
+    $arrDate[0] = (string)((int)$day+2);
+    $express_delivery_date =  implode("/", $arrDate);
+    // chuyển phát đường bộ
+    $arrDate[0] = (string)((int)$day+5);
+    $road_delivery_date =  implode("/", $arrDate);
+    // chuyển phát tiết kiệm
+    $arrDate[0] = (string)((int)$day+3);
+    $thrifty_delivery_date =  implode("/", $arrDate);
+    // chuyển phát hỏa tốc
+    $arrDate[0] = (string)((int)$day+1);
+    $fire_express_delivery_date =  implode("/", $arrDate);
+@endphp
 @extends('Admin.layout')
 
 @section('admin-main-content')
@@ -47,16 +68,16 @@
                                         <input value="{{ @$item['reminiscent_name_sending'] }}" name="form[reminiscent_name_sending]" type="text" class="form-control" placeholder="Nhập tên gợi nhớ">
                                         <input value="{{ @$item['sending_name'] }}" name="form[sending_name]" type="text" class="form-control" placeholder="Người gửi">
                                         <input value="{{ @$item['sending_phone_number'] }}" name="form[sending_phone_number]" type="text" class="form-control" placeholder="Số điện thoại">
-                                        <select id="provinces_sending" value="{{ @$item['provinces_sending'] }}" name="form[provinces_sending]" class="browser-default custom-select location">
+                                        <select id="provinces_sending" name="form[provinces_sending]" class="browser-default custom-select location">
                                             <option selected>Chọn tỉnh/thành phố</option>
                                             @foreach ($provinces as $key => $value)
                                                 <option value="{{$value['id']}}">{{ $value['name_provinces'] }}</option>
                                             @endforeach
                                         </select>
-                                        <select id="districts_sending" value="{{ @$item['districts_sending'] }}" name="form[districts_sending]" class="browser-default custom-select location">
+                                        <select id="districts_sending" name="form[districts_sending]" class="browser-default custom-select location">
                                             <option selected>Chọn quận/huyện</option>
                                         </select>
-                                        <select id="wards_sending" value="{{ @$item['wards_sending'] }}" name="form[wards_sending]" class="browser-default custom-select location">
+                                        <select id="wards_sending" name="form[wards_sending]" class="browser-default custom-select location">
                                             <option selected>Chọn phường/xã</option>
                                         </select>
                                         <textarea name="form[sending_place]" type="text" class="form-control" placeholder="Số nhà, tên đường">{{ @$item['sending_place'] }}</textarea>
@@ -66,16 +87,16 @@
                                         <input value="{{ @$item['reminiscent_name_receiver'] }}" name="form[reminiscent_name_receiver]" type="text" class="form-control" placeholder="Nhập tên gợi nhớ">
                                         <input value="{{ @$item['receiver_name'] }}" name="form[receiver_name]" type="text" class="form-control" placeholder="Người nhận">
                                         <input value="{{ @$item['receiver_phone_number'] }}" name="form[receiver_phone_number]" type="text" class="form-control" placeholder="Số điện thoại">
-                                        <select id="provinces_receiver" value="{{ @$item['provinces_receiver'] }}" name="form[provinces_receiver]" class="browser-default custom-select location">
+                                        <select id="provinces_receiver" name="form[provinces_receiver]" class="browser-default custom-select location">
                                             <option selected>Chọn tỉnh/thành phố</option>
                                             @foreach ($provinces as $key => $value)
                                                 <option value="{{$value['id']}}">{{ $value['name_provinces'] }}</option>
                                             @endforeach
                                         </select>
-                                        <select id="districts_receiver" value="{{ @$item['districts_receiver'] }}" name="form[districts_receiver]" class="browser-default custom-select location">
+                                        <select id="districts_receiver" name="form[districts_receiver]" class="browser-default custom-select location">
                                             <option selected>Chọn quận/huyện</option>
                                         </select>
-                                        <select id="wards_receiver" value="{{ @$item['wards_receiver'] }}" name="form[wards_receiver]" class="browser-default custom-select location">
+                                        <select id="wards_receiver" name="form[wards_receiver]" class="browser-default custom-select location">
                                             <option selected>Chọn phường/xã</option>
                                         </select>
                                         <textarea name="form[recipients]" type="text" class="form-control" placeholder="Số nhà, tên đường">{{ @$item['recipients'] }}</textarea>
@@ -92,7 +113,7 @@
                                         <input value="{{ @$item['width'] }}" name="form[width]" type="text" class="form-control" placeholder="Rộng (cm)">
                                         <input value="{{ @$item['height'] }}" name="form[height]" type="text" class="form-control" placeholder="Cao (cm)">
                                         <input value="{{ @$item['weight'] }}" name="form[weight]" type="text" class="form-control" placeholder="Khối lượng (Kg)">
-                                        <input value="{{ @$item['collection_fee'] }}" name="form[collection_fee]" type="text" class="form-control" placeholder="Số tiền thu hộ (VNĐ)">
+                                        <input id="formatPrice" type="text" value="{{ @$item['collection_fee'] }}" name="form[collection_fee]" class="form-control" placeholder="Số tiền thu hộ (VNĐ)">
                                         <textarea name="form[note]" type="text" class="form-control" placeholder="Ghi chú hàng hóa">{{ @$item['note'] }}</textarea>
                                         <a href="javascript:submitFormOrders('{{ route('admin.getInfoOrders') }}')" class="btn btn-default total-price">Tính giá dịch vụ</a>
                                     </div>
@@ -108,7 +129,7 @@
             </div>
         </div>
     </div>
-    @if (isset($distance))
+    @if (isset($distance) && $distance != "")
         <div class="row ng-star-inserted">
             <div class="col-md-12" style="margin: 25px 0; background-color: rgb(255, 29, 29)"><h5 class="title-info" style="margin: 15px; color: #fff">Bảng giá dịch vụ</h5></div>
             <div style="margin-bottom: 10px;" class="col-md-6">
@@ -118,20 +139,20 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Cước chính:</b> 643,500</div>
-                                    <div class="col-md-6"><b>Phí thu hộ:</b> 0</div>
+                                    <div class="col-md-6"><b>Cước chính:</b> {{ number_format(((float)str_replace(" km", "", $distance) * $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['express_delivery']), 0) }} VNĐ</div>
+                                    <div class="col-md-6"><b>Phí thu hộ:</b> {{ $item['collection_fee'] }} VNĐ</div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Phí bảo hiểm:</b> 0</div>
-                                    <div class="col-md-6"><b>Phí kiểm đếm:</b> 0</div>
+                                    <div class="col-md-6"><b>Phí bảo hiểm:</b> 0 VNĐ</div>
+                                    <div class="col-md-6"><b>Quãng đường:</b> {{ $distance }}</div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> 24/04/2021 09:18</div>
-                                    <div class="col-md-6"><b>Phí báo phát:</b> 0</div>
+                                    <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> {{ $express_delivery_date }}</div>
+                                    <div class="col-md-6"><b>Phí báo phát:</b> 0 VNĐ</div>
                                 </div>
                             </li>
                         </ul>
@@ -146,20 +167,20 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Cước chính:</b> 159,588</div>
-                                    <div class="col-md-6"><b>Phí thu hộ:</b> 0</div>
+                                    <div class="col-md-6"><b>Cước chính:</b> {{ number_format(((float)str_replace(" km", "", $distance) * $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['road_delivery']), 0) }} VNĐ</div>
+                                    <div class="col-md-6"><b>Phí thu hộ:</b> {{ $item['collection_fee'] }} VNĐ</div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Phí bảo hiểm:</b> 0</div>
-                                    <div class="col-md-6"><b>Phí kiểm đếm:</b> 0</div>
+                                    <div class="col-md-6"><b>Phí bảo hiểm:</b> 0 VNĐ</div>
+                                    <div class="col-md-6"><b>Quãng đường:</b> {{ $distance }}</div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> 27/04/2021 16:18</div>
-                                    <div class="col-md-6"><b>Phí báo phát:</b> 0</div>
+                                    <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> {{ $road_delivery_date }}</div>
+                                    <div class="col-md-6"><b>Phí báo phát:</b> 0 VNĐ</div>
                                 </div>
                             </li>
                         </ul>
@@ -174,20 +195,20 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Cước chính:</b> 271,557</div>
-                                    <div class="col-md-6"><b>Phí thu hộ:</b> 0</div>
+                                    <div class="col-md-6"><b>Cước chính:</b> {{ number_format(((float)str_replace(" km", "", $distance) * $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['thrifty_delivery']), 0) }} VNĐ</div>
+                                    <div class="col-md-6"><b>Phí thu hộ:</b> {{ $item['collection_fee'] }} VNĐ</div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Phí bảo hiểm:</b> 0</div>
-                                    <div class="col-md-6"><b>Phí kiểm đếm:</b> 0</div>
+                                    <div class="col-md-6"><b>Phí bảo hiểm:</b> 0 VNĐ</div>
+                                    <div class="col-md-6"><b>Quãng đường:</b> {{ $distance }}</div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> 25/04/2021 16:18</div>
-                                    <div class="col-md-6"><b>Phí báo phát:</b> 0</div>
+                                    <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> {{ $thrifty_delivery_date }}</div>
+                                    <div class="col-md-6"><b>Phí báo phát:</b> 0 VNĐ</div>
                                 </div>
                             </li>
                         </ul>
@@ -202,20 +223,20 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Cước chính:</b> 855,212</div>
-                                    <div class="col-md-6"><b>Phí thu hộ:</b> 0</div>
+                                    <div class="col-md-6"><b>Cước chính:</b> {{ number_format(((float)str_replace(" km", "", $distance) * $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['fire_express_delivery']), 0) }} VNĐ</div>
+                                    <div class="col-md-6"><b>Phí thu hộ:</b> {{ $item['collection_fee'] }} VNĐ</div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Phí bảo hiểm:</b> 0</div>
-                                    <div class="col-md-6"><b>Phí kiểm đếm:</b> 0</div>
+                                    <div class="col-md-6"><b>Phí bảo hiểm:</b> 0 VNĐ</div>
+                                    <div class="col-md-6"><b>Quãng đường:</b> {{ $distance }}</div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> 23/04/2021 09:18</div>
-                                    <div class="col-md-6"><b>Phí báo phát:</b> 0</div>
+                                    <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> {{ $fire_express_delivery_date }}</div>
+                                    <div class="col-md-6"><b>Phí báo phát:</b> 0 VNĐ</div>
                                 </div>
                             </li>
                         </ul>

@@ -128,7 +128,7 @@
                                                 // hình thức vận chuyển, loại hàng, giá, (cao, nặng, dài)
                                                 $transportation_type = $collection_order->transportation_type;
                                                 $sectors = $collection_detail->name;
-                                                $prices = $collection_detail->rates_detail;
+                                                $prices = $collection_detail->total_price;
                                                 $height = $collection_detail->height;
                                                 $weight = $collection_detail->weight;
                                                 $length = $collection_detail->length;

@@ -352,9 +352,12 @@ class AdminController extends Controller
     public function add_orders(Request $request){
         $item = [];
         $distance = "";
+        $stock_rates_price = 0;
+
         // kiểm tra id nếu tồn tại đưa đến trang sửa không có id đưa đến trang thêm
         if(isset($request->item)){
             $item = $request->item;
+            $stock_rates_price = $this->show_stock_rates_by_id($item['stock_rate_type'])[0]['rates'];
         }
         if(isset($request->distance)){
             $distance = $request->distance;
@@ -363,13 +366,45 @@ class AdminController extends Controller
         $provinces = new provinces();
         $provinces_list = $provinces->get_provinces();
 
+        // lấy loại hình vận chuyển
+        $transportation_type_list = $this->show_transportation_type();
+        // lấy giá chuyển phát nhanh
+        $express_delivery = $transportation_type_list[0]['rates'];
+        // lấy giá chuyển phát đường bộ
+        $road_delivery = $transportation_type_list[1]['rates'];
+        //lấy giá chuyển phát tiết kiệm
+        $thrifty_delivery = $transportation_type_list[4]['rates'];
+        // lấy giá chuyển phát hỏa tốc
+        $fire_express_delivery = $transportation_type_list[3]['rates'];
+
+        // gộp các loại giá
+        $shipping_rates = [
+            'express_delivery' => $express_delivery,
+            'road_delivery' => $road_delivery,
+            'thrifty_delivery' => $thrifty_delivery,
+            'fire_express_delivery' => $fire_express_delivery,
+        ];
+
+        // lấy loại hàng hóa
         $stock_rates_list = $this->show_stock_rates();
-        return view('Admin.Orders.form')->with('item', $item)->with('provinces', $provinces_list)->with('stock_rates', $stock_rates_list)->with('distance', $distance);
+        return view('Admin.Orders.form')->with('item', $item)->with('provinces', $provinces_list)->with('stock_rates', $stock_rates_list)->with('distance', $distance)->with('stock_rates_price', $stock_rates_price)->with('shipping_rates', $shipping_rates);
+    }
+
+    public function show_transportation_type(){
+        $transportation_type = new transportation_type();
+        $transportation_type_list = $transportation_type->get_transportation_type();
+        return $transportation_type_list;
     }
 
     public function show_stock_rates(){
         $stock_rates = new rates();
         $stock_list = $stock_rates->get_stock_rates();
+        return $stock_list;
+    }
+
+    public function show_stock_rates_by_id($id){
+        $stock_rates = new rates();
+        $stock_list = $stock_rates->get_stock_rates_by_id($id);
         return $stock_list;
     }
 
