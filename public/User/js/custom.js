@@ -64,3 +64,9 @@ atags.forEach(el=>{
         iframe.style.display = "block";
     })
 });
+
+function submitSearchOrders(link){
+    var frm = $('#form-search');
+    frm.attr('action', link);
+    frm.submit();
+}

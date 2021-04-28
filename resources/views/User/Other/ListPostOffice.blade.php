@@ -7,7 +7,6 @@
         <div class="w-100 text-center font-weight-bold font-IntelBold text-dark text-tracuu pt-3 pb-3 mb-3">Danh sách bưu cục gần bạn</div>
         <div class="row d-flex flex-row-reverse">
             <div class="col-lg-6 col-md-6 col-sm-12 col-12" id="distributePage">
-
                 @if ($item->count() > 0)
                     @foreach ($item as $key => $collection)
                         @php
@@ -15,8 +14,6 @@
                         @endphp
                         <iframe style="display:none" id="iframe{{$collection->id}}" src="{{ $mapplace }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     @endforeach
-                
-
                 <div class="clearfix"></div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-12" style="height: 450px;overflow: hidden;overflow-y: scroll;">

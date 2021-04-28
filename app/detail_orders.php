@@ -18,10 +18,48 @@ class detail_orders extends Model
         $query = $this->select('orders_id')->where('orders_id', '=', $id)->get();
         return $query;
     }
+
+    public function get_detail_order_by_id($id){
+        $query = $this->select('*')->where('orders_id', $id)->get();
+        return $query;
+    }
  
     public function delete_detail_orders($id){
         // tìm user theo id sau đó xóa
         $query = $this->where('id_detail_order', '=', $id)->delete();
         return $query;
+    }
+
+    public function saveItem($params, $transportation_type, $total_price, $order_id){
+        $data = $params['form'];
+        // nếu không tồn tại id tạo đối tượng và thêm mới
+        if(!isset($params['id'])){
+            $detail_orders = new detail_orders();
+            $detail_orders->orders_id = $order_id;
+            $detail_orders->stock_id = $data['stock_rate_type'];
+            $detail_orders->weight = $data['weight'];
+            $detail_orders->height = $data['height'];
+            $detail_orders->width = $data['width'];
+            $detail_orders->length = $data['length'];
+            $detail_orders->total_price = $total_price;
+            $detail_orders->collection_fee = str_replace("," ,"" , $data['collection_fee']);
+            $detail_orders->reminiscent_name_sending = $data['reminiscent_name_sending'];
+            $detail_orders->sending_name = $data['sending_name'];
+            $detail_orders->sending_phone_number = $data['sending_phone_number'];
+            $detail_orders->reminiscent_name_receiver = $data['reminiscent_name_receiver'];
+            $detail_orders->receiver_name = $data['receiver_name'];
+            $detail_orders->receiver_phone_number = $data['receiver_phone_number'];
+            $detail_orders->note = $data['note'];
+            $detail_orders->save();
+            // trả về id
+            return $detail_orders->id;
+        }else{
+            // nếu đã có id thì update database
+            // update data
+            $this->where('id', $params['id'])->update($data);
+            // trả về id
+            return $params['id'];
+        }
+        dd($params, $transportation_type);
     }
 }

@@ -59,4 +59,9 @@ class transportation_type extends Model
         $query = $this->select('*')->orderBy('id', 'ASC')->get();
         return $query;
     }
+
+    public function get_transportation_type_by_id($id){
+        $query = $this->select('*')->where('id', $id)->get();
+        return $query;
+    }
 }

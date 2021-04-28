@@ -29,7 +29,7 @@ class orders extends Model
         }
         // lấy hết theo id từ bé đến lớn
         // $query = $query->orderBy("id", "ASC")->paginate(10); // phân trang theo số phần tử
-        $query = $query->join('users', 'users.id', '=', 'orders.user_id')->join('transportation_type', 'transportation_type.id', '=', 'orders.transportation_id')->get();
+        $query = $query->join('transportation_type', 'transportation_type.id', '=', 'orders.transportation_id')->get();
         return $query;
      }
  
@@ -39,18 +39,21 @@ class orders extends Model
         return $query;
     }
 
-    public function saveItem($params){
-        dd($params);
-        // gán data = dữ liệu submit form
+    public function saveItem($params, $transportation_type){
         $data = $params['form'];
         // nếu không tồn tại id tạo đối tượng và thêm mới
         if(!isset($params['id'])){
-            // $rates = new rates();
-            // $rates->name = $data['name'];
-            // $rates->rates = $data['rates'];
-            // $rates->save();
+            $orders = new orders();
+            $orders->status = "Đang giao";
+            $orders->sending_place = $data['sending_place'];
+            $orders->recipients = $data['recipients'];
+            $orders->user_id = 0;
+            $orders->ward_id_sending = $data['wards_sending'];
+            $orders->ward_id_recipients = $data['wards_receiver'];
+            $orders->transportation_id = $transportation_type;
+            $orders->save();
             // trả về id
-            return $rates->id;
+            return $orders->id;
         }else{
             // nếu đã có id thì update database
             // update data
@@ -58,5 +61,10 @@ class orders extends Model
             // trả về id
             return $params['id'];
         }
+    }
+
+    public function get_orders_by_id($id){
+        $query = $this->select('*')->where('id_order', $id)->get();
+        return $query;
     }
 }

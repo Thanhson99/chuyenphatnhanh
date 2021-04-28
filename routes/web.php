@@ -83,6 +83,7 @@ Route::prefix($prefixUrl)->name($prefixUrl . '.')->group(function() use($control
     Route::get('/news', function () {
         return view('User.Other.News');
     })->name('news');
+    Route::post('/getOrders', $controllerName . '@show_orders')->name("showOrders");
 });
 
 $prefixUrl = 'admin';
@@ -108,6 +109,7 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::get('/listOrders', $controllerName . '@get_orders')->name("listOrders");
     Route::get('/formAddOrders', $controllerName . '@add_orders')->name("addOrders");
     Route::post('/getInfoOrders', $controllerName . '@get_info_orders')->name("getInfoOrders");
+    Route::post('/saveOrders', $controllerName . '@save_orders')->name("saveOrders");
     Route::post('/deleteOrders', $controllerName . '@delete_orders')->name('deleteOrders');
     Route::post('/districts', $controllerName . '@show_districts')->name("showDistricts");
     Route::post('/wards', $controllerName . '@show_wards')->name("showWards");

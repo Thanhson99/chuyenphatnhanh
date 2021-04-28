@@ -8,6 +8,10 @@ use App\User;
 use App\list_post_office;
 use App\Admin;
 use Session;
+use App\orders;
+use App\detail_orders;
+use App\rates;
+use App\transportation_type;
 
 class UserController extends Controller
 {
@@ -100,5 +104,87 @@ class UserController extends Controller
         $item = $office->list_office();
         // chuyển hướng
         return view('User.Other.ListPostOffice')->with('item' , $item);
+    }
+
+    public function show_orders(Request $request){
+        $params = $request->all();
+        $id = $params['bill'];
+        $orders_id = 0;
+        $stock_rates_id = 0;
+        $stock_rates_name = "";
+        $transportation_type_id = 0;
+        $transportation_type_name = "";
+        $status = "";
+        $time = "";
+        $new_time = "";
+        $receiver_name = "";
+        $total_price = 0;
+        if($id == null){
+            return view('User.Other.BillOfLading')->with('orders', null)->with('id', $id);
+        }
+        // khai báo model
+        $order = new orders();
+        $orders = $order->get_orders_by_id($id);
+
+        foreach($orders as $key => $collection){
+            $transportation_type_id = $collection->transportation_id;
+            $orders_id = $collection->id_order;
+            $status = $collection->status;
+            $time = $collection->created_at;
+        }
+
+        $detail_order = new detail_orders();
+        $detail_orders = $detail_order->get_detail_order_by_id($orders_id);
+
+        foreach($detail_orders as $key => $collection){
+            $stock_rates_id = $collection->stock_id;
+            $receiver_name = $collection->receiver_name;
+            $total_price = $collection->total_price;
+        }
+
+        $rate = new rates();
+        $stock_rate = $rate->get_stock_rates_by_id($stock_rates_id);
+        foreach($stock_rate as $key => $collection){
+            $stock_rates_name = $collection->name;
+        }
+
+        $transportation = new transportation_type();
+        $transportation_type = $transportation->get_transportation_type_by_id($transportation_type_id);
+        foreach($transportation_type as $key => $collection){
+            $transportation_type_name = $collection->transportation_type;
+        }
+
+        if($time != ""){
+            $arrDate = explode("-", $time);
+            // lấy ngày cần thay đổi
+            $day = $arrDate[2];
+            // chuyển phát nhanh
+            if($transportation_type_id == 1){
+                $arrDate[2] = (string)((int)$day+2);
+            }
+            // chuyển phát đường bộ
+            if($transportation_type_id == 2){
+                $arrDate[2] = (string)((int)$day+5);
+            }
+            // chuyển phát tiết kiệm
+            if($transportation_type_id == 3){
+                $arrDate[2] = (string)((int)$day+1);
+            }
+            // chuyển phát hỏa tốc
+            if($transportation_type_id == 4){
+                $arrDate[2] = (string)((int)$day+3);
+            }
+            $new_time =  implode("/", $arrDate);
+        }
+
+        $data = ['stock_rate_name' => $stock_rates_name,
+                'id' => $id,
+                'transportation_type_name' => $transportation_type_name,
+                'status' => $status,
+                'receiver_name' => $receiver_name,
+                'new_time' => $new_time,
+                'total_price' => $total_price,
+        ];
+        return view('User.Other.BillOfLading')->with('data' , $data);
     }
 }

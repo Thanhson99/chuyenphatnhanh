@@ -323,6 +323,7 @@ class AdminController extends Controller
         //lấy order
         $order = new orders();
         $orders = $order->list_orders($params);
+        // dd($detail_orders, $orders);
 
         // chuyển hướng
         return view('Admin.Orders.index')->with('orders' , $orders)->with('params', $params)->with('detail_orders', $detail_orders);
@@ -353,11 +354,13 @@ class AdminController extends Controller
         $item = [];
         $distance = "";
         $stock_rates_price = 0;
+        $insurance_fees = 0;
 
         // kiểm tra id nếu tồn tại đưa đến trang sửa không có id đưa đến trang thêm
         if(isset($request->item)){
             $item = $request->item;
             $stock_rates_price = $this->show_stock_rates_by_id($item['stock_rate_type'])[0]['rates'];
+            $insurance_fees = $this->show_stock_rates_by_id($item['stock_rate_type'])[0]['name'] === "Chất dễ cháy" ? 50000 : 0;
         }
         if(isset($request->distance)){
             $distance = $request->distance;
@@ -373,9 +376,9 @@ class AdminController extends Controller
         // lấy giá chuyển phát đường bộ
         $road_delivery = $transportation_type_list[1]['rates'];
         //lấy giá chuyển phát tiết kiệm
-        $thrifty_delivery = $transportation_type_list[4]['rates'];
+        $thrifty_delivery = $transportation_type_list[3]['rates'];
         // lấy giá chuyển phát hỏa tốc
-        $fire_express_delivery = $transportation_type_list[3]['rates'];
+        $fire_express_delivery = $transportation_type_list[2]['rates'];
 
         // gộp các loại giá
         $shipping_rates = [
@@ -387,7 +390,7 @@ class AdminController extends Controller
 
         // lấy loại hàng hóa
         $stock_rates_list = $this->show_stock_rates();
-        return view('Admin.Orders.form')->with('item', $item)->with('provinces', $provinces_list)->with('stock_rates', $stock_rates_list)->with('distance', $distance)->with('stock_rates_price', $stock_rates_price)->with('shipping_rates', $shipping_rates);
+        return view('Admin.Orders.form')->with('item', $item)->with('provinces', $provinces_list)->with('stock_rates', $stock_rates_list)->with('distance', $distance)->with('stock_rates_price', $stock_rates_price)->with('shipping_rates', $shipping_rates)->with('insurance_fees', $insurance_fees);
     }
 
     public function show_transportation_type(){
@@ -469,7 +472,7 @@ class AdminController extends Controller
         if($params['form']['wards_receiver'] == "Chọn phường/xã" || $params['form']['wards_receiver'] == "0"){
             $message = $message . 'phường/xã nhận, ';
         }
-        if($params['form']['stock_rate_type'] == "Loại hàng hóa"){
+        if($params['form']['stock_rate_type'] == "Chọn loại hàng hóa" || $params['form']['stock_rate_type'] == 0){
             $message = $message . 'loại hàng hóa.';
         }
 
@@ -512,6 +515,36 @@ class AdminController extends Controller
         $distanceAddress = $distance->getDistance($address_sending ,$address_receiver , "K");
 
         return redirect()->route('admin.addOrders', ['distance' => $distanceAddress, 'item' => $params['form']]);
+    }
+
+    public function save_orders(Request $request){
+        // Gọi model
+        $detail_orders = new detail_orders();
+        $orders = new orders();
+        $transportation_type = 0;
+        $total_price = 0;
+        $params = $request->all();
+        // bắt dk xem loại hình vận chuyển nào
+        if($request->type == 'express_delivery'){
+            $transportation_type = 1;
+            $total_price = $params['total_price_express_delivery'];
+        }
+        if($request->type == 'road_delivery'){
+            $transportation_type = 2;
+            $total_price = $params['total_price_road_delivery'];
+        }
+        if($request->type == 'thrifty_delivery'){
+            $transportation_type = 4;
+            $total_price = $params['total_price_thrifty_delivery'];
+        }
+        if($request->type == 'fire_express_delivery'){
+            $transportation_type = 3;
+            $total_price = $params['total_price_fire_express_delivery'];
+        }
+        $save_orders = $orders->saveItem($params, $transportation_type);
+        $save_detail_orders = $detail_orders->saveItem($params, $transportation_type, $total_price, $save_orders);
+        Session::flash('success', 'Thêm vận đơn thành công');
+        return redirect()->route('admin.listOrders');
     }
 
     public function logout(){
