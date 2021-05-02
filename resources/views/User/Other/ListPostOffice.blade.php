@@ -40,10 +40,19 @@
                 <div class="mt-3"></div>
             </div>
             @endif
-            
         </div>
-        
     </div>
 </section>
-
+<script>
+    const atags = document.querySelectorAll(".find-address.redirect");
+    const iframes = document.querySelectorAll("iframe");
+    iframes[0].style.display = "block";
+    atags.forEach(el=>{
+        el.addEventListener("click",(e)=>{
+            iframes.forEach(el=>el.style.display = "none");
+            const iframe = document.querySelector(`#iframe${e.target.id}`);
+            iframe.style.display = "block";
+        })
+    });
+</script>
 @endsection

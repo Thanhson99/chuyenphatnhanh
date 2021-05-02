@@ -12,6 +12,10 @@ use App\orders;
 use App\detail_orders;
 use App\rates;
 use App\transportation_type;
+use App\provinces;
+use App\districts;
+use App\wards;
+use App\distanceAddress;
 
 class UserController extends Controller
 {
@@ -186,5 +190,105 @@ class UserController extends Controller
                 'total_price' => $total_price,
         ];
         return view('User.Other.BillOfLading')->with('data' , $data);
+    }
+
+    public function show_rates(Request $request){
+        // xử lý dữ liệu
+        $params = $request->all();
+        // kiểm tra tỉnh thành đã nhập chưa ?
+        $message = "Vui lòng chọn ";
+        if($params['form']['provinces_sending'] == "Chọn tỉnh/thành phố"){
+            $message = $message . 'tỉnh/thành phố gửi, ';
+        }
+        if($params['form']['districts_sending'] == "Chọn quận/huyện" || $params['form']['districts_sending'] == "0"){
+            $message = $message . 'quận/huyện gửi, ';
+        }
+        if($params['form']['wards_sending'] == "Chọn phường/xã" || $params['form']['wards_sending'] == "0"){
+            $message = $message . 'phường/xã gửi, ';
+        }
+        if($params['form']['provinces_receiver'] == "Chọn tỉnh/thành phố"){
+            $message = $message . 'tỉnh/thành phố nhận, ';
+        }
+        if($params['form']['districts_receiver'] == "Chọn quận/huyện" || $params['form']['districts_receiver'] == "0"){
+            $message = $message . 'quận/huyện nhận, ';
+        }
+        if($params['form']['wards_receiver'] == "Chọn phường/xã" || $params['form']['wards_receiver'] == "0"){
+            $message = $message . 'phường/xã nhận.';
+        }
+
+        if($message != "Vui lòng chọn "){
+            return redirect()->route('user.checkCharges')->with('message', $message);
+        }
+
+        // gọi model
+        $provinces = new provinces();
+        // lấy tỉnh
+        $provinces_id_sending = $params['form']['provinces_sending'];
+        $provinces_name_sending = $provinces->get_provinces_name($provinces_id_sending)[0]['name_provinces'];
+        $provinces_id_receiver = $params['form']['provinces_receiver'];
+        $provinces_name_receiver = $provinces->get_provinces_name($provinces_id_receiver)[0]['name_provinces'];
+
+        // lấy thành phố
+        $districts = new districts();
+        $districts_id_sending = $params['form']['districts_sending'];
+        $districts_name_sending = $districts->get_district_name($districts_id_sending)[0]['name_district'];
+        $districts_id_receiver = $params['form']['districts_receiver'];
+        $districts_name_receiver = $districts->get_district_name($districts_id_receiver)[0]['name_district'];
+
+        //lấy quận huyện
+        $wards = new wards();
+        $wards_id_sending = $params['form']['wards_sending'];
+        $wards_name_sending = $wards->get_wards_name($wards_id_sending)[0]['name_ward'];
+        $wards_id_receiver = $params['form']['wards_receiver'];
+        $wards_name_receiver = $wards->get_wards_name($wards_id_receiver)[0]['name_ward'];
+        
+        // hợp nhất địa chỉ
+        $address_sending = $provinces_name_sending . ', ' . $districts_name_sending . ', ' . $wards_name_sending;
+        $address_receiver = $provinces_name_receiver . ', ' . $districts_name_receiver . ', ' . $wards_name_receiver;
+
+        // lấy độ dài đường đi theo Km
+        $distance = new distanceAddress();
+        $distanceAddress = $distance->getDistance($address_sending ,$address_receiver , "K");
+
+        $insurance_fees = $params['cargo_content'] === "Chất dễ cháy" ? 50000 : 0;
+
+        // lấy loại hình vận chuyển
+        $transportation_type_list = $this->show_transportation_type();
+        // lấy giá chuyển phát nhanh
+        $express_delivery = $transportation_type_list[0]['rates'];
+        // lấy giá chuyển phát đường bộ
+        $road_delivery = $transportation_type_list[1]['rates'];
+        //lấy giá chuyển phát tiết kiệm
+        $thrifty_delivery = $transportation_type_list[3]['rates'];
+        // lấy giá chuyển phát hỏa tốc
+        $fire_express_delivery = $transportation_type_list[2]['rates'];
+
+        // gộp các loại giá
+        $shipping_rates = [
+            'express_delivery' => $express_delivery,
+            'road_delivery' => $road_delivery,
+            'thrifty_delivery' => $thrifty_delivery,
+            'fire_express_delivery' => $fire_express_delivery,
+        ];
+
+        // lấy loại hàng hóa
+        $stock_rates_list = $this->show_stock_rates_by_name($params['cargo_content']);
+        $stock_rates_price = 0;
+        foreach($stock_rates_list as $key => $collection){
+            $stock_rates_price = $collection->rates;
+        }
+        return view('User.Other.CheckCharges')->with('distance', $distanceAddress)->with('params', $params)->with('stock_rates_price', $stock_rates_price)->with('shipping_rates', $shipping_rates)->with('insurance_fees', $insurance_fees);
+    }
+
+    public function show_stock_rates_by_name($name){
+        $stock_rates = new rates();
+        $stock_list = $stock_rates->get_stock_rates_by_name($name);
+        return $stock_list;
+    }
+
+    public function show_transportation_type(){
+        $transportation_type = new transportation_type();
+        $transportation_type_list = $transportation_type->get_transportation_type();
+        return $transportation_type_list;
     }
 }

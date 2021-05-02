@@ -84,6 +84,7 @@ Route::prefix($prefixUrl)->name($prefixUrl . '.')->group(function() use($control
         return view('User.Other.News');
     })->name('news');
     Route::post('/getOrders', $controllerName . '@show_orders')->name("showOrders");
+    Route::post('/getRates', $controllerName . '@show_rates')->name("showRates");
 });
 
 $prefixUrl = 'admin';
@@ -113,6 +114,7 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::post('/deleteOrders', $controllerName . '@delete_orders')->name('deleteOrders');
     Route::post('/districts', $controllerName . '@show_districts')->name("showDistricts");
     Route::post('/wards', $controllerName . '@show_wards')->name("showWards");
+    Route::get('/statistical', $controllerName . '@show_statistical')->name("showStatistical");
     Route::get('/logout', $controllerName . '@logout')->name("logout");
 });
 
@@ -121,7 +123,11 @@ $controller = 'customer';
 Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($controller){
     $controllerName = ucfirst($controller) . '\\' . ucfirst($controller) . 'Controller';
     Route::get('/home', $controllerName . '@statistical')->name("statistical");
+    Route::get('/infomation', $controllerName . '@changeInfo')->name('changeInfo');
+    Route::get('/showOrder', $controllerName . '@show_orders')->name('showOrders');
+    Route::post('/searchOrders', $controllerName . '@search_orders')->name('searchOrders');
     Route::get('/logout', $controllerName . '@logout')->name("logout");
+    Route::post('/saveInfo', $controllerName . '@saveInfo')->name("saveInfo");
 });
 
 Route::get('/page-not-found', function () {

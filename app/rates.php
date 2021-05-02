@@ -64,4 +64,9 @@ class rates extends Model
         $query = $this->select('*')->where('id', $id)->get();
         return $query;
     }
+
+    public function get_stock_rates_by_name($name){
+        $query = $this->select('*')->where('name', $name)->get();
+        return $query;
+    }
 }

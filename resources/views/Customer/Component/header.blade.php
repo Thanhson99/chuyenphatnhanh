@@ -9,6 +9,7 @@
     // lấy ảnh
     $user = User::where('email', $_SESSION["user"]->email)->first();
     $avatar = $user['avatar'];
+    $id = $user['id'];
     $name = $user['name'];
 @endphp
 <header class="w-100 wp-header text-black py-3 pt-lg-0 pb-lg-0 customer-header">
@@ -28,7 +29,7 @@
                     </a>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu customer-dropdown-menu" style="z-index: 99999">
-                      <li><a href="#">Thông tin cá nhân</a></li>
+                      <li><a href="{{ route('customer.changeInfo', ['id' => $id]) }}">Thông tin cá nhân</a></li>
                       <li><a href="{{ route('customer.logout') }}">Đăng xuất</a></li>
                     </ul>
                   </div>

@@ -9,13 +9,13 @@
                         <div class="col-lg-12 col-12">
                             <div class="row d-flex justify-content-center align-items-center font-size-16 pt-2 mt-4 mb-3 content-ft">
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-12 mb-4 mb-lg-0">
-                                    <a href="#" class="d-inline-block p-2 rounded bg-white d-flex justify-content-center align-items-center">
+                                    <a href="{{ route('user.listPostOffice') }}" class="d-inline-block p-2 rounded bg-white d-flex justify-content-center align-items-center">
                                         <span class="icon ntl-Location-1 mr-3"><span class="path1"></span><span class="path22"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></span> Tìm bưu cục
                                         gần bạn
                                     </a>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                                    <a href="#" class="d-inline-block p-2 rounded d-flex justify-content-center align-items-center text-white"><span class="icon ntl-Box-search mr-3"></span> Tra cứu giá cước</a>
+                                    <a href="{{ route('user.billOfLading') }}" class="d-inline-block p-2 rounded d-flex justify-content-center align-items-center text-white"><span class="icon ntl-Box-search mr-3"></span> Tra cứu giá cước</a>
                                 </div>
                             </div>
                         </div>

@@ -32,7 +32,7 @@
                     </div>
                     @if (isset($data))
                         @if ($data['stock_rate_name'] != "")
-                            <div class="w-100 p-3 p-lg-4 bg-white box-vandon">
+                            <div class="w-100 p-3 p-lg-4 bg-white box-vandon" style="margin-bottom: 30px;">
                                 <div class="row d-flex align-items-center">
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-12 border-5 text-center">
                                         <div class="w-100 pr-3 pb-3 mb-3 pb-md-0 mb-md-0">
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="w-100 p-3 p-lg-4 bg-white box-vandon">
+                            <div class="w-100 p-3 p-lg-4 bg-white box-vandon" style="margin-bottom: 30px;">
                                 <div class="row d-flex align-items-center">
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-12 border-5 text-center">
                                         <div class="w-100 pr-3 pb-3 mb-3 pb-md-0 mb-md-0">

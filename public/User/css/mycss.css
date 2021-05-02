@@ -82,3 +82,16 @@
 #video-home{
     display: unset !important;
 }
+
+.current .mt-2{
+    color: #fff;
+}
+
+.bg-fff:hover .mt-2{
+    color: #fff;
+}
+
+.btn-submit-type-transportation{
+    background: rgb(250, 25, 25) !important; 
+    color: #fff !important;
+}

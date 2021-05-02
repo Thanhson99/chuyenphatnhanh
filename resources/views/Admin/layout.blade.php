@@ -207,4 +207,92 @@
             });
         };
     </script>
+
+
+    @php
+        // kiểm tra đang ở route nào để active
+    $route = Route::current();
+    $name = Route::currentRouteName();
+    if($name === "admin.showStatistical"){
+        echo("<script src='https://code.highcharts.com/highcharts.js'></script>
+            <script>
+                function drawChart(chartID, cate, data, title, unit, type = 'line') {
+                    Highcharts.chart(chartID, {
+                        chart: {
+                            type: type
+                        },
+                        title: {
+                            text: title
+                        },
+                        xAxis: {
+                            categories: cate
+                        },
+                        yAxis: {
+                            title: {
+                                text: unit
+                            }
+                        },
+                        plotOptions: {
+                            line: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                enableMouseTracking: true
+                            }, column: {
+                                dataLabels: {
+                                    enabled: true
+                                }
+                            }
+                        },
+                        series: data
+                    });
+                }
+            </script>
+        ");
+       function js_str($s) {
+            if (!is_numeric($s)) {
+                return '"' . addcslashes($s, "\0..\37\"\\") . '"';
+            } else {
+                return addcslashes($s, "\0..\37\"\\");
+            }
+        }
+
+        function js_array($array) {
+            $temp = array_map('js_str', $array);
+            return '[' . implode(', ', $temp) . ']';
+        }
+        if(isset($data)){
+            $dates = $data['dates'];
+            $total_rev = $data['total_rev'];
+        }
+        echo("<script>
+                var lbl = " . js_array($dates) . ";
+                var data = [{
+                        name: 'Tổng doanh thu',
+                        data: " . js_array($total_rev) . "
+                }];
+                drawChart('my-chart', lbl, data, 'Doanh thu', 'VNĐ');
+            </script>
+        ");
+    }
+    if($name === "admin.addOrders"){
+        echo('<script>
+                Number.prototype.format = function(n, x) {
+                    var re = "\\d(?=(\\d{" + (x || 3) + "})+" + (n > 0 ? "\\." : "$") + ")";
+                    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, "g"), "$&,");
+                };
+
+                document.getElementById("formatPrice").addEventListener("keyup",e=>{
+                    // let str = e.target.value;
+                    let value = e.target.value.replace(/,/g,"");
+                    if(isNaN(value)) value="0";
+                    // res = str.replace(/blue/g, "red");
+                    let number = new Number(value);
+                    if(number > 500000000) number = 500000000;
+                    document.getElementById("formatPrice").value = number.format();
+                })
+            </script>
+        ');
+    }
+    @endphp
 </html>

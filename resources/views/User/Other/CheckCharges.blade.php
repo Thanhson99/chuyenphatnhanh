@@ -1,3 +1,39 @@
+@php
+    use App\provinces;
+    //lấy tỉnh thành
+    $provinces = new provinces();
+    $provinces_list = $provinces->get_provinces();
+
+    $data_provinces = [];
+    $data_provinces[0] = "Chọn tỉnh/thành";
+    foreach ($provinces_list as $key => $value) {
+        $data_provinces[$value['id']] = $value['name_provinces'];
+    }
+
+    // set time zone viet nam
+    date_default_timezone_set("Asia/Ho_Chi_Minh");
+    //  chuyển đổi ngày
+    $date = date("d/m/Y");
+    $arrDate = explode("/", $date);
+    // lấy ngày cần thay đổi
+    $day = $arrDate[0];
+    // chuyển phát nhanh
+    $arrDate[0] = (string)((int)$day+2);
+    $express_delivery_date =  implode("/", $arrDate);
+    // chuyển phát đường bộ
+    $arrDate[0] = (string)((int)$day+5);
+    $road_delivery_date =  implode("/", $arrDate);
+    // chuyển phát tiết kiệm
+    $arrDate[0] = (string)((int)$day+3);
+    $thrifty_delivery_date =  implode("/", $arrDate);
+    // chuyển phát hỏa tốc
+    $arrDate[0] = (string)((int)$day+1);
+    $fire_express_delivery_date =  implode("/", $arrDate);
+    // dd($params);
+
+    $select_provinces_sending = Form::select('form[provinces_sending]', $data_provinces, @$params['form']['provinces_sending'], ['class' => 'form-control', 'id' => 'provinces_sending']);
+    $select_provinces_receiver = Form::select('form[provinces_receiver]', $data_provinces, @$params['form']['provinces_receiver'], ['class' => 'form-control', 'id' => 'provinces_receiver']);
+@endphp
 @extends('User.layoutMain')
 
 @section('main-content')
@@ -11,86 +47,41 @@
                         <div class="spinner-border text-primary" style="position: absolute; z-index: 100; top: 50%;"></div>
                     </div>
 
-                    <form id="form-cp" action="#" method="get">
+                    <form id="form-cp" action="{{ route('user.showRates') }}" method="POST">
+                        @if ( session()->has('message') )
+                            <div class="alert alert-danger">{{ session()->get('message') }}</div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="font-IntelBold title-bc mb-2 mb-md-4">Nhập thông tin bưu kiện</div>
                         <div class="">
                             <label class="text-dark">Nơi gửi <sup class="text-danger">*</sup></label>
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <select name="send_city_id" class="selectpicker form-control change_city border-cam" id="send_city_id" data-id="send_district_id" required data-live-search="true" data-size="10">
-                                            <option value="">Chọn tỉnh thành</option>
-                                            <option value="50">Hồ Chí Minh</option>
-                                            <option value="29">Hà Nội</option>
-                                            <option value="43">Đà Nẵng</option>
-                                            <option value="67">An Giang</option>
-                                            <option value="72">Bà Rịa Vũng Tàu</option>
-                                            <option value="61">Bình Dương</option>
-                                            <option value="93">Bình Phước</option>
-                                            <option value="86">Bình Thuận</option>
-                                            <option value="77">Bình Định</option>
-                                            <option value="94">Bạc Liêu</option>
-                                            <option value="98">Bắc Giang</option>
-                                            <option value="97">Bắc Kạn</option>
-                                            <option value="99">Bắc Ninh</option>
-                                            <option value="71">Bến Tre</option>
-                                            <option value="11">Cao Bằng</option>
-                                            <option value="69">Cà Mau</option>
-                                            <option value="65">Cần Thơ</option>
-                                            <option value="81">Gia Lai</option>
-                                            <option value="23">Hà Giang</option>
-                                            <option value="90">Hà Nam</option>
-                                            <option value="38">Hà Tĩnh</option>
-                                            <option value="28">Hòa Bình</option>
-                                            <option value="89">Hưng Yên</option>
-                                            <option value="34">Hải Dương</option>
-                                            <option value="16">Hải Phòng</option>
-                                            <option value="95">Hậu Giang</option>
-                                            <option value="79">Khánh Hòa</option>
-                                            <option value="68">Kiên Giang</option>
-                                            <option value="82">KonTum</option>
-                                            <option value="25">Lai Châu</option>
-                                            <option value="62">Long An</option>
-                                            <option value="24">Lào Cai</option>
-                                            <option value="49">Lâm Đồng</option>
-                                            <option value="12">Lạng Sơn</option>
-                                            <option value="18">Nam Định</option>
-                                            <option value="37">Nghệ An</option>
-                                            <option value="35">Ninh Bình</option>
-                                            <option value="85">Ninh Thuận</option>
-                                            <option value="19">Phú Thọ</option>
-                                            <option value="78">Phú Yên</option>
-                                            <option value="73">Quảng Bình</option>
-                                            <option value="92">Quảng Nam</option>
-                                            <option value="76">Quảng Ngãi</option>
-                                            <option value="14">Quảng Ninh</option>
-                                            <option value="74">Quảng Trị</option>
-                                            <option value="83">Sóc Trăng</option>
-                                            <option value="26">Sơn La</option>
-                                            <option value="36">Thanh Hóa</option>
-                                            <option value="17">Thái Bình</option>
-                                            <option value="20">Thái Nguyên</option>
-                                            <option value="75">Thừa Thiên Huế</option>
-                                            <option value="63">Tiền Giang</option>
-                                            <option value="84">Trà Vinh</option>
-                                            <option value="22">Tuyên Quang</option>
-                                            <option value="70">Tây Ninh</option>
-                                            <option value="64">Vĩnh Long</option>
-                                            <option value="88">Vĩnh Phúc</option>
-                                            <option value="21">Yên Bái</option>
-                                            <option value="27">Điện Biên</option>
-                                            <option value="47">Đăk Lăk</option>
-                                            <option value="48">Đắk Nông</option>
-                                            <option value="60">Đồng Nai</option>
-                                            <option value="66">Đồng Tháp</option>
-                                        </select>
+                                        {!! $select_provinces_sending !!}
                                         <span id="err_send_city_id" generated="true" class="error" style="display: none;">Vui lòng chọn tỉnh thành</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <select name="send_district_id" class="selectpicker form-control" id="send_district_id" required data-live-search="true" data-size="10">
-                                            <option value="">Chọn quận huyện</option>
+                                        <select id="districts_sending" value="{{ @$item['districts_sending'] }}" name="form[districts_sending]" class="browser-default custom-select location">
+                                            <option selected>Chọn quận/huyện</option>
+                                        </select>
+                                        <span id="err_send_district_id" generated="true" class="error" style="display: none;">Vui lòng chọn quận </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <select id="wards_sending" name="form[wards_sending]" class="browser-default custom-select location">
+                                            <option selected>Chọn phường/xã</option>
                                         </select>
                                         <span id="err_send_district_id" generated="true" class="error" style="display: none;">Vui lòng chọn quận </span>
                                     </div>
@@ -102,81 +93,24 @@
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <select name="recieve_city_id" class="selectpicker form-control change_city" id="recieve_city_id" data-id="recieve_district_id" required data-live-search="true" data-size="10">
-                                            <option value="0">Chọn tỉnh thành</option>
-                                            <option value="50">Hồ Chí Minh</option>
-                                            <option value="29">Hà Nội</option>
-                                            <option value="43">Đà Nẵng</option>
-                                            <option value="67">An Giang</option>
-                                            <option value="72">Bà Rịa Vũng Tàu</option>
-                                            <option value="61">Bình Dương</option>
-                                            <option value="93">Bình Phước</option>
-                                            <option value="86">Bình Thuận</option>
-                                            <option value="77">Bình Định</option>
-                                            <option value="94">Bạc Liêu</option>
-                                            <option value="98">Bắc Giang</option>
-                                            <option value="97">Bắc Kạn</option>
-                                            <option value="99">Bắc Ninh</option>
-                                            <option value="71">Bến Tre</option>
-                                            <option value="11">Cao Bằng</option>
-                                            <option value="69">Cà Mau</option>
-                                            <option value="65">Cần Thơ</option>
-                                            <option value="81">Gia Lai</option>
-                                            <option value="23">Hà Giang</option>
-                                            <option value="90">Hà Nam</option>
-                                            <option value="38">Hà Tĩnh</option>
-                                            <option value="28">Hòa Bình</option>
-                                            <option value="89">Hưng Yên</option>
-                                            <option value="34">Hải Dương</option>
-                                            <option value="16">Hải Phòng</option>
-                                            <option value="95">Hậu Giang</option>
-                                            <option value="79">Khánh Hòa</option>
-                                            <option value="68">Kiên Giang</option>
-                                            <option value="82">KonTum</option>
-                                            <option value="25">Lai Châu</option>
-                                            <option value="62">Long An</option>
-                                            <option value="24">Lào Cai</option>
-                                            <option value="49">Lâm Đồng</option>
-                                            <option value="12">Lạng Sơn</option>
-                                            <option value="18">Nam Định</option>
-                                            <option value="37">Nghệ An</option>
-                                            <option value="35">Ninh Bình</option>
-                                            <option value="85">Ninh Thuận</option>
-                                            <option value="19">Phú Thọ</option>
-                                            <option value="78">Phú Yên</option>
-                                            <option value="73">Quảng Bình</option>
-                                            <option value="92">Quảng Nam</option>
-                                            <option value="76">Quảng Ngãi</option>
-                                            <option value="14">Quảng Ninh</option>
-                                            <option value="74">Quảng Trị</option>
-                                            <option value="83">Sóc Trăng</option>
-                                            <option value="26">Sơn La</option>
-                                            <option value="36">Thanh Hóa</option>
-                                            <option value="17">Thái Bình</option>
-                                            <option value="20">Thái Nguyên</option>
-                                            <option value="75">Thừa Thiên Huế</option>
-                                            <option value="63">Tiền Giang</option>
-                                            <option value="84">Trà Vinh</option>
-                                            <option value="22">Tuyên Quang</option>
-                                            <option value="70">Tây Ninh</option>
-                                            <option value="64">Vĩnh Long</option>
-                                            <option value="88">Vĩnh Phúc</option>
-                                            <option value="21">Yên Bái</option>
-                                            <option value="27">Điện Biên</option>
-                                            <option value="47">Đăk Lăk</option>
-                                            <option value="48">Đắk Nông</option>
-                                            <option value="60">Đồng Nai</option>
-                                            <option value="66">Đồng Tháp</option>
-                                        </select>
-                                        <span id="err_recieve_city_id" generated="true" class="error" style="display: none;">Vui lòng chọn tỉnh thành</span>
+                                        {!! $select_provinces_receiver !!}
+                                        <span id="err_send_city_id" generated="true" class="error" style="display: none;">Vui lòng chọn tỉnh thành</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <select name="recieve_district_id" class="selectpicker form-control" id="recieve_district_id" required data-live-search="true" data-size="10">
-                                            <option value="0">Chọn quận huyện</option>
+                                        <select id="districts_receiver" name="form[districts_receiver]" class="browser-default custom-select location">
+                                            <option selected>Chọn quận/huyện</option>
                                         </select>
-                                        <span id="err_recieve_district_id" generated="true" class="error" style="display: none;">Vui lòng chọn quận</span>
+                                        <span id="err_send_district_id" generated="true" class="error" style="display: none;">Vui lòng chọn quận </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <select id="wards_receiver" name="form[wards_receiver]" class="browser-default custom-select location">
+                                            <option selected>Chọn phường/xã</option>
+                                        </select>
+                                        <span id="err_send_district_id" generated="true" class="error" style="display: none;">Vui lòng chọn quận </span>
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +181,6 @@
                                     </span>
                                     <div class="mt-2">
                                         Đồ điện tử
-                                        <!-- <br>tử -->
                                     </div>
                                 </div>
                             </li>
@@ -260,7 +193,6 @@
                                     </span>
                                     <div class="mt-2">
                                         Dược phẩm
-                                        <!-- <br>TPCN -->
                                     </div>
                                 </div>
                             </li>
@@ -312,11 +244,127 @@
                         <div class="w-100 text-center mt-4">
                             <input type="hidden" id="feature" name="feature" value="1" />
                             <input type="hidden" id="cargo_content" name="cargo_content" value="Tài liệu" />
-                            <input class="btn font-IntelBold font-size-18" type="button" name="hoantat" value="Tra giá" onClick="placeOrder()" id="complete" />
+                            <input class="btn font-size-18" type="submit" name="hoantat" value="Tra giá" id="complete" style="background: rgb(255, 25, 25); color: #fff"/>
                         </div>
+                        @csrf
                     </form>
                 </div>
             </div>
+            @if (isset($distance) && $distance != "")
+                <div class="w-100 p-3 p-lg-4 bg-white" style="position: relative; margin-top: 20px;">
+                    <div class="row ng-star-inserted">
+                        <div class="col-md-12" style="margin: 25px 0; background-color: rgb(255, 29, 29)"><h5 class="title-info" style="margin: 15px; color: #fff">Bảng giá dịch vụ</h5></div>
+                        <div style="margin-bottom: 10px;" class="col-md-6">
+                            <div class="card">
+                                <div class="card-body"><h5 class="card-title">Chuyển phát nhanh</h5></div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Cước chính:</b> {{ number_format(( $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['express_delivery']), 0) }} VNĐ</div>
+                                            <div class="col-md-6"><b>Phí thu hộ:</b> {{ $params['cod_amt'] }} VNĐ</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Phí bảo hiểm:</b> {{  number_format($insurance_fees, 0) }} VNĐ</div>
+                                            <div class="col-md-6"><b>Quãng đường:</b> {{ $distance }}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> {{ $express_delivery_date }}</div>
+                                            <div class="col-md-6"><b>Phí báo phát:</b> 0 VNĐ</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <input type="hidden" name="total_price_express_delivery" value="{{ (int)($stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['express_delivery'] + (int)$params['cod_amt'] + $insurance_fees) }}">
+                                <a  href="{{ route('user.login') }}" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 10px;" class="col-md-6">
+                            <div class="card">
+                                <div class="card-body"><h5 class="card-title">Đường bộ</h5></div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Cước chính:</b> {{ number_format(( $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['road_delivery']), 0) }} VNĐ</div>
+                                            <div class="col-md-6"><b>Phí thu hộ:</b> {{ $params['cod_amt'] }} VNĐ</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Phí bảo hiểm:</b> {{ number_format($insurance_fees, 0) }} VNĐ</div>
+                                            <div class="col-md-6"><b>Quãng đường:</b> {{ $distance }}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> {{ $road_delivery_date }}</div>
+                                            <div class="col-md-6"><b>Phí báo phát:</b> 0 VNĐ</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <input type="hidden" name="total_price_road_delivery" value="{{ (int)($stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['road_delivery'] + (int)$params['cod_amt'] + $insurance_fees) }}">
+                                <a  href="{{ route('user.login') }}" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 10px;" class="col-md-6">
+                            <div class="card">
+                                <div class="card-body"><h5 class="card-title">Tiết kiệm</h5></div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Cước chính:</b> {{ number_format(( $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['thrifty_delivery']), 0) }} VNĐ</div>
+                                            <div class="col-md-6"><b>Phí thu hộ:</b> {{ $params['cod_amt'] }} VNĐ</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Phí bảo hiểm:</b> {{ number_format($insurance_fees, 0) }} VNĐ</div>
+                                            <div class="col-md-6"><b>Quãng đường:</b> {{ $distance }}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> {{ $thrifty_delivery_date }}</div>
+                                            <div class="col-md-6"><b>Phí báo phát:</b> 0 VNĐ</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <input type="hidden" name="total_price_thrifty_delivery" value="{{ (int)($stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['thrifty_delivery'] + (int)$params['cod_amt'] + $insurance_fees) }}">
+                                <a  href="{{ route('user.login') }}" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 10px;" class="col-md-6">
+                            <div class="card">
+                                <div class="card-body"><h5 class="card-title">Hỏa tốc</h5></div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Cước chính:</b> {{ number_format(( $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['fire_express_delivery']), 0) }} VNĐ</div>
+                                            <div class="col-md-6"><b>Phí thu hộ:</b> {{ $params['cod_amt'] }} VNĐ</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Phí bảo hiểm:</b> {{ number_format($insurance_fees, 0) }} VNĐ</div>
+                                            <div class="col-md-6"><b>Quãng đường:</b> {{ $distance }}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-6"><b>Thời gian toàn trình dự kiến:</b> {{ $fire_express_delivery_date }}</div>
+                                            <div class="col-md-6"><b>Phí báo phát:</b> 0 VNĐ</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <input type="hidden" name="total_price_fire_express_delivery" value="{{ (int)($stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['fire_express_delivery'] + (int)$params['cod_amt'] + $insurance_fees) }}">
+                                <a href="{{ route('user.login') }}" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </section>

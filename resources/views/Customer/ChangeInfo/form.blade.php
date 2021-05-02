@@ -21,7 +21,7 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                Biểu đồ
+                INFOMATION
             </div>
         </div>
     </div>

@@ -133,7 +133,7 @@
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-md-6"><b>Cước chính:</b> {{ number_format(( $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['express_delivery']), 0) }} VNĐ</div>
-                                                <div class="col-md-6"><b>Phí thu hộ:</b> {{ $item['collection_fee'] }} VNĐ</div>
+                                                <div class="col-md-6"><b>Phí thu hộ:</b> {{ number_format($item['collection_fee'], 0) }} VNĐ</div>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
@@ -160,7 +160,7 @@
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-md-6"><b>Cước chính:</b> {{ number_format(( $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['road_delivery']), 0) }} VNĐ</div>
-                                                <div class="col-md-6"><b>Phí thu hộ:</b> {{ $item['collection_fee'] }} VNĐ</div>
+                                                <div class="col-md-6"><b>Phí thu hộ:</b> {{ number_format($item['collection_fee'], 0) }} VNĐ</div>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
@@ -187,7 +187,7 @@
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-md-6"><b>Cước chính:</b> {{ number_format(( $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['thrifty_delivery']), 0) }} VNĐ</div>
-                                                <div class="col-md-6"><b>Phí thu hộ:</b> {{ $item['collection_fee'] }} VNĐ</div>
+                                                <div class="col-md-6"><b>Phí thu hộ:</b> {{ number_format($item['collection_fee'], 0) }} VNĐ</div>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
@@ -214,7 +214,7 @@
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-md-6"><b>Cước chính:</b> {{ number_format(( $stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['fire_express_delivery']), 0) }} VNĐ</div>
-                                                <div class="col-md-6"><b>Phí thu hộ:</b> {{ $item['collection_fee'] }} VNĐ</div>
+                                                <div class="col-md-6"><b>Phí thu hộ:</b> {{ number_format($item['collection_fee'], 0) }} VNĐ</div>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
