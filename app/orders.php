@@ -67,8 +67,4 @@ class orders extends Model
         $query = $this->select('*')->where('id_order', $id)->get();
         return $query;
     }
-
-    public function get_date($date){
-        // $query = $this->select('created_at')
-    }
 }

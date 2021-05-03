@@ -548,18 +548,53 @@ class AdminController extends Controller
     }
 
     public function show_statistical(){
-        $dates = ['28/11', '29/11', '30/11', '01/12', '02/12', '03/12', '04/12'];
-        $total_rev = [900, 850, 990, 1200, 780, 930, 1700];
-        $with_coupon = [300, 400, 200, 250, 540, 120, 800];
-        $without_coupon = [100, 100, 100, 150, 140, 20, 500];
+        // lấy ngày hiện tại
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        // lui 7 day
+        $subNow = Carbon::now('Asia/Ho_Chi_Minh')->subDays(7)->toDateString();
+        // lấy dữ liệu
+        $detail_order = new detail_orders();
+        $detail_orders = $detail_order->get_date($subNow, $now);
+        
+        // xử lý mảng
+        $tempNow = Carbon::now('Asia/Ho_Chi_Minh');
+        $tempSubNow = Carbon::now('Asia/Ho_Chi_Minh')->subDays(7);
+
+        $arrDate = [];
+        while($tempNow->toDateString() != $tempSubNow->toDateString()){
+            array_push($arrDate, $tempNow->toDateString());
+            $tempNow->subDays(1); 
+        }
+
+        $data_detail = [];
+        foreach($detail_orders as $key => $value){
+            if(array_key_exists(date('Y-m-d', strtotime($value->created_at)), $data_detail)){
+                $data_detail[date('Y-m-d', strtotime($value->created_at))][0] += $value->total_price;
+                $data_detail[date('Y-m-d', strtotime($value->created_at))][1] += 1;
+            }else{
+                $data_detail[date('Y-m-d', strtotime($value->created_at))] = [$value->total_price, 1];
+            }
+        }
+
+        $arrTotalPrice = [];
+        $arrTotalOrder = [];
+
+        $dates = array_reverse($arrDate);
+        foreach($dates as $date => $value){
+            if(array_key_exists($value, $data_detail)){
+                array_push($arrTotalPrice, $data_detail[$value][0]);
+                array_push($arrTotalOrder, $data_detail[$value][1]);
+            }else{
+                array_push($arrTotalPrice, 0);
+                array_push($arrTotalOrder, 0);
+            }
+        }
 
         $data = [
             'dates' => $dates,
-            'total_rev' => $total_rev,
-            'with_coupon' => $with_coupon,
-            'without_coupon' => $without_coupon,
+            'total_price' => $arrTotalPrice,
+            'total_order' => $arrTotalOrder,
         ];
-        // dd(Carbon::now('Asia/Ho_Chi_Minh')->subDay(7)->toDateString());
         return view('Admin.Statistical.index', ['data' => $data]);
     }
 

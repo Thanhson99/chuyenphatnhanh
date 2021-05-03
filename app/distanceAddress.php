@@ -8,7 +8,7 @@ class distanceAddress extends Model
 {
     function getDistance($addressFrom, $addressTo, $unit = ''){
         // Google API key
-        $apiKey = 'AIzaSyDrE2W81RzSSNb-tw22IOlOS_scVXYVEnY';
+        $apiKey = 'AIzaSyAdXvIohMNE-9CazH8H7ClfZKfrddbxxUg';
         
         // Change address format
         $formattedAddrFrom    = str_replace(' ', '+', $addressFrom);

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class detail_orders extends Model
 {
@@ -60,6 +61,12 @@ class detail_orders extends Model
             // trả về id
             return $params['id'];
         }
-        dd($params, $transportation_type);
+    }
+
+    public function get_date($dateStart, $dateEnd){
+        $query = $this->select('total_price', 'detail_orders.created_at');
+        $query = $query->join('orders', 'detail_orders.orders_id', '=', 'orders.id_order');
+        $query = $query->whereBetween('detail_orders.created_at', [$dateStart, $dateEnd])->get();
+        return $query;
     }
 }
