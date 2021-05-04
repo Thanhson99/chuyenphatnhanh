@@ -102,9 +102,9 @@
                         <div id="collapse5" class="panel-collapse collapse show">
                             <div class="panel-body">
                                 <div class="sharefooter text-left mb-2">
-                                    <a href="#" target="_blank" title="Zalo" rel="nofollow"><span class="ntl-Zalo"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span></span></a>
+                                    <a href="https://id.zalo.me/" target="_blank" title="Zalo" rel="nofollow"><span class="ntl-Zalo"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span></span></a>
                                     <a href="https://www.facebook.com/son.vi.99" target="_blank" title="Facebook" rel="nofollow"><span class="ntl-Facebook1"><span class="path1"></span><span class="path2"></span></span></a>
-                                    <a href="#" target="_blank" title="Youtube" rel="nofollow"><span class="ntl-Youtube"><span class="path1"></span><span class="path2"></span></span></a>
+                                    <a href="https://www.youtube.com/channel/UCxppEMRCO-kQap1AMMXAaqA" target="_blank" title="Youtube" rel="nofollow"><span class="ntl-Youtube"><span class="path1"></span><span class="path2"></span></span></a>
                                 </div>
                                 <form class="position-relative register-email" id="register_email">
                                     <input type="email" name="email_register" id="email_register" value="" placeholder="Nhập email để nhận thông tin" class="form-control" autocomplete="off" required>

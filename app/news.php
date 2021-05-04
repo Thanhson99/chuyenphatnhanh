@@ -38,7 +38,7 @@ class news extends Model
             }
         }
         // lấy hết theo id từ bé đến lớn
-        $query = $query->orderBy("id", "ASC")->paginate(10); // phân trang theo số phần tử
+        $query = $query->orderBy("id", "ASC")->paginate(5); // phân trang theo số phần tử
         return $query;
     }
 
@@ -120,5 +120,34 @@ class news extends Model
                 }
             }
         }
+    }
+
+    public function get_list_news($type){
+        $query = $this->select('*');
+        if($type === 'new'){
+            return $query->paginate(5);
+        }
+        $query = $query->where('new_type', $type)->paginate(5);
+        return $query;
+    }
+
+    public function get_list_news_by_id($id){
+        $query = $this->select('*')->where('id', $id)->get();
+        return $query;
+    }
+
+    public function get_top_most_view_specialized(){
+        $query = $this->select('*')->where('new_type', 'tin chuyên ngành')->first();
+        return $query;
+    }
+
+    public function get_top_most_view_wok(){
+        $query = $this->select('*')->where('new_type', 'tin hoạt động')->first();
+        return $query;
+    }
+
+    public function get_top_most_view_sale(){
+        $query = $this->select('*')->where('new_type', 'tin khuyến mãi')->first();
+        return $query;
     }
 }

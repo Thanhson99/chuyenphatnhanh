@@ -80,9 +80,8 @@ Route::prefix($prefixUrl)->name($prefixUrl . '.')->group(function() use($control
     Route::get('/pricelist', function () {
         return view('User.Other.PriceList');
     })->name('priceList');
-    Route::get('/news', function () {
-        return view('User.Other.News');
-    })->name('news');
+    Route::get('/news', $controllerName . '@list_news')->name('news');
+    Route::get('/showNews', $controllerName . '@show_news')->name('showNews');
     Route::post('/getOrders', $controllerName . '@show_orders')->name("showOrders");
     Route::post('/getRates', $controllerName . '@show_rates')->name("showRates");
 });
@@ -126,6 +125,9 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::get('/infomation', $controllerName . '@changeInfo')->name('changeInfo');
     Route::get('/showOrder', $controllerName . '@show_orders')->name('showOrders');
     Route::post('/searchOrders', $controllerName . '@search_orders')->name('searchOrders');
+    Route::get('/manageOrder', $controllerName . '@manage_order')->name('manageOrder');
+    Route::get('/statisticalOrder', $controllerName . '@statistical_order')->name('statisticalOrder');
+    Route::get('/evaluate', $controllerName . '@evaluate')->name('evaluate');
     Route::get('/logout', $controllerName . '@logout')->name("logout");
     Route::post('/saveInfo', $controllerName . '@saveInfo')->name("saveInfo");
 });

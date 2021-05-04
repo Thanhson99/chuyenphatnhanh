@@ -16,6 +16,7 @@ use App\provinces;
 use App\districts;
 use App\wards;
 use App\distanceAddress;
+use App\news;
 
 class UserController extends Controller
 {
@@ -290,5 +291,47 @@ class UserController extends Controller
         $transportation_type = new transportation_type();
         $transportation_type_list = $transportation_type->get_transportation_type();
         return $transportation_type_list;
+    }
+
+    public function list_news(Request $request){
+        $type = $request->type;
+        if($type === null || $type === 'new'){
+            $type = 'new';
+        }
+        if($type === 'specialized'){
+            $type = "tin chuyên ngành";
+        }
+        if($type === 'wok'){
+            $type = "tin hoạt động";
+        }
+        if($type === 'sale'){
+            $type = "tin khuyến mãi";
+        }
+        $data = $this->get_list_news($type);
+        $topNews = $this->get_top_news();
+        return view('User.Other.News')->with('data', $data)->with('topNews', $topNews);
+    }
+
+    public function get_list_news($type){
+        $news = new news();
+        $list_news = $news->get_list_news($type);
+        return $list_news;
+    }
+
+    public function get_top_news(){
+        $data = [];
+        $news = new news();
+        $data[0] = $news->get_top_most_view_specialized();
+        $data[1] = $news->get_top_most_view_wok();
+        $data[2] = $news->get_top_most_view_sale();
+        return $data;
+    }
+
+    public function show_news(Request $request){
+        $params = $request->all();
+        $news = new news();
+        $list_news = $news->get_list_news_by_id($params['id']);
+        $topNews = $this->get_top_news();
+        return view('User.Other.ShowNews')->with('data', $list_news)->with('topNews', $topNews);;
     }
 }

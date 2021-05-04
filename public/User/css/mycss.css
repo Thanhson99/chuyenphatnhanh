@@ -95,3 +95,12 @@
     background: rgb(250, 25, 25) !important; 
     color: #fff !important;
 }
+
+/* body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+} */

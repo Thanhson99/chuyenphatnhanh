@@ -79,12 +79,13 @@
                     </div>
                 </div>
                 <div class="w-100 d-inline-block pl-1 pr-1">
-                    <form class="row position-relative search mt-1 mt-md-3" action="#" method="get" role="search" id="tracking_top">
+                    <form class="row position-relative search mt-1 mt-md-3" action="{{ route('user.showOrders') }}" method="POST">
                         <div class="col-lg-10 col-sm-10 col-9 pr-0 pr-sm-2">
                             <input style="box-shadow: 1px 2px 3px #333" type="text" name="bill" id="bill" value="" placeholder="Nhập mã vận đơn" class="form-control rounded-0 border-0 tukhoa" autocomplete="off" />
                         </div>
-                        <div class="col-lg-2 col-sm-2 col-3 pl-0"><button style="box-shadow: 1px 2px 3px #333" class="btn-default w-100 rounded-0 pl-1 pr-1 btn-search-home">Tra cứu</button></div>
+                        <div class="col-lg-2 col-sm-2 col-3 pl-0"><button type="submit" style="box-shadow: 1px 2px 3px #333" class="btn-default w-100 rounded-0 pl-1 pr-1 btn-search-home">Tra cứu</button></div>
                         <span class="error col-lg-12" id="error_bill" style="display: none;">Nhập mã vận đơn</span>
+                        @csrf
                     </form>
                 </div>
                 <div class="row text-dark-min mx-auto mt-1 mt-md-3">

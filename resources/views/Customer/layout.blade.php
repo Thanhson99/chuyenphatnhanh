@@ -32,4 +32,77 @@
             toastr.success("{{ \Session::get('success') }}", 'Thành công')
         </script>
     @endif
+    {{-- @php
+        // kiểm tra đang ở route nào để active
+    $route = Route::current();
+    $name = Route::currentRouteName();
+    if($name === "customer.statistical"){
+        echo("<script src='https://code.highcharts.com/highcharts.js'></script>
+            <script>
+                function drawChart(chartID, cate, data, leftTitle, leftUnit, rightTitle, rightUnit, type = 'line') {
+                    Highcharts.chart(chartID, {
+                        chart: {
+                            type: type
+                        },
+                        title: {
+                            text: 'Thống kê vận đơn'
+                        },
+                        xAxis: {
+                            categories: cate
+                        },
+                        yAxis: [{ //--- Primary yAxis
+                            title: {
+                                text: 'Vận đơn'
+                            }
+                        }, /*{ //--- Secondary yAxis
+                            title: {
+                                text: 'Đơn Hàng, Khách Hàng'
+                            },
+                            opposite: true
+                        }*/],
+                        plotOptions: {
+                            line: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                enableMouseTracking: true
+                            }, column: {
+                                dataLabels: {
+                                    enabled: true
+                                }
+                            }
+                        },
+                        series: data
+                    });
+                }
+            </script>
+        ");
+       function js_str($s) {
+            if (!is_numeric($s)) {
+                return '"' . addcslashes($s, "\0..\37\"\\") . '"';
+            } else {
+                return addcslashes($s, "\0..\37\"\\");
+            }
+        }
+
+        function js_array($array) {
+            $temp = array_map('js_str', $array);
+            return '[' . implode(', ', $temp) . ']';
+        }
+        if(isset($data)){
+            $dates = $data['dates'];
+            $total_price = $data['total_price'];
+        }
+        echo("<script>
+                var lbl = " . js_array($dates) . ";
+                var data = [{
+                        name: 'Tổng doanh thu',
+                        yAxis: 0,
+                        data: " . js_array($total_price) . "
+                }];
+                drawChart('my-chart', lbl, data, 'Doanh thu', 'VNĐ', 'Đơn hàng', 'Số lượng');
+            </script>
+        ");
+    }
+    @endphp --}}
 </html>

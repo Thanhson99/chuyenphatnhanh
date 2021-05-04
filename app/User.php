@@ -102,4 +102,9 @@ class User extends Authenticatable
             File::delete($path);
         }
     }
+
+    public function get_date($dateStart, $dateEnd){
+        $query = $this->select('provider_name', 'created_at')->whereBetween('users.created_at', [$dateStart, $dateEnd])->get();
+        return $query;
+    }
 }

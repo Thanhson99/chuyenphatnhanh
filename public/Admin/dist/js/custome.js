@@ -143,3 +143,9 @@ function submitFormOrders(link){
     frm.attr('action', link);
     frm.submit();
 }
+
+$('#select_day').change(function(){
+    var frm = $('#submit-select-day');
+    // frm.attr('action', link);
+    frm.submit();
+})

@@ -547,25 +547,33 @@ class AdminController extends Controller
         return redirect()->route('admin.listOrders');
     }
 
-    public function show_statistical(){
+    public function show_statistical(Request $request){
+        // lay day
+        $day = 7;
+        if(isset($request->day)){
+            $day = $request->day;
+        }
         // lấy ngày hiện tại
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
         // lui 7 day
-        $subNow = Carbon::now('Asia/Ho_Chi_Minh')->subDays(7)->toDateString();
+        $subNow = Carbon::now('Asia/Ho_Chi_Minh')->subDays($day)->toDateString();
         // lấy dữ liệu
         $detail_order = new detail_orders();
         $detail_orders = $detail_order->get_date($subNow, $now);
         
-        // xử lý mảng
+        // xử lý ngày bắt đầu và ngày kết thúc
         $tempNow = Carbon::now('Asia/Ho_Chi_Minh');
-        $tempSubNow = Carbon::now('Asia/Ho_Chi_Minh')->subDays(7);
+        $tempSubNow = Carbon::now('Asia/Ho_Chi_Minh')->subDays($day);
 
+        // lấy ngày
         $arrDate = [];
         while($tempNow->toDateString() != $tempSubNow->toDateString()){
             array_push($arrDate, $tempNow->toDateString());
             $tempNow->subDays(1); 
         }
 
+        //------------------- Thống kê doanh thu và số lượng order-------------------------
+        // lấy detail order
         $data_detail = [];
         foreach($detail_orders as $key => $value){
             if(array_key_exists(date('Y-m-d', strtotime($value->created_at)), $data_detail)){
@@ -579,7 +587,9 @@ class AdminController extends Controller
         $arrTotalPrice = [];
         $arrTotalOrder = [];
 
+        // format lại mảng ngày
         $dates = array_reverse($arrDate);
+        // thêm giá và số lượng vào 2 mảng tương ứng
         foreach($dates as $date => $value){
             if(array_key_exists($value, $data_detail)){
                 array_push($arrTotalPrice, $data_detail[$value][0]);
@@ -589,13 +599,40 @@ class AdminController extends Controller
                 array_push($arrTotalOrder, 0);
             }
         }
+        // ----------------------------- Thống kê user đăng ký------------------------------
+        // khai báo model lấy ra từ csdl
+        $user = new User();
+        $list_user = $user->get_date($subNow, $now);
 
+        // lấy user
+        $data_user = [];
+        foreach($list_user as $key => $value){
+            if(array_key_exists(date('Y-m-d', strtotime($value->created_at)), $data_user)){
+                $data_user[date('Y-m-d', strtotime($value->created_at))] += 1;
+            }else{
+                $data_user[date('Y-m-d', strtotime($value->created_at))] = 1;
+            }
+        }
+
+        // xử lý arr theo provider name
+        $arrTotalUser = [];
+        // thêm giá và số lượng vào 2 mảng tương ứng
+        foreach($dates as $date => $value){
+            if(array_key_exists($value, $data_user)){
+                array_push($arrTotalUser, $data_user[$value]);
+            }else{
+                array_push($arrTotalUser, 0);
+            }
+        }
+
+        // lưu vào 1 mảng để truyền đi đơn giản
         $data = [
             'dates' => $dates,
             'total_price' => $arrTotalPrice,
             'total_order' => $arrTotalOrder,
+            'total_user' => $arrTotalUser,
         ];
-        return view('Admin.Statistical.index', ['data' => $data]);
+        return view('Admin.Statistical.index', ['data' => $data])->with('day', $day);
     }
 
     public function logout(){

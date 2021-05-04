@@ -224,7 +224,7 @@
                             type: type
                         },
                         title: {
-                            text: 'Thống kê doanh thu và đơn hàng'
+                            text: 'Thống kê doanh thu, đơn hàng và khách hàng'
                         },
                         xAxis: {
                             categories: cate
@@ -235,7 +235,7 @@
                             }
                         }, { //--- Secondary yAxis
                             title: {
-                                text: 'Đơn Hàng'
+                                text: 'Đơn Hàng, Khách Hàng'
                             },
                             opposite: true
                         }],
@@ -272,6 +272,7 @@
             $dates = $data['dates'];
             $total_price = $data['total_price'];
             $total_order = $data['total_order'];
+            $total_user = $data['total_user'];
         }
         echo("<script>
                 var lbl = " . js_array($dates) . ";
@@ -283,6 +284,10 @@
                     name: 'Tổng số đơn hàng',
                     yAxis: 1,
                     data: " . js_array($total_order) . "
+                },{
+                    name: 'Tổng số khách hàng',
+                    yAxis: 1,
+                    data: " . js_array($total_user) . "
                 }];
                 drawChart('my-chart', lbl, data, 'Doanh thu', 'VNĐ', 'Đơn hàng', 'Số lượng');
             </script>

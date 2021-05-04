@@ -2,62 +2,39 @@
     <div class="sidebar">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Tổng quan
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Quản lý vận đơn
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Thống kê
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('customer.showOrders') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Tra cứu vận đơn
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Thống kê vận đơn
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Quản lý tài khoản lẻ
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Nhận xét và đánh giá
-                        </p>
-                    </a>
-                </li>
+                @php
+                    $slide_bar = [
+                        'customer.statistical' => 'Tổng quan',
+                        'customer.manageOrder' => 'Quản lý vận đơn',
+                        'customer.showOrders' => 'Tra cứu vận đơn',
+                        'customer.statisticalOrder' => 'Thống kê vận đơn',
+                        'customer.evaluate' => 'Nhận xét và đánh giá',
+                    ];
+                    // kiểm tra đang ở route nào để active
+                    $route = Route::current();
+                    $name = Route::currentRouteName();
+                    foreach ($slide_bar as $key => $value) {
+                        if($key === $name){
+                            echo('<li class="nav-item admin-bar-active">
+                                    <a href="' . route($key) . '" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            ' . $value . '
+                                        </p>
+                                    </a>
+                                </li>');
+                        }else{
+                            echo('<li class="nav-item">
+                                    <a href="' . route($key) . '" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            ' . $value . '
+                                        </p>
+                                    </a>
+                                </li>');
+                        }
+                    }
+                @endphp
             </ul>
         </nav>
     </div>

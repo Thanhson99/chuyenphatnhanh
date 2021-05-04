@@ -145,6 +145,18 @@ class CustomerController extends Controller
         return view('Customer.SearchOrder.index')->with('data' , $data);
     }
 
+    public function manage_order(){
+        return view('Customer.ManageOrders.index');
+    }
+
+    public function statistical_order(){
+        dd('thong ke order');
+    }
+
+    public function evaluate(){
+        dd('Nhận xét');
+    }
+
     public function logout(){
         // bắt đầu session (phiên)
         session_start();
