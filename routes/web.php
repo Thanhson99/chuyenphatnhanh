@@ -124,8 +124,13 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::get('/home', $controllerName . '@statistical')->name("statistical");
     Route::get('/infomation', $controllerName . '@changeInfo')->name('changeInfo');
     Route::get('/showOrder', $controllerName . '@show_orders')->name('showOrders');
+    Route::get('/addOrder', $controllerName . '@add_orders')->name('addOrders');
+    Route::post('/saveOrders', $controllerName . '@save_orders')->name("saveOrders");
+    Route::post('/getInfoOrders', $controllerName . '@get_info_orders')->name("getInfoOrders");
     Route::post('/searchOrders', $controllerName . '@search_orders')->name('searchOrders');
-    Route::get('/manageOrder', $controllerName . '@manage_order')->name('manageOrder');
+    Route::get('/delivered', $controllerName . '@delivered')->name('delivered');
+    Route::get('/areDelivered', $controllerName . '@are_delivered')->name('areDelivered');
+    Route::get('/cancelled', $controllerName . '@cancelled')->name('cancelled');
     Route::get('/statisticalOrder', $controllerName . '@statistical_order')->name('statisticalOrder');
     Route::get('/evaluate', $controllerName . '@evaluate')->name('evaluate');
     Route::get('/logout', $controllerName . '@logout')->name("logout");

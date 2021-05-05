@@ -36,9 +36,9 @@
     $select_provinces_sending = Form::select('form[provinces_sending]', $data_provinces, @$item['provinces_sending'], ['class' => 'form-control', 'id' => 'provinces_sending']);
     $select_provinces_receiver = Form::select('form[provinces_receiver]', $data_provinces, @$item['provinces_receiver'], ['class' => 'form-control', 'id' => 'provinces_receiver']);
 @endphp
-@extends('Admin.layout')
+@extends('Customer.layout')
 
-@section('admin-main-content')
+@section('Customer-main-content')
 <div class="content-wrapper" style="min-height: 415px;">
     <div class="content-header">
         <div class="container-fluid">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.listUser') }}">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('customer.statistical') }}">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Thêm vận đơn</li>
                     </ol>
                 </div>
@@ -59,7 +59,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="group-btn">
-                    <a href="{{ route('admin.listOrders') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/close.png') }}" alt="">Đóng</a>
+                    <a href="{{ route('customer.statistical') }}" class="btn btn-default"><img src="{{ asset('Admin/dist/img/icons/close.png') }}" alt="">Đóng</a>
                 </div>
             </div>
             <div class="row">
@@ -117,7 +117,7 @@
                                         <input value="{{ @$item['weight'] }}" name="form[weight]" type="text" class="form-control" placeholder="Khối lượng (Kg)">
                                         <input id="formatPrice" type="text" value="{{ @$item['collection_fee'] }}" name="form[collection_fee]" class="form-control" placeholder="Số tiền thu hộ (VNĐ)">
                                         <textarea name="form[note]" type="text" class="form-control" placeholder="Ghi chú hàng hóa">{{ @$item['note'] }}</textarea>
-                                        <a href="javascript:submitFormOrders('{{ route('admin.getInfoOrders') }}')" class="btn btn-default total-price">Tính giá dịch vụ</a>
+                                        <a href="javascript:submitFormOrders('{{ route('customer.getInfoOrders') }}')" class="btn btn-default total-price">Tính giá dịch vụ</a>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                         </li>
                                     </ul>
                                     <input type="hidden" name="total_price_express_delivery" value="{{ (int)($stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['express_delivery'] + (int)$item['collection_fee'] + $insurance_fees) }}">
-                                    <a  href="javascript:submitFormOrders('{{ route('admin.saveOrders', 'type=express_delivery') }}')" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
+                                    <a  href="javascript:submitFormOrders('{{ route('customer.saveOrders', 'type=express_delivery') }}')" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
                                 </div>
                             </div>
                             <div style="margin-bottom: 10px;" class="col-md-6">
@@ -177,7 +177,7 @@
                                         </li>
                                     </ul>
                                     <input type="hidden" name="total_price_road_delivery" value="{{ (int)($stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['road_delivery'] + (int)$item['collection_fee'] + $insurance_fees) }}">
-                                    <a  href="javascript:submitFormOrders('{{ route('admin.saveOrders', 'type=road_delivery') }}')" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
+                                    <a  href="javascript:submitFormOrders('{{ route('customer.saveOrders', 'type=road_delivery') }}')" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
                                 </div>
                             </div>
                             <div style="margin-bottom: 10px;" class="col-md-6">
@@ -204,7 +204,7 @@
                                         </li>
                                     </ul>
                                     <input type="hidden" name="total_price_thrifty_delivery" value="{{ (int)($stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['thrifty_delivery'] + (int)$item['collection_fee'] + $insurance_fees) }}">
-                                    <a  href="javascript:submitFormOrders('{{ route('admin.saveOrders', 'type=thrifty_delivery') }}')" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
+                                    <a  href="javascript:submitFormOrders('{{ route('customer.saveOrders', 'type=thrifty_delivery') }}')" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
                                 </div>
                             </div>
                             <div style="margin-bottom: 10px;" class="col-md-6">
@@ -231,13 +231,13 @@
                                         </li>
                                     </ul>
                                     <input type="hidden" name="total_price_fire_express_delivery" value="{{ (int)($stock_rates_price + (float)str_replace(" km", "", $distance) * $shipping_rates['fire_express_delivery'] + (int)$item['collection_fee'] + $insurance_fees) }}">
-                                    <a href="javascript:submitFormOrders('{{ route('admin.saveOrders', 'type=fire_express_delivery') }}')" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
+                                    <a href="javascript:submitFormOrders('{{ route('customer.saveOrders', 'type=fire_express_delivery') }}')" class="btn btn-default btn-submit-type-transportation">Tạo đơn</a>
                                 </div>
                             </div>
                         </div>
                     @endif
-                    @if (isset($item['id']))
-                        <input type="hidden" name="id" value="{{ $item['id'] }}">
+                    @if (isset($id))
+                        <input type="hidden" name="id" value="{{ $id }}">
                     @endif
                     @csrf
                 </form>

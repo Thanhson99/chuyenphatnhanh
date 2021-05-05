@@ -1,17 +1,3 @@
-@php
-    use App\User;
-    session_start();
-    if(!isset($_SESSION["user"])){
-        //chuyển hướng
-        header("Location: http://chuyenphatnhanh.blog/page-not-found");
-        exit;
-    }
-    // lấy ảnh
-    $user = User::where('email', $_SESSION["user"]->email)->first();
-    $avatar = $user['avatar'];
-    $id = $user['id'];
-    $name = $user['name'];
-@endphp
 <header class="w-100 wp-header text-black py-3 pt-lg-0 pb-lg-0 customer-header">
     <div class="container">
         <div class="row d-flex">

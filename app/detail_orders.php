@@ -34,7 +34,7 @@ class detail_orders extends Model
     public function saveItem($params, $transportation_type, $total_price, $order_id){
         $data = $params['form'];
         // nếu không tồn tại id tạo đối tượng và thêm mới
-        if(!isset($params['id'])){
+        if(!isset($params['id_order'])){
             $detail_orders = new detail_orders();
             $detail_orders->orders_id = $order_id;
             $detail_orders->stock_id = $data['stock_rate_type'];
@@ -57,7 +57,7 @@ class detail_orders extends Model
         }else{
             // nếu đã có id thì update database
             // update data
-            $this->where('id', $params['id'])->update($data);
+            // $this->where('orders_id', $order_id)->update($data);
             // trả về id
             return $params['id'];
         }

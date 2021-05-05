@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.listUser') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.listUser') }}">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Quản lý đơn hàng</li>
                     </ol>
                 </div>
@@ -122,7 +122,7 @@
                                                     $name_district = $collection_address->name_district;
                                                     $name_ward = $collection_address->name_ward;
                                                 }
-                                                $address_recipients = $name_provinces . ', ' . $name_district . ', ' . $name_ward . ', ' . $collection_order->sending_place;
+                                                $address_recipients = $name_provinces . ', ' . $name_district . ', ' . $name_ward . ', ' . $collection_order->recipients;
 
                                                 //thông tin hàng hóa
                                                 // hình thức vận chuyển, loại hàng, giá, (cao, nặng, dài)

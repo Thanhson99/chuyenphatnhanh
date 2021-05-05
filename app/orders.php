@@ -39,15 +39,15 @@ class orders extends Model
         return $query;
     }
 
-    public function saveItem($params, $transportation_type){
+    public function saveItem($params, $transportation_type, $user_id = 0){
         $data = $params['form'];
         // nếu không tồn tại id tạo đối tượng và thêm mới
-        if(!isset($params['id'])){
+        if(!isset($params['id_order'])){
             $orders = new orders();
             $orders->status = "Đang giao";
             $orders->sending_place = $data['sending_place'];
             $orders->recipients = $data['recipients'];
-            $orders->user_id = 0;
+            $orders->user_id =  $user_id;
             $orders->ward_id_sending = $data['wards_sending'];
             $orders->ward_id_recipients = $data['wards_receiver'];
             $orders->transportation_id = $transportation_type;
@@ -57,7 +57,7 @@ class orders extends Model
         }else{
             // nếu đã có id thì update database
             // update data
-            // $this->where('id', $params['id'])->update($data);
+            // $this->where('user_id', $user_id)->update($data);
             // trả về id
             return $params['id'];
         }
@@ -65,6 +65,18 @@ class orders extends Model
 
     public function get_orders_by_id($id){
         $query = $this->select('*')->where('id_order', $id)->get();
+        return $query;
+    }
+
+    public function get_orders_by_user_id_and_status($id, $status){
+        $query = $this->select('*')->where('user_id', $id)->where('status', $status);
+        $query = $query->join('detail_orders', 'orders.id_order', '=', 'detail_orders.orders_id')->get();
+        return $query;
+    }
+
+    public function get_orders_by_user_id($id){
+        $query = $this->select('*')->where('user_id', $id);
+        $query = $query->join('detail_orders', 'orders.id_order', '=', 'detail_orders.orders_id')->get();
         return $query;
     }
 }

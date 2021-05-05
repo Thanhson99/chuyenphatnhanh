@@ -5,7 +5,10 @@
                 @php
                     $slide_bar = [
                         'customer.statistical' => 'Tổng quan',
-                        'customer.manageOrder' => 'Quản lý vận đơn',
+                        'customer.addOrders' => 'Tạo vận đơn',
+                        'customer.delivered' => 'Vận đơn đã giao',
+                        'customer.areDelivered' => 'Vận đơn đang giao',
+                        'customer.cancelled' => 'Vận đơn đã hủy',
                         'customer.showOrders' => 'Tra cứu vận đơn',
                         'customer.statisticalOrder' => 'Thống kê vận đơn',
                         'customer.evaluate' => 'Nhận xét và đánh giá',
@@ -16,7 +19,7 @@
                     foreach ($slide_bar as $key => $value) {
                         if($key === $name){
                             echo('<li class="nav-item admin-bar-active">
-                                    <a href="' . route($key) . '" class="nav-link">
+                                    <a href="' . route($key, 'id=' . $id) . '" class="nav-link">
                                         <i class="nav-icon fas fa-th"></i>
                                         <p>
                                             ' . $value . '
@@ -25,7 +28,7 @@
                                 </li>');
                         }else{
                             echo('<li class="nav-item">
-                                    <a href="' . route($key) . '" class="nav-link">
+                                    <a href="' . route($key, 'id=' . $id) . '" class="nav-link">
                                         <i class="nav-icon fas fa-th"></i>
                                         <p>
                                             ' . $value . '
