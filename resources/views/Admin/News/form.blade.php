@@ -66,7 +66,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <span>Nội dung</span>
-                                    <textarea  name="form[description]" style="height: 100px" type="text" class="form-control" placeholder="Nội dung">{{ @$item['description'] }}</textarea>
+                                    <textarea  name="form[description]" onchange="toMetaDescription(this)" style="height: 100px" type="text" class="form-control" placeholder="Nội dung">{{ @$item['description'] }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -95,7 +95,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <span>Meta description:</span>
-                                    <textarea name="form[meta_description]" style="height: 100px" type="text" class="form-control">{{ @$item['meta_description'] }}</textarea>
+                                    <textarea id="meta_description" name="form[meta_description]" style="height: 100px" type="text" class="form-control">{{ @$item['meta_description'] }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-row">

@@ -38,7 +38,7 @@ class news extends Model
             }
         }
         // lấy hết theo id từ bé đến lớn
-        $query = $query->orderBy("id", "ASC")->paginate(5); // phân trang theo số phần tử
+        $query = $query->orderBy("id", "ASC")->paginate(3); // phân trang theo số phần tử
         return $query;
     }
 

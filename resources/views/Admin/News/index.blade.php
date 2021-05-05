@@ -85,7 +85,7 @@
                                     @php
                                         $id = $collection->id;
                                         $title = Template::highlight($collection->title, $params['search']);
-                                        $description = Template::highlight($collection->description, $params['search']);
+                                        $description = Template::highlight($collection->meta_description, $params['search']);
                                         $picture = $collection->picture;
                                         $new_type = Template::highlight($collection->new_type, $params['search']);
                                         $updatedAt = $collection->updated_at;

@@ -28,7 +28,7 @@
                                 <a href="{{ route('user.showNews', ['id' => $value->id]) }}" class="post-title"> <h2>{{ $value->title }}</h2> </a>
                                 <div class="post-desc" style="height: 130px; overflow: hidden">
                                     <p style="height: auto; overflow: hidden">
-                                        {{ $value->description }}
+                                        {{ $value->meta_description }}
                                     </p>
                                 </div>
                                 <div class="post-meta d-flex justify-content-between align-items-center">

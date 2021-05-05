@@ -145,7 +145,7 @@ class AdminController extends Controller
     public function save_news(Request $request){
         // validate
         $validatedData = $request->validate([
-            'form.title' => 'required|min:3|max:70',
+            'form.title' => 'required|min:3|max:100',
             'form.description' => 'required|min:3|max:1000',
         ],
         [

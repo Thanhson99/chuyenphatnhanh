@@ -103,6 +103,18 @@ function toSlug(t){
     $('#slug').val(str);
 }
 
+function toMetaDescription(t){
+    var str = $(t).val();
+    var arrStr = str.split(".");
+    var metaDes = "";
+    if(arrStr.length > 3){
+        metaDes.concat(arrStr[0].concat(arrStr[1].concat(arrStr[2])));
+    }else{
+        metaDes = str;
+    }
+    $("#meta_description").val(metaDes);
+}
+
 function showPassword() {
     var x = document.getElementById("password");
     if (x.type === "password") {
