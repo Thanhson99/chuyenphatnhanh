@@ -26,6 +26,7 @@
                 <form id="submit-select-day" style="display: flex" action="{{ route('customer.statistical') }}">
                     <label style="width: 100%; padding: 7px">Chọn loại thống kê</label>
                     {!! $select_day !!}
+                    <input type="hidden" value="{{ @$id }}">
                 </form>
             </div>
             <div id="my-chart" style="min-width: 1140px; height: 500px; margin: 15px auto 0;"></div>

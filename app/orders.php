@@ -79,4 +79,12 @@ class orders extends Model
         $query = $query->join('detail_orders', 'orders.id_order', '=', 'detail_orders.orders_id')->get();
         return $query;
     }
+
+    public function get_date_by_user_id($user_id, $dateStart, $dateEnd){
+        $query = $this->select('orders.status', 'orders.user_id', 'detail_orders.total_price', 'detail_orders.created_at');
+        $query = $query->join('detail_orders', 'detail_orders.orders_id', '=', 'orders.id_order');
+        $query = $query->where('user_id', $user_id);
+        $query = $query->whereBetween('detail_orders.created_at', [$dateStart, $dateEnd])->get();
+        return $query;
+    }
 }

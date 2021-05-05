@@ -14,6 +14,7 @@ use App\provinces;
 use App\districts;
 use App\wards;
 use App\distanceAddress;
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
@@ -64,8 +65,68 @@ class CustomerController extends Controller
         }
     }
 
-    public function statistical(){
-        return view('Customer.Statistical.index');
+    public function statistical(Request $request){
+        $user = User::where('email', $_SESSION["user"]->email)->first();
+        $user_id = (string)$user['id'];
+        // lay day
+        $day = 7;
+        if(isset($request->day)){
+            $day = $request->day;
+        }
+        // lấy ngày hiện tại
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        // lui 7 day
+        $subNow = Carbon::now('Asia/Ho_Chi_Minh')->subDays($day)->toDateString();
+        // lấy dữ liệu
+        $order = new orders();
+        $list_orders = $order->get_date_by_user_id($user_id , $subNow, $now);
+        
+        // xử lý ngày bắt đầu và ngày kết thúc
+        $tempNow = Carbon::now('Asia/Ho_Chi_Minh');
+        $tempSubNow = Carbon::now('Asia/Ho_Chi_Minh')->subDays($day);
+
+        // lấy ngày
+        $arrDate = [];
+        while($tempNow->toDateString() != $tempSubNow->toDateString()){
+            array_push($arrDate, $tempNow->toDateString());
+            $tempNow->subDays(1); 
+        }
+
+        //------------------- Thống kê tổng tiền và số lượng order-------------------------
+        // lấy detail order
+        $data_detail = [];
+        foreach($list_orders as $key => $value){
+            if(array_key_exists(date('Y-m-d', strtotime($value->created_at)), $data_detail)){
+                $data_detail[date('Y-m-d', strtotime($value->created_at))][0] += $value->total_price;
+                $data_detail[date('Y-m-d', strtotime($value->created_at))][1] += 1;
+            }else{
+                $data_detail[date('Y-m-d', strtotime($value->created_at))] = [$value->total_price, 1];
+            }
+        }
+
+        $arrTotalPrice = [];
+        $arrTotalOrder = [];
+
+        // format lại mảng ngày
+        $dates = array_reverse($arrDate);
+        // thêm giá và số lượng vào 2 mảng tương ứng
+        foreach($dates as $date => $value){
+            if(array_key_exists($value, $data_detail)){
+                array_push($arrTotalPrice, $data_detail[$value][0]);
+                array_push($arrTotalOrder, $data_detail[$value][1]);
+            }else{
+                array_push($arrTotalPrice, 0);
+                array_push($arrTotalOrder, 0);
+            }
+        }
+
+        // lưu vào 1 mảng để truyền đi đơn giản
+        $data = [
+            'dates' => $dates,
+            'total_price' => $arrTotalPrice,
+            'total_order' => $arrTotalOrder,
+        ];
+        return view('Customer.Statistical.index', ['data' => $data])->with('day', $day)->with('id', $user_id);
     }
 
     public function show_orders(){
@@ -220,7 +281,7 @@ class CustomerController extends Controller
 
     public function evaluate(Request $request){
         $params = $request->all();
-        dd($params);
+        return view('Customer.Evaluate.index');
     }
 
     public function add_orders(Request $request){

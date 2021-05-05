@@ -246,7 +246,7 @@
     }
     @endphp
 
-    {{-- @php
+    @php
         // kiểm tra đang ở route nào để active
     $route = Route::current();
     $name = Route::currentRouteName();
@@ -259,21 +259,21 @@
                             type: type
                         },
                         title: {
-                            text: 'Thống kê vận đơn'
+                            text: 'Thống kê tổng chi phí và vận đơn'
                         },
                         xAxis: {
                             categories: cate
                         },
                         yAxis: [{ //--- Primary yAxis
                             title: {
-                                text: 'Vận đơn'
+                                text: 'Chi phí (VNĐ)'
                             }
-                        }, /*{ //--- Secondary yAxis
+                        }, { //--- Secondary yAxis
                             title: {
-                                text: 'Đơn Hàng, Khách Hàng'
+                                text: 'Đơn Hàng'
                             },
                             opposite: true
-                        }*/],
+                        }],
                         plotOptions: {
                             line: {
                                 dataLabels: {
@@ -306,17 +306,66 @@
         if(isset($data)){
             $dates = $data['dates'];
             $total_price = $data['total_price'];
+            $total_order = $data['total_order'];
         }
         echo("<script>
                 var lbl = " . js_array($dates) . ";
                 var data = [{
-                        name: 'Tổng doanh thu',
+                        name: 'Tổng chi phí',
                         yAxis: 0,
                         data: " . js_array($total_price) . "
+                },{
+                        name: 'Tổng số vận đơn',
+                        yAxis: 1,
+                        data: " . js_array($total_order) . "
                 }];
-                drawChart('my-chart', lbl, data, 'Doanh thu', 'VNĐ', 'Đơn hàng', 'Số lượng');
+                drawChart('my-chart', lbl, data, 'Chi phí', 'VNĐ', 'Đơn hàng', 'Số lượng');
             </script>
         ");
     }
-    @endphp --}}
+    @endphp
+    <script>
+        (function () {
+            window.onload = function () {
+                document.addEventListener("contextmenu", function (e) {
+                    e.preventDefault();
+                }, false);
+                document.addEventListener("keydown", function (e) {
+                    // "I" key
+                    if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                        disabledEvent(e);
+                    }
+                    // "J" key
+                    if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+                        disabledEvent(e);
+                    }
+                    // "S" key + macOS
+                    if (e.keyCode === 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                        disabledEvent(e);
+                    }
+                    // "U" key
+                    if (e.ctrlKey && e.keyCode === 85) {
+                        disabledEvent(e);
+                    }
+                    // "C" key
+                    if (e.ctrlKey && e.keyCode === 67) {
+                        disabledEvent(e);
+                    }
+                    // "F12" key
+                    if (event.keyCode === 123) {
+                        disabledEvent(e);
+                    }
+                }, false);
+                function disabledEvent(e) {
+                    if (e.stopPropagation) {
+                        e.stopPropagation();
+                    } else if (window.event) {
+                        window.event.cancelBubble = true;
+                    }
+                    e.preventDefault();
+                    return false;
+                }
+            };
+        })();
+    </script>
 </html>
