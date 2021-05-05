@@ -119,4 +119,45 @@ return [
             'google',
         ],
     ],
+    'defaults' => [
+        'guard'     => 'user',
+        'passwords' => 'user',
+    ],
+
+    'guards' => [
+        'admin' => [
+            'driver'   => 'session',
+            'provider' => 'admin',
+        ],
+        'user' => [
+            'driver'   => 'session',
+            'provider' => 'user',
+        ],
+    ],
+
+    'providers' => [
+        'admin' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Admin::class
+        ],
+        'user' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\User::class
+        ],
+    ],
+
+    'passwords' => [
+        'admin' => [
+            'provider' => 'admin',
+            'email' => 'auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'user' => [
+            'provider' => 'user',
+            'email' => 'auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+    ],
 ];

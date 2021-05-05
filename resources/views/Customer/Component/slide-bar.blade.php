@@ -11,7 +11,7 @@
                         'customer.cancelled' => 'Vận đơn đã hủy',
                         'customer.showOrders' => 'Tra cứu vận đơn',
                         'customer.statisticalOrder' => 'Thống kê vận đơn',
-                        'customer.evaluate' => 'Nhận xét và đánh giá',
+                        'customer.showEvaluate' => 'Nhận xét và đánh giá',
                     ];
                     // kiểm tra đang ở route nào để active
                     $route = Route::current();

@@ -132,7 +132,8 @@ Route::prefix($prefixUrl)->name($prefixUrl . ".")->group(function() use($control
     Route::get('/areDelivered', $controllerName . '@are_delivered')->name('areDelivered');
     Route::get('/cancelled', $controllerName . '@cancelled')->name('cancelled');
     Route::get('/statisticalOrder', $controllerName . '@statistical_order')->name('statisticalOrder');
-    Route::get('/evaluate', $controllerName . '@evaluate')->name('evaluate');
+    Route::post('/evaluate', $controllerName . '@evaluate')->name('evaluate');
+    Route::get('/showEvaluate', $controllerName . '@show_evaluate')->name('showEvaluate');
     Route::get('/logout', $controllerName . '@logout')->name("logout");
     Route::post('/saveInfo', $controllerName . '@saveInfo')->name("saveInfo");
 });

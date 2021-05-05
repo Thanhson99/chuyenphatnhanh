@@ -1,70 +1,103 @@
 @extends('Customer.layout')
 
 @section('Customer-main-content')
-<div class="content-wrapper" style="min-height: 415px;">
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Nhận xét và đánh giá</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('customer.statistical') }}">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Nhận xét và đánh giá</li>
-                    </ol>
+<div class="content-wrapper d-flex justify-content-center align-items-start" >
+    <div class="card mt-3" style="min-height: 415px; max-width: 100%; width: 600px; padding: 1rem 1.25rem;">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12 text-center">
+                        <h4 class="mt-3 mb-2">Nhận xét và đánh giá</h4>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <form id="form-list-new" class="list-items" method="POST" action="#" enctype="multipart/form-data">
-                    <div class="col-md-12">
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <div class="form-row">
-                                    <div class="col">
-                                        <span>Đánh giá chất lượng</span>
-                                        <input class="star star-5" id="star-5" type="radio" name="star"/> <label class="star star-5" for="star-5"></label> 
-                                        <input class="star star-4" id="star-4" type="radio" name="star"/> <label class="star star-4" for="star-4"></label>
-                                        <input class="star star-3" id="star-3" type="radio" name="star"/> <label class="star star-3" for="star-3"></label> 
-                                        <input class="star star-2" id="star-2" type="radio" name="star"/> <label class="star star-2" for="star-2"></label>
-                                        <input class="star star-1" id="star-1" type="radio" name="star"/> <label class="star star-1" for="star-1"></label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <span>Bạn đánh giá thế nào chất lượng dịch vụ của Fastshipping ?</span>
-                                        <div class="col">
-                                            <input type="checkbox" name="cb1" value="Tất cả đều tuyệt vời">Tất cả đều tuyệt vời
-                                            <input type="checkbox" name="cb2" value="Lấy hàng nhanh">Lấy hàng nhanh
-                                            <input type="checkbox" name="cb3" value="Nhân viên lấy hàng thân thiện">Nhân viên lấy hàng thân thiện
-                                            <input type="checkbox" name="cb4" value="Nhân viên giao hàng nhiệt tình">Nhân viên giao hàng nhiệt tình
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <form id="form-list-new" class="list-items" method="POST" action="{{ route('customer.evaluate') }}" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <div class="text-center">
+                                        <div>
+                                            <span>Đánh giá chất lượng</span>
                                         </div>
-                                        <div class="col">
-                                            <input type="checkbox" name="cb5" value="CSKH hỗ trợ nhanh và nhiệt tình">CSKH hỗ trợ nhanh và nhiệt tình
-                                            <input type="checkbox" name="cb6" value="Nhân viên bưu cục hỗ trợ hiệu quả">Nhân viên bưu cục hỗ trợ hiệu quả
-                                            <input type="checkbox" name="cb7" value="Giao hàng nhanh">Giao hàng nhanh
-                                            <input type="checkbox" name="cb8" value="Nhân viên trả hàng tốt">Nhân viên trả hàng tốt
+                                        <div class="d-flex justify-content-center mt-3 mb-3">
+                                            <fieldset class="rating">
+                                                <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label> <input type="radio" id="star4half" name="rating" value="4.5" />
+                                                <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> <input type="radio" id="star4" name="rating" value="4" />
+                                                <label class="full" for="star4" title="Pretty good - 4 stars"></label> <input type="radio" id="star3half" name="rating" value="3.5" />
+                                                <label class="half" for="star3half" title="Meh - 3.5 stars"></label> <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                                <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label> <input type="radio" id="star2" name="rating" value="2" />
+                                                <label class="full" for="star2" title="Kinda bad - 2 stars"></label> <input type="radio" id="star1half" name="rating" value="1.5" />
+                                                <label class="half" for="star1half" title="Meh - 1.5 stars"></label> <input type="radio" id="star1" name="rating" value="1" />
+                                                <label class="full" for="star1" title="Sucks big time - 1 star"></label> <input type="radio" id="starhalf" name="rating" value="0.5" />
+                                                <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                                <input type="radio" class="reset-option" name="rating" value="reset" />
+                                            </fieldset>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <textarea placeholder="Ý kiến khác ... " name=""></textarea>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong>Bạn đánh giá thế nào chất lượng dịch vụ của Fastshipping?</strong>
+                                            <div class="row mt-2">
+                                                <div class="col d-flex flex-column">
+                                                    <div class="item-op">
+                                                        <div class="col"></div>
+                                                        <input type="checkbox" name="cb1" value="Tất cả đều tuyệt vời" />
+                                                        Tất cả đều tuyệt vời
+                                                    </div>
+                                                    <div class="item-op">
+                                                        <input type="checkbox" name="cb3" value="Nhân viên lấy hàng thân thiện" />
+                                                        Nhân viên lấy hàng thân thiện
+                                                    </div>
+                                                    <div class="item-op">
+                                                        <input type="checkbox" name="cb2" value="Lấy hàng nhanh" />
+                                                        Lấy hàng nhanh
+                                                    </div>
+                                                    <div class="item-op">
+                                                        <input type="checkbox" name="cb4" value="Nhân viên giao hàng nhiệt tình" />
+                                                        Nhân viên giao hàng nhiệt tình
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="item-op">
+                                                        <input type="checkbox" name="cb5" value="CSKH hỗ trợ nhanh và nhiệt tình" />
+                                                        CSKH hỗ trợ nhanh và nhiệt tình
+                                                    </div>
+                                                    <div class="item-op">
+                                                        <input type="checkbox" name="cb6" value="Nhân viên bưu cục hỗ trợ hiệu quả" />
+                                                        Nhân viên bưu cục hỗ trợ hiệu quả
+                                                    </div>
+                                                    <div class="item-op">
+                                                        <input type="checkbox" name="cb7" value="Giao hàng nhanh" />
+                                                        Giao hàng nhanh
+                                                    </div>
+                                                    <div class="item-op">
+                                                        <input type="checkbox" name="cb8" value="Nhân viên trả hàng tốt" />
+                                                        Nhân viên trả hàng tốt
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <input type="submit" value="Gửi phản hồi">
+                                    <div class="mt-2">
+                                        <div class="row">
+                                            <textarea class="form-control" placeholder="Ý kiến khác ... " rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-center mt-3">
+                                            <input class="btn btn-danger" type="submit" value="Gửi phản hồi" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                        @csrf
+                    </form>
+                </div>
             </div>
         </div>
     </div>

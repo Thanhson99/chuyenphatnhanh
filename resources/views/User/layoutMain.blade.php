@@ -39,7 +39,7 @@
     <script src="{{ asset('/User/vendor/countdowntime/countdowntime.js') }}"></script>
     <script src="{{ asset('/User/js/custom.js') }}"></script>
     <script src="{{ asset('/User/js/slick.min.js') }}"></script>
-    <script src="{{ asset('/User/js/main_home.min.js') }}"></script>
+    {{-- <script src="{{ asset('/User/js/main_home.min.js') }}"></script> --}}
     <script src="{{ asset('/User/js/jquery.lazyload.min.js') }}"></script>
     <script src="{{ asset('/User/js/fastclick.min.js') }}"></script>
     <script src="{{ asset('/User/js/timber.min.js') }}"></script>

@@ -279,9 +279,14 @@ class CustomerController extends Controller
         return $list_orders;
     }
 
+    public function show_evaluate(){
+        return view('Customer.Evaluate.index');
+    }
+
     public function evaluate(Request $request){
         $params = $request->all();
-        return view('Customer.Evaluate.index');
+        Session::flash('success', 'Cảm ơn bạn đã phản hồi cho chúng tôi');
+        return redirect()->route('customer.statistical');
     }
 
     public function add_orders(Request $request){

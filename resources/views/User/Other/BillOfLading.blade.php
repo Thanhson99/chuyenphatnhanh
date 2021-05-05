@@ -13,7 +13,7 @@
                                 <div class="w-100">
                                     <div class="w-100 title-code font-size-24 SanFranciscoDisplay-Bold text-white mb-2">Nhập mã vận đơn</div>
                                     <form id="form-search" class="w-100 box-search position-relative mt-2" action="#" method="POST" role="search">
-                                        <input required type="text" name="bill" id="bill" value="" placeholder="0 2 5 4 8 5 2" class="form-control code" autocomplete="off" />
+                                        <input required type="text" name="bill" placeholder="0 2 5 4 8 5 2" class="form-control"/>
                                         <a href="javascript:submitSearchOrders('{{ route('user.showOrders') }}')" class="btn position-absolute text-center" style="top:0; right:0"><span class="ntl-Search-Gray"></span></a>
                                         @csrf
                                     </form>
