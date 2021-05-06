@@ -32,7 +32,7 @@
         $data_provinces[$value['id']] = $value['name_provinces'];
     }
 
-    $select_rates_type = Form::select('form[stock_rate_type]', $data, @$item['stock_rate_type'], ['class' => 'form-control']);
+    $select_rates_type = Form::select('form[stock_rate_type]', $data, @$item['stock_id'], ['class' => 'form-control']);
     $select_provinces_sending = Form::select('form[provinces_sending]', $data_provinces, @$item['provinces_sending'], ['class' => 'form-control', 'id' => 'provinces_sending']);
     $select_provinces_receiver = Form::select('form[provinces_receiver]', $data_provinces, @$item['provinces_receiver'], ['class' => 'form-control', 'id' => 'provinces_receiver']);
 @endphp

@@ -313,7 +313,7 @@
         ');
     }
     @endphp
-    <script>
+    {{-- <script>
         (function () {
             window.onload = function () {
                 document.addEventListener("contextmenu", function (e) {
@@ -356,5 +356,5 @@
                 }
             };
         })();
-    </script>
+    </script> --}}
 </html>

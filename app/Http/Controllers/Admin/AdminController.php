@@ -16,6 +16,7 @@ use App\districts;
 use App\wards;
 use App\distanceAddress;
 use Carbon\Carbon;
+use App\get_address;
 use Session;
 
 class AdminController extends Controller
@@ -390,6 +391,50 @@ class AdminController extends Controller
 
         // lấy loại hàng hóa
         $stock_rates_list = $this->show_stock_rates();
+         // kiểm tra id nếu tồn tại đưa đến trang sửa không có id đưa đến tragn thêm
+        if(isset($request->id)){
+            $item = [];
+            $detail = new detail_orders();
+            $detail_orders = $detail->get_all($request->id);
+            // dd($detail_orders);
+            foreach($detail_orders as $key => $value){
+                $item['id_detail_order'] = $value->id_detail_order;
+                $item['orders_id'] = $value->orders_id;
+                $item['weight'] = $value->weight;
+                $item['height'] = $value->height;
+                $item['width'] = $value->width;
+                $item['length'] = $value->length;
+                $item['reminiscent_name_sending'] = $value->reminiscent_name_sending;
+                $item['sending_name'] = $value->sending_name;
+                $item['sending_phone_number'] = $value->sending_phone_number;
+                $item['reminiscent_name_receiver'] = $value->reminiscent_name_receiver;
+                $item['receiver_name'] = $value->receiver_name;
+                $item['receiver_phone_number'] = $value->receiver_phone_number;
+                $item['note'] = $value->note;
+                $item['sending_place'] = $value->sending_place;
+                $item['recipients'] = $value->recipients;
+                $item['wards_sending'] = $value->ward_id_sending;
+                $item['wards_receiver'] = $value->ward_id_recipients;
+                $item['collection_fee'] = $value->collection_fee;
+                $item['transportation_id'] = $value->transportation_id;
+                $item['stock_id'] = $value->stock_id;
+            }
+            //lấy địa chỉ người gửi
+            $temp = new get_address();
+            $address = $temp->get_address($item['wards_sending']);
+            foreach ($address as $key => $collection_address) {
+                $item['provinces_sending'] = $collection_address->province_id;
+                $item['districts_sending'] = $collection_address->district_id;
+            }
+
+            // lấy địa chỉ nơi nhận
+            $address = $temp->get_address($item['wards_receiver']);
+            foreach ($address as $key => $collection_address) {
+                $item['provinces_receiver'] = $collection_address->province_id;
+                $item['districts_receiver'] = $collection_address->district_id;
+            }
+            return view('Admin.Orders.form')->with('item', $item)->with('provinces', $provinces_list)->with('stock_rates', $stock_rates_list)->with('distance', $distance)->with('stock_rates_price', $stock_rates_price)->with('shipping_rates', $shipping_rates)->with('insurance_fees', $insurance_fees);;
+        }
         return view('Admin.Orders.form')->with('item', $item)->with('provinces', $provinces_list)->with('stock_rates', $stock_rates_list)->with('distance', $distance)->with('stock_rates_price', $stock_rates_price)->with('shipping_rates', $shipping_rates)->with('insurance_fees', $insurance_fees);
     }
 

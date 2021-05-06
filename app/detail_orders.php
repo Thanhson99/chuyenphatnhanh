@@ -16,7 +16,12 @@ class detail_orders extends Model
     }
 
     public function get_order_id($id){
-        $query = $this->select('orders_id')->where('orders_id', '=', $id)->get();
+        $query = $this->select('orders_id')->where('id_detail_order', '=', $id)->get();
+        return $query;
+    }
+
+    public function get_detail_by_detail_id($id){
+        $query = $this->select('*')->where('id_detail_order', $id)->get();
         return $query;
     }
 
@@ -67,6 +72,13 @@ class detail_orders extends Model
         $query = $this->select('total_price', 'detail_orders.created_at');
         $query = $query->join('orders', 'detail_orders.orders_id', '=', 'orders.id_order');
         $query = $query->whereBetween('detail_orders.created_at', [$dateStart, $dateEnd])->get();
+        return $query;
+    }
+
+    public function get_all($id){
+        $query = $this->select('*');
+        $query = $query->where('id_detail_order', $id);
+        $query = $query->join('orders', 'detail_orders.orders_id', '=', 'orders.id_order')->get();
         return $query;
     }
 }
