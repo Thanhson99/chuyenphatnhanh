@@ -21,10 +21,6 @@ Route::get('/', function () {
 Route::get('callback/{driver}', 'User\LoginController@callback_social')->name('callback.social');
 Route::get('redirect/{driver}', 'User\LoginController@redirect_social')->name('login.provider');
 
-//login facebook
-Route::get('redirect/facebook', 'User\LoginFBController@redirectToProvider')->name('loginfb.provider');
-Route::get('callback/facebook', 'User\LoginFBController@handleProviderCallback')->name('callbackfb.social');
-
 $prefixUrl = 'user';
 $controller = 'user';
 Route::prefix($prefixUrl)->name($prefixUrl . '.')->group(function() use($controller){

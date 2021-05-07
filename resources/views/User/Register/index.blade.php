@@ -2,7 +2,7 @@
 
 @section('main-content')
 
-	<div class="container-login100" style="background-image: url('images/bg-02.jpeg');">
+	<div class="container-login100" style="background-image: url('{{ asset('User/images/bg-02.jpeg') }}');">
 		<div class="wrap-login200 p-l-20 p-r-20 p-t-30 p-b-30">
 			<form action="{{ route('user.postRegister') }}" method="POST" class="login100-form validate-form">
 				<span class="login100-form-title p-b-37">
@@ -14,7 +14,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-6">
-							<img class="img-banner-register" src="images/banner.png">
+							<img class="img-banner-register" src="{{ asset('User/images/banner.png') }}">
 						</div>
 						<div class="col-sm-6">
 							<div class="row">

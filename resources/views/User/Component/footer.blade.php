@@ -220,6 +220,7 @@
                 </ul>
             </li>
             <li class="mobile-nav__item"><a class="mobile-nav__link mobile-nav__border" href="{{ route('user.contact') }}" title="Liên hệ">Liên hệ</a></li>
+            <li class="mobile-nav__item"><a class="mobile-nav__link mobile-nav__border" href="{{ route('user.login') }}" title="Liên hệ">Đăng nhập</a></li>
         </ul>
     </div>
 </body>

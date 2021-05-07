@@ -53,7 +53,7 @@
         </script>
     @endif
 
-    {{-- <script>
+    <script>
         (function () {
             window.onload = function () {
                 document.addEventListener("contextmenu", function (e) {
@@ -96,7 +96,7 @@
                 }
             };
         })();
-    </script> --}}
+    </script>
             
     @php
         // kiểm tra đang ở route nào để active

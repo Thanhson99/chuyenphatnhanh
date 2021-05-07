@@ -20,10 +20,12 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver($provider)->user();
         } catch (\Exception $e) {
-            session_start();
-            $_SESSION["user"] = $user;
-            Session::flash('success', 'Đăng nhập thành công');
-            return redirect()->route('customer.statistical');
+            if(isset($user)){
+                session_start();
+                $_SESSION["user"] = $user;
+                Session::flash('success', 'Đăng nhập thành công');
+                return redirect()->route('customer.statistical');
+            }
         }
         //  kiểm tra tài khoản admin
         $admin = Admin::where('email', $user->getEmail())->first();

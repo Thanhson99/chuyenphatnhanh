@@ -106,13 +106,11 @@ function toSlug(t){
 function toMetaDescription(t){
     var str = $(t).val();
     var arrStr = str.split(".");
-    var metaDes = "";
     if(arrStr.length > 3){
-        metaDes.concat(arrStr[0].concat(arrStr[1].concat(arrStr[2])));
+        $("#meta_description").html(arrStr[0] + arrStr[1] + arrStr[2]);
     }else{
-        metaDes = str;
+        $("#meta_description").html(str);
     }
-    $("#meta_description").val(metaDes);
 }
 
 function showPassword() {

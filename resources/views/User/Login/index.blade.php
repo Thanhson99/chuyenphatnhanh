@@ -1,13 +1,13 @@
 @extends('User.layoutLogin')
 
 @section('main-content')
-	<div class="container-login100" style="background-image: url('images/bg-02.jpeg');">
+	<div class="container-login100" style="background-image: url('{{ asset('User/images/bg-02.jpeg') }}');">
 		<div class="wrap-login100 p-l-35 p-r-10 p-t-50 p-b-30">
 			<form  action="{{ route('user.postLogin') }}" method="POST" class="login100-form validate-form">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-6">
-							<img class="img-banner" src="images/banner.png">
+							<img class="img-banner" src="{{ asset('User/images/banner.png') }}">
 						</div>
 						<div class="col-sm-6">
 							<span class="login100-form-title p-b-37">
@@ -35,7 +35,7 @@
 							</div>
 							<div class="flex-c">
 								<a href="{{ route('login.provider', 'google') }}" class="login100-social-item"	>
-									<img  style="width: 30px" src="images/icons/icon-google.png" alt="GOOGLE">
+									<img  style="width: 30px" src="{{ asset('User/images/icons/icon-google.png') }}" alt="GOOGLE">
 								</a>
 							</div>
 							<div class="text-center redirect-login">

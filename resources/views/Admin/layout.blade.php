@@ -15,7 +15,7 @@
         {{-- header --}}
         @include('Admin.Component.header')
         {{-- slide bar --}}
-        @include('Admin.component.slide-bar')
+        @include('Admin.Component.slide-bar')
             
         @yield('admin-main-content')
             
